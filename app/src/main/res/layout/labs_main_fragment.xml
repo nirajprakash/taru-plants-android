@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.taru.ui.labs.LabsMainViewModel" />
+
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:orientation="vertical">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center_horizontal"
+                android:text="Labs" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_launcher_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToSample1()}"
+                android:text="Labs Sample 1" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center_horizontal"
+                android:text="Others" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_3d_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateTo3d()}"
+                android:text="3d" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_3dsense_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateTo3dSense()}"
+                android:text="3d Sense" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_3d_sense2_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateTo3dSense2()}"
+                android:text="3d Sense 2" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_3dmodel_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateTo3dModel()}"
+                android:text="3d Model" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_others_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToDefault()}"
+                android:text="Default" />
+
+
+            <Button
+                android:id="@+id/labs_main_fragment_json_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToJson()}"
+                android:text="Json" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_template_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateTemplate()}"
+                android:text="Template" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_ad_list_fragment_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToLauncher()}"
+                android:text="Launcher" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_app_launcher_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToAdListFragment()}"
+                android:text="Ad List" />
+
+            <Button
+                android:id="@+id/labs_main_fragment_info_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.navigateToInfoFragment()}"
+                android:text="Info" />
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

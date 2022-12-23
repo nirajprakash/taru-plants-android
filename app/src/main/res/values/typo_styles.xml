@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Typo.Jl.cardTitle" parent="TextAppearance.AppCompat.Medium">
+<!--        <item name="fontFamily">@font/josefin_sans_regular</item>-->
+<!--        <item name="android:fontWeight">400</item>-->
+<!--        <item name="fontStyle">normal</item>-->
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="Typo.Jl.chipText" parent="TextAppearance.AppCompat.Small">
+<!--        <item name="fontFamily">@font/dm_sans_regular</item>-->
+<!--        <item name="fontWeight">400</item>-->
+<!--        <item name="android:textSize">@dimen/sp_14</item>-->
+    </style>
+</resources>

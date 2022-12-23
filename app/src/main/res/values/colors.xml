@@ -2,4 +2,116 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+
+
+    <!--    white -->
+    <color name="md_white_1000">#ffffff</color>
+    <color name="md_white_1000_0">#00ffffff</color>
+    <color name="md_white_1000_05">#0cffffff</color>
+    <color name="md_white_1000_10">#1affffff</color>
+    <color name="md_white_1000_15">#22ffffff</color>
+    <color name="md_white_1000_20">#33ffffff</color>
+    <color name="md_white_1000_25">#40ffffff</color>
+    <color name="md_white_1000_50">#80ffffff</color>
+    <color name="md_white_1000_60">#99ffffff</color>
+    <color name="md_white_1000_75">#c0ffffff</color>
+
+
+    <!--    black -->
+    <color name="md_black_1000_4">#04000000</color>
+    <color name="md_black_1000_10">#1a000000</color>
+    <color name="md_black_1000_15">#26000000</color>
+    <color name="md_black_1000_20">#33000000</color>
+    <color name="md_black_1000_25">#40000000</color>
+    <color name="md_black_1000_50">#80000000</color>
+    <color name="md_black_1000_75">#c0000000</color>
+    <color name="md_black_1000">#000000</color>
+
+    <color name="taru_green_0">#000000</color>
+    <color name="taru_green_10">#002110</color>
+    <color name="taru_green_20">#003920</color>
+    <color name="taru_green_25">#004528</color>
+    <color name="taru_green_30">#005230</color>
+    <color name="taru_green_35">#005f38</color>
+    <color name="taru_green_40">#006d41</color>
+    <color name="taru_green_50">#008953</color>
+    <color name="taru_green_60">#00a666</color>
+    <color name="taru_green_70">#2ac27c</color>
+    <color name="taru_green_80">#50df96</color>
+    <color name="taru_green_90">#70fcb0</color>
+    <color name="taru_green_95">#c1ffd5</color>
+    <color name="taru_green_98">#e9ffed</color>
+    <color name="taru_green_99">#f5fff4</color>
+    <color name="taru_green_100">#ffffff</color>
+
+
+    <color name="taru_yellow_0">#000000</color>
+    <color name="taru_yellow_10">#241a00</color>
+    <color name="taru_yellow_20">#3d2e00</color>
+    <color name="taru_yellow_25">#4b3900</color>
+    <color name="taru_yellow_30">#594400</color>
+    <color name="taru_yellow_35">#674f00</color>
+    <color name="taru_yellow_40">#755b00</color>
+    <color name="taru_yellow_50">#937300</color>
+    <color name="taru_yellow_60">#b18c0e</color>
+    <color name="taru_yellow_70">#cfa62e</color>
+    <color name="taru_yellow_80">#ecc148</color>
+    <color name="taru_yellow_90">#ffdf91</color>
+    <color name="taru_yellow_95">#ffefcf</color>
+    <color name="taru_yellow_98">#fff8f1</color>
+    <color name="taru_yellow_99">#fffbff</color>
+    <color name="taru_yellow_100">#ffffff</color>
+
+    <color name="taru_blue_0">#000000</color>
+    <color name="taru_blue_10">#04006d</color>
+    <color name="taru_blue_20">#0c04a8</color>
+    <color name="taru_blue_25">#1e1fb1</color>
+    <color name="taru_blue_30">#2d2fbc</color>
+    <color name="taru_blue_35">#3a3ec7</color>
+    <color name="taru_blue_40">#474cd4</color>
+    <color name="taru_blue_50">#6167ee</color>
+    <color name="taru_blue_60">#7e84ff</color>
+    <color name="taru_blue_70">#9fa3ff</color>
+    <color name="taru_blue_80">#c0c1ff</color>
+    <color name="taru_blue_90">#e1e0ff</color>
+    <color name="taru_blue_95">#f1efff</color>
+    <color name="taru_blue_98">#fbf8ff</color>
+    <color name="taru_blue_99">#fffbff</color>
+    <color name="taru_blue_100">#ffffff</color>
+
+    <color name="taru_neutral_0">#000000</color>
+    <color name="taru_neutral_10">#161d18</color>
+    <color name="taru_neutral_20">#2a322c</color>
+    <color name="taru_neutral_25">#353d37</color>
+    <color name="taru_neutral_30">#414942</color>
+    <color name="taru_neutral_35">#4c544e</color>
+    <color name="taru_neutral_40">#586059</color>
+    <color name="taru_neutral_50">#717972</color>
+    <color name="taru_neutral_60">#8a938b</color>
+    <color name="taru_neutral_70">#a5ada5</color>
+    <color name="taru_neutral_80">#c0c9c0</color>
+    <color name="taru_neutral_90">#dce5dc</color>
+    <color name="taru_neutral_95">#eaf3ea</color>
+    <color name="taru_neutral_98">#f3fcf2</color>
+    <color name="taru_neutral_99">#f6fff5</color>
+    <color name="taru_neutral_100">#ffffff</color>
+
+    <color name="taru_error_0">#000000</color>
+    <color name="taru_error_10">#410002</color>
+    <color name="taru_error_20">#690005</color>
+    <color name="taru_error_25">#7e0007</color>
+    <color name="taru_error_30">#93000a</color>
+    <color name="taru_error_35">#a80710</color>
+    <color name="taru_error_40">#ba1a1a</color>
+    <color name="taru_error_50">#de3730</color>
+    <color name="taru_error_60">#ff5449</color>
+    <color name="taru_error_70">#ff897d</color>
+    <color name="taru_error_80">#ffb4ab</color>
+    <color name="taru_error_90">#ffdad6</color>
+    <color name="taru_error_95">#ffedea</color>
+    <color name="taru_error_98">#fff8f7</color>
+    <color name="taru_error_99">#fffbff</color>
+    <color name="taru_error_100">#ffffff</color>
 </resources>
