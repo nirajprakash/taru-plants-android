@@ -1,6 +1,7 @@
 package com.taru.ui
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -11,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.taru.R
 import com.taru.databinding.ActivityMainBinding
@@ -40,23 +43,24 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }*/
-
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController() ?: return
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+
+            Log.d("MainActivity", "addOnDestinationChangedListener: ${destination.id}")
             when (destination.id) {
-                R.id.navigation_home -> binding.navView.visibility = View.VISIBLE
-                R.id.navigation_plants -> binding.navView.visibility = View.VISIBLE
-                R.id.navigation_about -> binding.navView.visibility = View.VISIBLE
-                R.id.navigation_cure -> binding.navView.visibility = View.VISIBLE
+                R.id.nav_home -> binding.navView.visibility = View.VISIBLE
+                R.id.nav_plants -> binding.navView.visibility = View.VISIBLE
+                R.id.nav_about -> binding.navView.visibility = View.VISIBLE
+                R.id.nav_cure -> binding.navView.visibility = View.VISIBLE
                 else -> binding.navView.visibility = View.GONE
             }
         }
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_home, R.id.navigation_plants, R.id.navigation_cure, R.id.navigation_about)
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(R.id.navigation_home, R.id.navigation_plants, R.id.navigation_cure, R.id.navigation_about)
+//        )
+//
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
     }
 
@@ -80,5 +84,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    private fun findNavController(): NavController? {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        return navHostFragment?.navController
     }
 }

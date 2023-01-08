@@ -25,7 +25,7 @@
         tools:layout="@layout/nav_cure_fragment">
     </fragment>
     <fragment
-        android:id="@+id/nav_About"
+        android:id="@+id/nav_about"
         android:name="com.taru.ui.pages.nav.about.NavAboutFragment"
         android:label="About"
         tools:layout="@layout/nav_about_fragment">
