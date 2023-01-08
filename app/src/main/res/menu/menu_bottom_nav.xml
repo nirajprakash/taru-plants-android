@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_if_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_plants"
+        android:icon="@drawable/ic_if_plants"
+        android:title="Plants" />
+
+    <item
+        android:id="@+id/navigation_cure"
+        android:icon="@drawable/ic_if_shovel"
+        android:title="Cure" />
+
+    <item
+        android:id="@+id/navigation_about"
+        android:icon="@drawable/ic_infocircle"
+        android:title="About" />
+</menu>

@@ -63,6 +63,7 @@
     <color name="md_theme_dark_outlineVariant">#414942</color>
     <color name="md_theme_dark_scrim">#000000</color>
 
+    <color name="colorOnPrimary">@color/md_theme_light_onSurface</color>
 
 
 

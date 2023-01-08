@@ -10,6 +10,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.navigation.ui.setupWithNavController
 import com.taru.R
 import com.taru.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +40,24 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }*/
+
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_plants -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_about -> binding.navView.visibility = View.VISIBLE
+                R.id.navigation_cure -> binding.navView.visibility = View.VISIBLE
+                else -> binding.navView.visibility = View.GONE
+            }
+        }
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_home, R.id.navigation_plants, R.id.navigation_cure, R.id.navigation_about)
+        )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,3 +1,8 @@
+## project
+
+- https://github.com/dgewe/Movie-App-Android
+- 
+
 # m3
 
 ## styling and theming
@@ -16,3 +21,8 @@
 - https://github.com/robolectric/deckard-gradle233
 
 - test doubles : shadows 
+
+## nav graph 
+
+- https://stackoverflow.com/questions/70763230/how-to-hide-bottom-bar-nav-when-following-single-activity-design
+- 

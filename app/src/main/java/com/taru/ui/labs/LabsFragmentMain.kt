@@ -52,50 +52,15 @@ class LabsFragmentMain : FragmentBase(true) {
         Log.i("LabsFragmentMain", "navigateTo $it")
 
         when (it) {
-            LabsConstants.Navigation.SAMPLE_1 -> {
-                //val action = LabsFragmentMainDirections.navigateToLabsSample1()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.THREE_D -> {
-                //val action = LabsFragmentMainDirections.navigateToLabs3d()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.THREE_D_SENSE -> {
-                //val action = LabsFragmentMainDirections.navigateToLabs3dSense()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.THREE_D_SENSE2 -> {
-                //val action = LabsFragmentMainDirections.navigateToLabs3dSense2()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.THREE_D_MODEL -> {
-                //val action = LabsFragmentMainDirections.navigateToLabs3dModel()
-                //findNavController().navigate(action)
+            LabsConstants.Navigation.NAV_APP -> {
+                val action = LabsFragmentMainDirections.navigateGlobalToNavApp()
+                findNavController().navigate(action)
             }
             LabsConstants.Navigation.DEFAULT -> {
                 val action = LabsFragmentMainDirections.navigateGlobalToNavDefault()
                 findNavController().navigate(action)
             }
-            LabsConstants.Navigation.JSON -> {
-                //val action = LabsFragmentMainDirections.navigateToLabsJson()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.TEMPLATE -> {
-                //val action = LabsFragmentMainDirections.navigateToLabsTemplate()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.LAUNCHER -> {
-                //val action = LabsFragmentMainDirections.navigateToLauncher()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.AD_LIST -> {
-                //val action = LabsFragmentMainDirections.navigateToAdListFragment()
-                //findNavController().navigate(action)
-            }
-            LabsConstants.Navigation.INFO -> {
-                //val action = LabsFragmentMainDirections.navigateToInfoFragment()
-                //findNavController().navigate(action)
-            }
+
         }
     }
 

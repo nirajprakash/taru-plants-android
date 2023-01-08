@@ -8,6 +8,8 @@
     <action android:id="@+id/navigate_global_to_navLabs"
         app:destination="@id/nav_labs"/>
 
+    <action android:id="@+id/navigate_global_to_navApp"
+        app:destination="@id/nav_app"/>
     <include
 
         app:graph="@navigation/nav_default"/>
@@ -15,5 +17,9 @@
     <include
 
         app:graph="@navigation/nav_labs"/>
+    <include
+
+        app:graph="@navigation/nav_app"/>
+
 
 </navigation>

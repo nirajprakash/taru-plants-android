@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_app"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.taru.ui.pages.nav.home.NavHomeFragment"
+        android:label="Home"
+        tools:layout="@layout/nav_home_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_plants"
+        android:name="com.taru.ui.pages.nav.plants.NavPlantsFragment"
+        android:label="Plants"
+        tools:layout="@layout/nav_plants_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/nav_cure"
+        android:name="com.taru.ui.pages.nav.cure.NavCureFragment"
+        android:label="Cure"
+        tools:layout="@layout/nav_cure_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/nav_About"
+        android:name="com.taru.ui.pages.nav.about.NavAboutFragment"
+        android:label="About"
+        tools:layout="@layout/nav_about_fragment">
+    </fragment>
+
+
+</navigation>
