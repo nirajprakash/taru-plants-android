@@ -30,30 +30,41 @@
                 app:logo="@drawable/ic_logo_taru"
                 app:menu="@menu/menu_app"/>
         </com.google.android.material.appbar.AppBarLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_200"
+                android:clipToPadding="false">
 
-    <View android:layout_height="0dp"
-        android:layout_width="0dp"
-        app:layout_constraintHeight_percent="0.6"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/taru_green_30"/>
+                <View
+                    android:id="@+id/check1" android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    app:layout_constraintDimensionRatio="0.6"
+                    app:layout_constraintWidth_percent="0.8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/taru_green_30"/>
 
-    <View android:layout_height="match_parent"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/taru_green_10"/>
+                <View android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/dp_24"
+                    app:layout_constraintDimensionRatio="0.8"
+                    app:layout_constraintWidth_percent="0.7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/check1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/taru_green_10"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

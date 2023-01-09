@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="Typo.Jl.Headline" parent="TextAppearance.Material3.DisplayLarge">
+        <!--        <item name="fontFamily">@font/josefin_sans_regular</item>-->
+        <!--        <item name="android:fontWeight">400</item>-->
+        <!--        <item name="fontStyle">normal</item>-->
+        <item name="lineHeight">@dimen/dp_0</item>
+    </style>
     <style name="Typo.Jl.cardTitle" parent="TextAppearance.AppCompat.Medium">
 <!--        <item name="fontFamily">@font/josefin_sans_regular</item>-->
 <!--        <item name="android:fontWeight">400</item>-->

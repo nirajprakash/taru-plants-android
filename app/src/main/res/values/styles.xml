@@ -23,4 +23,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="Jl.App.ShapeAppearanceOverlay.circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Jl.App.ShapeAppearanceOverlay.32" parent="">
+        <item name="cornerSize">@dimen/dp_32</item>
+    </style>
 </resources>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorSurface">@color/md_theme_dark_surface</color>
+    <color name="colorBack">@color/black</color>
 
-    <color name="colorOnPrimary">@color/md_theme_dark_onSurface</color>
+    <color name="colorShadow">@color/md_black_1000</color>
+    <color name="colorOnSurface">@color/md_theme_dark_onSurface</color>
 
 
 
