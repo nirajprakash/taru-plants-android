@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/dr_ripple_round_32"
     android:background="@drawable/dr_rect_round_32_surface">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -33,7 +36,8 @@
         android:textAppearance="@style/Typo.Jl.Headline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="22C" />
+        tools:text="22C"
+        android:text="22C"/>
 
     <TextView
 
@@ -50,7 +54,8 @@
         android:textColor="@color/md_theme_light_onSurface"
         app:layout_constraintBottom_toBottomOf="@+id/home_weather_card_temp"
         app:layout_constraintStart_toEndOf="@+id/home_weather_card_temp"
-        tools:text="Partially Cloud" />
+        tools:text="Partially Cloud"
+        android:text="Partially Cloud"/>
 
     <LinearLayout
         android:id="@+id/home_weather_card_pressure_ll"
@@ -79,6 +84,7 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/white"
 
+            android:text="800mb"
             tools:text="800mb" />
     </LinearLayout>
 
@@ -109,6 +115,7 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/md_theme_light_onSurface"
 
+            android:text="4.3 Km"
 
             tools:text="4.3 Km" />
     </LinearLayout>
@@ -141,6 +148,7 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/md_theme_light_onSurface"
 
+            android:text="87%"
             tools:text="87%" />
     </LinearLayout>
     <androidx.constraintlayout.helper.widget.Flow

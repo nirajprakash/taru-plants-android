@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Created by Niraj on 08-01-2023.
  */
 @AndroidEntryPoint
-class NavHomeFragment: FragmentBase(false) {
+class NavHomeFragment : FragmentBase(false) {
     private val mViewModel: NavHomeViewModel by viewModels()
     private lateinit var vBinding: NavHomeFragmentBinding
 
@@ -57,19 +57,24 @@ class NavHomeFragment: FragmentBase(false) {
             vBinding.recyclerview.adapter = mListAdapter
 
 
+            /* layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                 override fun getSpanSize(position: Int): Int {
+                     return mListAdapter.getItemViewType(position)
+                 }
+             }*/
+            var list = mutableListOf(
+                ModelCategory(0), ModelCategory(1), ModelCategory(2),
+                ModelCategory(3), ModelCategory(4), ModelCategory(5),
+                ModelCategory(6), ModelCategory(7), ModelCategory(8), ModelCategory(9)
+            )
 
-           /* layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return mListAdapter.getItemViewType(position)
-                }
-            }*/
-            var list = mutableListOf(ModelCategory(0),ModelCategory(1),ModelCategory(2),
-                ModelCategory(3),ModelCategory(4),ModelCategory(5),
-                ModelCategory(6),ModelCategory(7),ModelCategory(8),ModelCategory(9))
 
+            mListAdapter.submitList(list)
 
-                mListAdapter.submitList(list)
             vBinding.homeWeatherCard.homeWeatherCardImage.load(R.drawable.pic_weather)
+            vBinding.homeScannerCard.homeScannerCardImage1.load(R.drawable.pic_scan_1)
+            vBinding.homeScannerCard.homeScannerCardImage2.load(R.drawable.pic_scan_2)
+            vBinding.homeScannerCard.homeScannerCardImage3.load(R.drawable.pic_scan_3)
 //            throw RuntimeException("Test Crash")
 
             /*mViewModel.mListStateParcel?.let {

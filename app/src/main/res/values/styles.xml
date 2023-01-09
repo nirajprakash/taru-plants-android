@@ -31,4 +31,14 @@
     <style name="Jl.App.ShapeAppearanceOverlay.32" parent="">
         <item name="cornerSize">@dimen/dp_32</item>
     </style>
+
+    <style name="Jl.App.ShapeAppearanceOverlay.32.left" parent="">
+        <item name="cornerSizeTopLeft">@dimen/dp_32</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp_32</item>
+    </style>
+
+    <style name="Jl.App.ShapeAppearanceOverlay.32.right" parent="">
+        <item name="cornerSizeTopRight">@dimen/dp_32</item>
+        <item name="cornerSizeBottomRight">@dimen/dp_32</item>
+    </style>
 </resources>

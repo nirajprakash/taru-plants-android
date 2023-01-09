@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dp_56"
+    android:layout_marginEnd="@dimen/dp_12"
+    android:foreground="@drawable/dr_ripple_round_18"
+    android:clickable="true"
+    android:focusable="true"
+
     android:layout_height="wrap_content">
 
 <!--    android:translationZ="@dimen/dp_2"
@@ -39,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Radish"
+        android:text="Radish"
         android:gravity="center_horizontal"
         android:textColor="@color/colorOnSurface"
         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
