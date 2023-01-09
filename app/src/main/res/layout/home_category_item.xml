@@ -27,6 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1:1"
+        android:id="@+id/home_category_item_image"
 
         app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.circle"
         tools:src="@drawable/pic_tool_category"

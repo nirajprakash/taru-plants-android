@@ -56,6 +56,11 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
 
+    //Coil
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation("io.coil-kt:coil-svg:$coil_version")
+
+
     testImplementation 'junit:junit:4.13.2'
 
     testImplementation "org.robolectric:robolectric:4.9.1"
