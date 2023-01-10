@@ -15,7 +15,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:background="?colorSurface">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -39,9 +40,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dp_200"
-            android:clipToPadding="false">
+            android:layout_height="wrap_content">
 
            <TextView
                android:id="@+id/nav_plants_recent_title"
@@ -83,7 +82,6 @@
                 android:paddingEnd="@dimen/dp_24"
 
                 android:layout_marginTop="@dimen/dp_24"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerview_horizontal"
 
@@ -92,6 +90,7 @@
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
 
+                android:paddingBottom="@dimen/dp_200"
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +101,9 @@
                 android:paddingEnd="@dimen/dp_24"
                 android:clipToPadding="false"
                 tools:listitem="@layout/home_category_item"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"/>
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                android:orientation="vertical"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
