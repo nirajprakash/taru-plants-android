@@ -41,4 +41,17 @@
         <item name="cornerSizeTopRight">@dimen/dp_32</item>
         <item name="cornerSizeBottomRight">@dimen/dp_32</item>
     </style>
+
+    <style name="Jl.App.ShapeAppearanceOverlay.24" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_24</item>
+    </style>
+    <style name="Jl.App.ShapeAppearanceOverlay.20" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_20</item>
+    </style>
+    <style name="Jl.App.ShapeAppearanceOverlay.18" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_18</item>
+    </style>
 </resources>

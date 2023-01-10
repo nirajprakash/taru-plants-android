@@ -6,54 +6,107 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="bViewModel"
             type="com.taru.ui.pages.nav.plants.NavPlantsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:elevation="@dimen/dp_0">
+
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Taru"
-                android:id="@+id/topAppBar"
-                app:titleCentered="true"
                 app:logo="@drawable/ic_logo_taru"
-                app:menu="@menu/menu_app"/>
+                app:menu="@menu/menu_app"
+                app:title="Taru"
+                app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent">
 
-    <View android:layout_height="0dp"
-        android:layout_width="0dp"
-        app:layout_constraintHeight_percent="0.6"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/taru_green_30"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_200"
+            android:clipToPadding="false">
 
-    <View android:layout_height="match_parent"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/taru_green_10"/>
+           <TextView
+               android:id="@+id/nav_plants_recent_title"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Recent Search"
+               android:paddingStart="@dimen/dp_24"
+               android:paddingEnd="@dimen/dp_24"
+
+               android:layout_marginTop="@dimen/dp_24"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+
+               android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_horizontal"
+                android:layout_width="match_parent"
+
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_title"
+
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
+                android:clipToPadding="false"
+                tools:listitem="@layout/home_category_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"/>
+
+            <TextView
+                android:id="@+id/nav_plants_checkout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Checkout Plants"
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
+
+                android:layout_marginTop="@dimen/dp_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerview_horizontal"
+
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nav_plants_checkout_title"
+
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
+                android:clipToPadding="false"
+                tools:listitem="@layout/home_category_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

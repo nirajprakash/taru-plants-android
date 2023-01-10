@@ -42,6 +42,8 @@
                 android:paddingBottom="@dimen/dp_200"
                 android:clipToPadding="false">
 
+
+
                 <Button
                     android:id="@+id/home_search_btn"
 
@@ -61,15 +63,32 @@
                     android:textColor="@color/color_on_surface_38"
                     />
 
+
+                <TextView
+                    android:id="@+id/home_category_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:paddingStart="@dimen/dp_24"
+                    android:paddingEnd="@dimen/dp_24"
+
+                    android:layout_marginTop="@dimen/dp_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_search_btn"
+
+
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
 
-                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_search_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/home_category_title"
 
                     android:paddingStart="@dimen/dp_24"
                     android:paddingEnd="@dimen/dp_24"
