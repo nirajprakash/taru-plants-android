@@ -25,4 +25,8 @@
 ## nav graph 
 
 - https://stackoverflow.com/questions/70763230/how-to-hide-bottom-bar-nav-when-following-single-activity-design
-- 
+
+
+## ml kit
+
+- https://proandroiddev.com/create-vision-app-using-ml-kit-library-and-camerax-7bf022105604

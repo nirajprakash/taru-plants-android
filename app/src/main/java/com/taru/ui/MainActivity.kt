@@ -14,13 +14,19 @@ import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.taru.R
 import com.taru.databinding.ActivityMainBinding
+import com.taru.ui.nav.NavManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var navManager: NavManager
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -62,6 +68,8 @@ class MainActivity : AppCompatActivity() {
 //
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+
+        initNavManager()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,5 +97,15 @@ class MainActivity : AppCompatActivity() {
     private fun findNavController(): NavController? {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
         return navHostFragment?.navController
+    }
+
+    private fun initNavManager() {
+        navManager.setOnNavEvent {
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+            navHostFragment?.findNavController()?.navigate(it)
+
+            /* val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+             currentFragment?.navigateSafe(it)*/
+        }
     }
 }

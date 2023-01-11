@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="bViewModel"
+            type="com.taru.ui.pages.nav.home.NavHomeViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_216"
     android:clickable="true"
     android:focusable="true"
+
+    android:onClick="@{() -> bViewModel.navigateToScan()}"
     android:foreground="@drawable/dr_ripple_round_32"
     android:background="@drawable/dr_rect_round_32_surface">
 
@@ -73,7 +85,7 @@
             android:layout_width="@dimen/dp_24"
             android:layout_height="@dimen/dp_24"
             app:srcCompat="@drawable/ic_if_scan"
-            app:tint="@color/md_theme_light_secondaryContainer"/>
+            app:tint="?colorSecondaryContainer"/>
         <Space
             android:layout_width="@dimen/dp_24"
             android:layout_height="@dimen/dp_2"/>
@@ -83,7 +95,7 @@
             android:layout_height="wrap_content"
             android:text="Scan Plant"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            android:textColor="@color/md_theme_light_secondaryContainer"
+            android:textColor="?colorSecondaryContainer"
         />
 
 
@@ -93,3 +105,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

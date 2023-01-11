@@ -5,6 +5,9 @@
     android:id="@+id/nav_app"
     app:startDestination="@id/nav_home">
 
+    <action android:id="@+id/action_global_to_Scan"
+        app:destination="@id/scan"/>
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.taru.ui.pages.nav.home.NavHomeFragment"
@@ -30,6 +33,11 @@
         android:label="About"
         tools:layout="@layout/nav_about_fragment">
     </fragment>
-
+    <fragment
+        android:id="@+id/scan"
+        android:name="com.taru.ui.pages.scan.ScanFragment"
+        android:label="Scan"
+        tools:layout="@layout/scan_fragment">
+    </fragment>
 
 </navigation>

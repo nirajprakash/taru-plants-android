@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bViewModel"
+            type="com.taru.ui.pages.scan.ScanViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="@dimen/dp_0">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:logo="@drawable/ic_logo_taru"
+                app:menu="@menu/menu_app"
+                app:title="Taru"
+                app:titleCentered="true" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/dp_200"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+<!--               app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+             -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="0dp"
+                app:contentPadding="@dimen/dp_0"
+                app:strokeColor="@android:color/transparent"
+                app:strokeWidth="@dimen/dp_0"
+                app:cardCornerRadius="@dimen/dp_32"
+                android:layout_margin="@dimen/dp_24">
+                <androidx.camera.view.PreviewView
+                    android:id="@+id/previewView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                   />
+            </com.google.android.material.card.MaterialCardView>
+
+
+           <!-- <View
+                android:background="@drawable/dr_rect_round_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_24"
+                />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--         app:navigationIcon="@drawable/ic_drawer_menu_24px"-->
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            style="@style/Widget.Material3.BottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabCradleMargin="@dimen/dp_8"
+            app:fabCradleRoundedCornerRadius="@dimen/dp_12"
+            app:fabAlignmentMode="center"
+            app:fabAnchorMode="cradle"
+
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:menu="@menu/scan_menu" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottomAppBar"
+            app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.circle"
+            app:srcCompat="@drawable/ic_if_scan" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

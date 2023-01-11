@@ -12,7 +12,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:fitsSystemWindows="true"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?colorSurface">
@@ -129,6 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/dp_24"
                     android:layout_marginHorizontal="@dimen/dp_24"
+                    app:bViewModel="@{bViewModel}"
 
                     />
                <!-- <androidx.constraintlayout.widget.ConstraintLayout

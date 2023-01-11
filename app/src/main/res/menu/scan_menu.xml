@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ThreeD_Ads.in.example.ThreeD_Ads.MainActivity">
+    <item
+        android:id="@+id/menu_scan_action_image"
+        android:orderInCategory="100"
+        android:title="Image"
+        android:icon="@drawable/ic_if_image"
+        app:showAsAction="always" />
+
+</menu>
