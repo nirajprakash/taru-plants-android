@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:id="@+id/plant_detail_verticals"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    android:background="@drawable/dr_rect_round_32_back_alpha"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/plant_detail_pressure_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/plant_detail_pressure_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pressure"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:id="@+id/plant_detail_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="800mb"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+            android:textColor="@color/colorOnSurface"
+            tools:text="800mb" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/plant_detail_divider_1"
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_32"
+        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+    <LinearLayout
+        android:id="@+id/plant_detail_visibility_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/plant_detail_visibility_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visibility"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:id="@+id/plant_detail_visibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.3 Km"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+            android:textColor="@color/colorOnSurface"
+
+            tools:text="4.3 Km" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/plant_detail_divider_2"
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_32"
+        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+    <LinearLayout
+        android:id="@+id/plant_detail_humidity_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/plant_detail_humidity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:id="@+id/plant_detail_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="87%"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/colorOnSurface"
+            tools:text="87%" />
+    </LinearLayout>
+
+
+
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:constraint_referenced_ids="plant_detail_pressure_ll,plant_detail_divider_1,plant_detail_visibility_ll,plant_detail_divider_2,plant_detail_humidity_ll"
+        app:flow_horizontalAlign="center"
+
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="8dp"
+        app:flow_horizontalStyle="spread"
+
+        app:flow_verticalBias="0"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

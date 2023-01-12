@@ -6,6 +6,7 @@
 
     <color name="colorShadow">@color/md_black_1000</color>
     <color name="colorOnSurface">@color/md_theme_dark_onSurface</color>
+    <color name="colorCard">#202218</color>
 
 
 

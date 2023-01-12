@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bViewModel"
+            type="com.taru.ui.pages.weather.WeatherViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="@dimen/dp_0">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_app"
+                app:title="Taru"
+                app:titleCentered="true" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/dp_200">
+
+                <View
+                    android:id="@+id/weather_image_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_96"
+                    android:layout_margin="@dimen/dp_24"
+                    android:background="@drawable/dr_rect_round_32_back_alpha"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/weather_image"
+
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/dp_2"
+                    android:foreground="@drawable/dr_rect_round_32_gradient_white"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/weather_image_area"
+                    app:layout_constraintEnd_toEndOf="@id/weather_image_area"
+                    app:layout_constraintStart_toStartOf="@id/weather_image_area"
+                    app:layout_constraintTop_toTopOf="@id/weather_image_area"
+                    app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.32"
+                    tools:src="@drawable/pic_weather" />
+
+                <TextView
+
+                    android:id="@+id/weather_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_24"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:background="@drawable/dr_rect_round_18_back_alpha"
+                    android:paddingHorizontal="@dimen/dp_16"
+                    android:paddingVertical="@dimen/dp_8"
+
+                    android:text="Partially Cloud"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="@color/colorOnSurface"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weather_image_area"
+                    tools:text="Partially Cloud" />
+
+                <TextView
+
+                    android:id="@+id/weather_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_28"
+                    android:layout_marginTop="@dimen/dp_12"
+
+                    android:text="22C"
+
+                    android:textAppearance="@style/Typo.Jl.Headline.Large"
+                    android:textColor="@color/colorOnSurface"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weather_state"
+                    tools:text="22C" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:id="@+id/weather_verticals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="@dimen/dp_24"
+
+                    android:background="@drawable/dr_rect_round_32_back_alpha"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weather_temp">
+
+                    <LinearLayout
+                        android:id="@+id/weather_pressure_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginBottom="@dimen/dp_24"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <TextView
+                            android:id="@+id/weather_pressure_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pressure"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/color_on_surface_54" />
+
+                        <TextView
+                            android:id="@+id/weather_pressure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="800mb"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+                            android:textColor="@color/colorOnSurface"
+                            tools:text="800mb" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/weather_divider_1"
+                        android:layout_width="@dimen/dp_1"
+                        android:layout_height="@dimen/dp_32"
+                        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+                    <LinearLayout
+                        android:id="@+id/weather_visibility_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginBottom="@dimen/dp_24"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
+
+                        <TextView
+                            android:id="@+id/weather_visibility_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Visibility"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/color_on_surface_54" />
+
+                        <TextView
+                            android:id="@+id/weather_visibility"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.3 Km"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+                            android:textColor="@color/colorOnSurface"
+
+                            tools:text="4.3 Km" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/weather_divider_2"
+                        android:layout_width="@dimen/dp_1"
+                        android:layout_height="@dimen/dp_32"
+                        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+                    <LinearLayout
+                        android:id="@+id/weather_humidity_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginBottom="@dimen/dp_24"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
+
+                        <TextView
+                            android:id="@+id/weather_humidity_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Humidity"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/color_on_surface_54" />
+
+                        <TextView
+                            android:id="@+id/weather_humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="87%"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                            android:textColor="@color/colorOnSurface"
+                            tools:text="87%" />
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/flow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginBottom="@dimen/dp_16"
+                        app:constraint_referenced_ids="weather_pressure_ll,weather_divider_1,weather_visibility_ll,weather_divider_2,weather_humidity_ll"
+                        app:flow_horizontalAlign="center"
+
+                        app:flow_horizontalBias="0"
+                        app:flow_horizontalGap="8dp"
+                        app:flow_horizontalStyle="spread"
+
+                        app:flow_verticalBias="0"
+                        app:flow_wrapMode="chain"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+
+                    android:id="@+id/weather_forcast_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_28"
+
+                    android:layout_marginTop="@dimen/dp_32"
+
+                    android:textColor="@color/colorOnSurface"
+
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weather_verticals"
+
+                    android:text="Forecast"/>
+
+                <TextView
+
+                    android:id="@+id/weather_forcast_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_28"
+
+                    android:layout_marginTop="@dimen/dp_4"
+
+                    android:textColor="@color/color_on_surface_54"
+
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weather_forcast_title"
+
+                    android:text="Next 15 days"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -66,6 +66,10 @@ dependencies {
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 
+    // chart
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     implementation 'com.guolindev.permissionx:permissionx:1.7.1'
     testImplementation 'junit:junit:4.13.2'
 

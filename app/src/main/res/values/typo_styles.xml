@@ -6,6 +6,10 @@
         <!--        <item name="fontStyle">normal</item>-->
         <item name="lineHeight">@dimen/dp_0</item>
     </style>
+    <style name="Typo.Jl.Headline.Large" parent="Typo.Jl.Headline">
+
+        <item name="android:textSize">@dimen/sp_108</item>
+    </style>
     <style name="Typo.Jl.cardTitle" parent="TextAppearance.AppCompat.Medium">
 <!--        <item name="fontFamily">@font/josefin_sans_regular</item>-->
 <!--        <item name="android:fontWeight">400</item>-->

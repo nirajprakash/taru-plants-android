@@ -15,4 +15,8 @@ class NavHomeViewModel @Inject constructor(private val navManager: NavManager,):
     fun navigateToScan(){
         navManager.navigate(NavHomeFragmentDirections.actionGlobalToScan())
     }
+
+    fun navigateToWeather(){
+        navManager.navigate(NavHomeFragmentDirections.actionGlobalToWeather())
+    }
 }
