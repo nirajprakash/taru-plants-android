@@ -1,6 +1,7 @@
 package com.taru.ui.pages.nav.plants.recommended
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,8 @@ import com.taru.databinding.NavPlantsRecentItemBinding
 /**
  * Created by Niraj on 10-01-2023.
  */
-class PlantsAdapter : ListAdapter<ModelPlant, PlantsAdapter.ItemViewHolder>(ModelPlant.diffCallback) {
+class PlantsAdapter(
+    val mOnClick: (ModelPlant) -> Unit) : ListAdapter<ModelPlant, PlantsAdapter.ItemViewHolder>(ModelPlant.diffCallback) {
 
 
 
@@ -26,10 +28,17 @@ class PlantsAdapter : ListAdapter<ModelPlant, PlantsAdapter.ItemViewHolder>(Mode
         holder.bind(getItem(position))
     }
 
-    inner class ItemViewHolder(var binding: NavPlantsItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ItemViewHolder(var binding: NavPlantsItemBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
         fun bind(plant: ModelPlant) {
             binding.navPlantsRecentItemImage.load(R.drawable.pic_tool_category)
+            binding.bOnClick =  this
+            binding.executePendingBindings()
+        }
 
+        override fun onClick(v: View?) {
+            var posi = adapterPosition
+            mOnClick(getItem(posi))
         }
 
 

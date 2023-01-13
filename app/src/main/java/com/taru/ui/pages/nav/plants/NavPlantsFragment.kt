@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.taru.databinding.NavPlantsFragmentBinding
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.plants.recent.ModelRecent
@@ -42,7 +43,9 @@ class NavPlantsFragment: FragmentBase(false) {
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
         mListAdapterRecent = RecentSearchAdapter()
-        mListAdapter = PlantsAdapter()
+        mListAdapter = PlantsAdapter() {
+            modelPlant ->  navigateToDetail(modelPlant.id)
+        }
         /*{
             Log.d("AdListFragment", "AdListAdapter: $it")
             navigateToDetail(it.key)
@@ -91,5 +94,9 @@ class NavPlantsFragment: FragmentBase(false) {
             }*/
 
         }
+    }
+
+    private fun navigateToDetail(id: Int) {
+        findNavController().navigate(NavPlantsFragmentDirections.actionToDetail())
     }
 }

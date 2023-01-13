@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+
+        android:id="@+id/plant_detail_attr_scientific_name_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_24"
+
+        android:text="Scientific Name:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="?colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plant_detail_section_region_chip_group"
+         />
+
+    <TextView
+        android:id="@+id/plant_detail_attr_scientific_name"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_4"
+
+        android:text="Raphanus raphanistrum"
+
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="@color/colorOnSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plant_detail_attr_scientific_name_header"
+        tools:text="Raphanus raphanistrum" />
+
+
+    <TextView
+
+        android:id="@+id/plant_detail_attr_genus_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_24"
+
+        android:text="Genus:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="?colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plant_detail_attr_scientific_name"
+        />
+
+    <TextView
+        android:id="@+id/plant_detail_attr_genus"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_4"
+
+        android:text="Raphanus"
+
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="@color/colorOnSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plant_detail_attr_genus_header"
+        tools:text="Raphanus" />
+
+
+    <TextView
+
+        android:id="@+id/plant_detail_attr_family_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_24"
+
+        android:text="Family:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="?colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plant_detail_attr_genus"
+        />
+
+    <TextView
+        android:id="@+id/plant_detail_attr_family"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_4"
+
+        android:text="Brassicaceae"
+
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="@color/colorOnSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plant_detail_attr_family_header"
+        tools:text="Brassicaceae" />
+
+</merge>

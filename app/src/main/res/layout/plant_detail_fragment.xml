@@ -9,7 +9,7 @@
 
         <variable
             name="bViewModel"
-            type="com.taru.ui.pages.weather.WeatherViewModel" />
+            type="com.taru.ui.pages.detail.PlantDetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -80,6 +80,9 @@
                     android:background="@drawable/dr_rect_rounded_18_on_surface"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/dp_36"
+                    android:foreground="?selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/plant_detail_image_area"
@@ -90,7 +93,7 @@
                     <ImageView
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        app:srcCompat="@drawable/ic_if_scan"
+                        app:srcCompat="@drawable/ic_if_gallery"
                         app:tint="?colorSecondaryContainer"/>
                     <Space
                         android:layout_width="@dimen/dp_24"
@@ -99,7 +102,7 @@
                         android:id="@+id/home_plant_detail_card_visibility_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Scan Plant"
+                        android:text="Gallery"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?colorSecondaryContainer"
                         />
@@ -107,91 +110,100 @@
 
                 </LinearLayout>
 
+
+
+
                 <TextView
 
-                    android:id="@+id/plant_detail_state"
+                    android:id="@+id/plant_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_24"
+                    android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_24"
-                    android:background="@drawable/dr_rect_round_18_back_alpha"
-                    android:paddingHorizontal="@dimen/dp_16"
-                    android:paddingVertical="@dimen/dp_8"
 
-                    android:text="Partially Cloud"
-                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:text="Radish"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/colorOnSurface"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plant_detail_image_area"
-                    tools:text="Partially Cloud" />
+                    tools:text="Radish" />
 
                 <TextView
 
-                    android:id="@+id/plant_detail_temp"
+                    android:id="@+id/plant_detail_section_region_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_20"
 
-                    android:text="22C"
+                    android:text="Found In:"
 
-                    android:textAppearance="@style/Typo.Jl.Headline.Large"
-                    android:textColor="@color/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    android:textColor="@color/color_on_surface_54"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_state"
-                    tools:text="22C" />
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_title"
+                    tools:text="Found In:" />
 
 
-<!--                todo work here -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/plant_detail_section_region_chip_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_detail_section_region_title">
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Asia"
+                        app:chipBackgroundColor="#FFCCC5"
+                        style="@style/Widget.Jl.App.Chip.Plain"/>
+
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Africa"
+                        app:chipBackgroundColor="#8BE3EF"
+                        style="@style/Widget.Jl.App.Chip.Plain"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Europe"
+                        app:chipBackgroundColor="#E89BFC"
+                        style="@style/Widget.Jl.App.Chip.Plain"/>
+
+                </com.google.android.material.chip.ChipGroup>
+                <!--                todo work here -->
 
                 <include
-                    android:id="@+id/plant_detail_verticals"
-                    layout="@layout/plant_detail_verticals"
+                    android:id="@+id/plant_detail_attrs"
+                    layout="@layout/plant_detail_attributes"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_temp"
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_section_region_chip_group"
 
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
 
                     android:layout_margin="@dimen/dp_24"
                     />
+                <include
+                    android:id="@+id/plant_detail_verticals"
+                    layout="@layout/plant_detail_verticals"
 
-
-                <TextView
-
-                    android:id="@+id/plant_detail_forcast_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_28"
-
-                    android:layout_marginTop="@dimen/dp_32"
-
-                    android:textColor="@color/colorOnSurface"
-
-                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_verticals"
+                    app:layout_constraintTop_toBottomOf="@id/plant_detail_attr_family"
 
-                    android:text="Forecast"/>
-
-                <TextView
-
-                    android:id="@+id/plant_detail_forcast_subtitle"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_28"
+                    android:layout_width="match_parent"
 
-                    android:layout_marginTop="@dimen/dp_4"
-
-                    android:textColor="@color/color_on_surface_54"
-
-                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/plant_detail_forcast_title"
-
-                    android:text="Next 15 days"/>
+                    android:layout_margin="@dimen/dp_24"
+                    tools:ignore="NotSibling" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

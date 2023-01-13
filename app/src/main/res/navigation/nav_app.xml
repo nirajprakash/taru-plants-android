@@ -22,6 +22,8 @@
         android:name="com.taru.ui.pages.nav.plants.NavPlantsFragment"
         android:label="Plants"
         tools:layout="@layout/nav_plants_fragment">
+        <action android:id="@+id/action_to_detail"
+            app:destination="@id/plant_detail"/>
     </fragment>
     <fragment
         android:id="@+id/nav_cure"
@@ -34,6 +36,12 @@
         android:name="com.taru.ui.pages.nav.about.NavAboutFragment"
         android:label="About"
         tools:layout="@layout/nav_about_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/plant_detail"
+        android:name="com.taru.ui.pages.detail.PlantDetailFragment"
+        android:label="Plant Detail"
+        tools:layout="@layout/plant_detail_fragment">
     </fragment>
     <fragment
         android:id="@+id/scan"
