@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bOnClick"
+            type="View.OnClickListener" />
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_marginEnd="@dimen/dp_12"
+    android:foreground="@drawable/dr_ripple_round_24"
+    android:clickable="true"
+
+    android:layout_marginBottom="@dimen/dp_24"
+    android:focusable="true"
+    android:onClick="@{bOnClick::onClick}"
+
+    android:layout_height="wrap_content">
+
+    <!--    android:translationZ="@dimen/dp_2"
+    -->
+    <View android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="1.0"
+        android:id="@+id/home_category_item_image_area"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        android:background="@drawable/dr_rect_round_24"/>
+    <!--            android:translationZ="@dimen/dp_2"
+    -->
+
+    <TextView
+        android:id="@+id/nav_plants_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Radish"
+        android:text="Radish"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorOnSurface"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/dp_6"
+
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/nav_plants_item_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="16:6"
+        android:id="@+id/nav_plants_recent_item_image"
+
+        app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
+        tools:src="@drawable/pic_tool_category"
+
+
+        android:layout_marginTop="@dimen/dp_20"/>
+
+    <TextView
+        android:id="@+id/nav_plants_item_common_name_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Common Name:"
+        android:text="Common Name:"
+        android:gravity="center_horizontal"
+        android:textColor="@color/color_on_surface_54"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_20"
+        app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_item_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/dp_6"
+
+        />
+
+    <TextView
+        android:id="@+id/nav_plants_item_common_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Common Nettle"
+
+        android:text="Common Nettle"
+        android:gravity="start"
+        android:textColor="@color/colorOnSurface"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_20"
+        app:layout_constraintBaseline_toBaselineOf="@id/nav_plants_item_common_name_header"
+        app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_item_image"
+        app:layout_constraintStart_toEndOf="@id/nav_plants_item_common_name_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/dp_6"
+
+        />
+    <TextView
+        android:id="@+id/nav_plants_item_family_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Family:"
+        android:text="Family:"
+        android:gravity="center_horizontal"
+        android:textColor="@color/color_on_surface_54"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginStart="@dimen/dp_20"
+        app:layout_constraintTop_toBottomOf="@+id/nav_plants_item_common_name_header"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/nav_plants_item_family"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Urticaceae"
+
+        android:text="Urticaceae"
+        android:gravity="start"
+        android:textColor="@color/colorOnSurface"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_20"
+        app:layout_constraintBaseline_toBaselineOf="@id/nav_plants_item_family_header"
+        app:layout_constraintTop_toBottomOf="@+id/nav_plants_item_common_name_header"
+        app:layout_constraintStart_toEndOf="@id/nav_plants_item_family_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/dp_6"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

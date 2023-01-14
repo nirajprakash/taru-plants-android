@@ -15,6 +15,9 @@
         android:name="com.taru.ui.pages.nav.home.NavHomeFragment"
         android:label="Home"
         tools:layout="@layout/nav_home_fragment">
+
+        <action android:id="@+id/action_to_search"
+            app:destination="@id/search"/>
     </fragment>
 
     <fragment
@@ -52,7 +55,14 @@
     <fragment
         android:id="@+id/weather"
         android:name="com.taru.ui.pages.weather.WeatherFragment"
-        android:label="Scan"
+        android:label="Weather"
         tools:layout="@layout/weather_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.taru.ui.pages.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/search_fragment">
     </fragment>
 </navigation>

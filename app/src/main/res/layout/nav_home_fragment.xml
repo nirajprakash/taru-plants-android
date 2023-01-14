@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:elevation="@dimen/dp_0">
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -46,6 +47,7 @@
 
                 <Button
                     android:id="@+id/home_search_btn"
+                    android:onClick="@{() -> bViewModel.navigateToSearch()}"
 
                     style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                     android:layout_marginTop="@dimen/dp_24"
