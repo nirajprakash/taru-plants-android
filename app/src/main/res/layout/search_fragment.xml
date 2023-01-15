@@ -28,6 +28,7 @@
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
                 android:hint="search plant .." />
             <!--<com.google.android.material.appbar.MaterialToolbar
@@ -37,6 +38,8 @@
                 app:menu="@menu/menu_app"
                 app:title="Taru"
                 app:titleCentered="true" />-->
+
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -80,8 +83,8 @@
                     android:paddingEnd="@dimen/dp_24"
                     android:clipToPadding="false"
                     tools:listitem="@layout/search_plants_item"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
                     android:orientation="vertical"/>
 
 
@@ -101,6 +104,22 @@
             android:hint="plant search"
             app:layout_anchor="@id/search_bar">
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_view_recyclerview"
+                android:layout_width="match_parent"
+
+                android:paddingBottom="@dimen/dp_200"
+                android:layout_height="match_parent"
+
+
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
+                android:clipToPadding="false"
+                tools:listitem="@layout/search_plants_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                android:orientation="vertical"/>
         </com.google.android.material.search.SearchView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

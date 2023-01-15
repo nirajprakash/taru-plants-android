@@ -13,6 +13,12 @@ import coil.load
 import com.taru.R
 import com.taru.databinding.SearchFragmentBinding
 import com.taru.ui.base.FragmentBase
+import com.taru.ui.pages.nav.plants.recent.ModelRecent
+import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
+import com.taru.ui.pages.nav.plants.recommended.ModelPlant
+import com.taru.ui.pages.nav.plants.recommended.PlantsAdapter
+import com.taru.ui.pages.search.autocomplete.SearchAutoCompleteAdapter
+import com.taru.ui.pages.search.plants.SearchPlantsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -25,6 +31,8 @@ class SearchFragment : FragmentBase(true){
     private val mViewModel: SearchViewModel by viewModels()
     private lateinit var vBinding: SearchFragmentBinding
 
+    private lateinit var mListAdapterAutoComplete: SearchAutoCompleteAdapter
+    private lateinit var mListAdapter: SearchPlantsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +51,39 @@ class SearchFragment : FragmentBase(true){
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
+        mListAdapterAutoComplete = SearchAutoCompleteAdapter(){
+
+        }
+        mListAdapter = SearchPlantsAdapter() {
+                modelPlant ->
+        //navigateToDetail(modelPlant.id)
+        }
+
         lifecycleScope.launchWhenCreated {
-            vBinding.weatherImage.load(R.drawable.pic_weather)
+//            vBinding.weatherImage.load(R.drawable.pic_weather)
+
+            vBinding.searchViewRecyclerview.adapter = mListAdapterAutoComplete
+
+
+
+            var list = mutableListOf(
+                ModelRecent(0), ModelRecent(1), ModelRecent(2),
+                ModelRecent(3), ModelRecent(4), ModelRecent(5),
+                ModelRecent(6), ModelRecent(7), ModelRecent(8), ModelRecent(9)
+            )
+
+
+            mListAdapterAutoComplete.submitList(list)
+
+            vBinding.recyclerview.adapter = mListAdapter
+            var list2 = mutableListOf(
+                ModelPlant(0), ModelPlant(1), ModelPlant(2),
+                ModelPlant(3), ModelPlant(4), ModelPlant(5),
+                ModelPlant(6), ModelPlant(7), ModelPlant(8), ModelPlant(9)
+            )
+
+
+            mListAdapter.submitList(list2)
         }
 
         vBinding.searchView

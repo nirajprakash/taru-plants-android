@@ -40,7 +40,7 @@
     -->
 
     <TextView
-        android:id="@+id/nav_plants_item_title"
+        android:id="@+id/search_plants_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Radish"
@@ -60,11 +60,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/nav_plants_item_title"
+        app:layout_constraintTop_toBottomOf="@id/search_plants_item_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="16:6"
-        android:id="@+id/nav_plants_recent_item_image"
+        android:id="@+id/search_plants_item_image"
 
         app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
         tools:src="@drawable/pic_tool_category"
@@ -73,7 +73,7 @@
         android:layout_marginTop="@dimen/dp_20"/>
 
     <TextView
-        android:id="@+id/nav_plants_item_common_name_header"
+        android:id="@+id/search_plants_item_common_name_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Common Name:"
@@ -83,14 +83,14 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_20"
-        app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_item_image"
+        app:layout_constraintTop_toBottomOf="@+id/search_plants_item_image"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/dp_6"
 
         />
 
     <TextView
-        android:id="@+id/nav_plants_item_common_name"
+        android:id="@+id/search_plants_item_common_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="Common Nettle"
@@ -101,15 +101,15 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_20"
-        app:layout_constraintBaseline_toBaselineOf="@id/nav_plants_item_common_name_header"
-        app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_item_image"
-        app:layout_constraintStart_toEndOf="@id/nav_plants_item_common_name_header"
+        app:layout_constraintBaseline_toBaselineOf="@id/search_plants_item_common_name_header"
+        app:layout_constraintTop_toBottomOf="@+id/search_plants_item_image"
+        app:layout_constraintStart_toEndOf="@id/search_plants_item_common_name_header"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="@dimen/dp_6"
 
         />
     <TextView
-        android:id="@+id/nav_plants_item_family_header"
+        android:id="@+id/search_plants_item_family_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Family:"
@@ -119,14 +119,14 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         android:layout_marginTop="@dimen/dp_2"
         android:layout_marginStart="@dimen/dp_20"
-        app:layout_constraintTop_toBottomOf="@+id/nav_plants_item_common_name_header"
+        app:layout_constraintTop_toBottomOf="@+id/search_plants_item_common_name_header"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/dp_12"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <TextView
-        android:id="@+id/nav_plants_item_family"
+        android:id="@+id/search_plants_item_family"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="Urticaceae"
@@ -137,9 +137,9 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_20"
-        app:layout_constraintBaseline_toBaselineOf="@id/nav_plants_item_family_header"
-        app:layout_constraintTop_toBottomOf="@+id/nav_plants_item_common_name_header"
-        app:layout_constraintStart_toEndOf="@id/nav_plants_item_family_header"
+        app:layout_constraintBaseline_toBaselineOf="@id/search_plants_item_family_header"
+        app:layout_constraintTop_toBottomOf="@+id/search_plants_item_common_name_header"
+        app:layout_constraintStart_toEndOf="@id/search_plants_item_family_header"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="@dimen/dp_6"
 

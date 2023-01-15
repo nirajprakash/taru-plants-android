@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bOnClick"
+            type="View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginTop="@dimen/dp_8"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:onClick="@{bOnClick::onClick}"
+
+        >
+
+        <View
+            android:id="@+id/search_autocomplete_item_image_area"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_4"
+            android:background="@drawable/dr_rect_round_18"
+            app:layout_constraintDimensionRatio="16:16"
+            app:layout_constraintStart_toStartOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/search_autocomplete_item_image"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_2"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/search_autocomplete_item_image_area"
+            app:layout_constraintEnd_toEndOf="@+id/search_autocomplete_item_image_area"
+
+            app:layout_constraintStart_toStartOf="@+id/search_autocomplete_item_image_area"
+
+            app:layout_constraintTop_toTopOf="@+id/search_autocomplete_item_image_area"
+            app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.18"
+
+
+            tools:src="@drawable/pic_tool_category" />
+
+        <ImageView
+            android:id="@+id/search_autocomplete_item_icon"
+
+
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/round_keyboard_arrow_right_24" />
+
+        <TextView
+            android:id="@+id/search_autocomplete_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="Radish"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/search_autocomplete_item_icon"
+            app:layout_constraintStart_toEndOf="@+id/search_autocomplete_item_image_area"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Radish" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

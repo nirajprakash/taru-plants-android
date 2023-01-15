@@ -54,6 +54,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'androidx.core:core-ktx:+'
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     //Coil
