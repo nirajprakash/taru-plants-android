@@ -3,6 +3,19 @@
 - https://github.com/dgewe/Movie-App-Android
 - https://github.com/bkhezry/weather/blob/master/app/build.gradle
 - https://github.com/openfarmcc/OpenFarm
+- https://github.com/gastsail/CocktailApp
+- https://github.com/philipplackner/WeatherApp
+- https://github.com/furkanaskin/Weatherapp
+
+## clean
+- https://github.com/gastsail/CocktailApp/blob/master/app/src/main/java/com/g/tragosapp/domain/DefaultCocktailRepository.kt
+- https://github.com/igorwojda/android-showcase
+
+
+## weather api
+
+- https://open-meteo.com/en
+- https://api.openweathermap.org/data/2.5/
 
 # m3
 
@@ -34,3 +47,30 @@
 
 ## search
 - https://github.com/material-components/material-components-android/blob/master/docs/components/Search.md
+
+# room
+
+## converter
+
+- https://github.com/martinraj/Android-Geo-Remainder-Alarm/blob/master/app/src/main/java/com/marty/georemainder/dbutilities/LatLngConverter.java
+- https://stackoverflow.com/questions/48554515/how-to-retrieve-data-based-on-the-closest-distance-in-room-persistance
+
+# paging
+
+- https://github.com/nameisjayant/Paging3-with-RoomDatabase-and-Retrofit-in-Android-Kotlin/blob/master/app/src/main/java/com/example/roomdatabasewithpaging3/Data/Repository/DogsRemoteMediator.kt
+- https://github.com/ronnieotieno/Android-Paging-3-with-MVVM-Retrofit-and-Flow/blob/master/app/src/main/java/dev/ronnie/allplayers/data/remotediator/PlayersRemoteMediator.kt
+- https://github.com/ersiver/Newsster/blob/master/app/src/main/java/com/ersiver/newsster/repository/NewssterRemoteMediator.kt
+
+
+## https://members.ip-api.com/#pricing
+
+- https://stackoverflow.com/questions/14101070/how-to-determine-location-of-device-in-android-using-ip-address
+- http://ip-api.com/json
+
+## keys hide
+
+- https://gist.github.com/loftywaif002/f2ebe2024ad73d6a579285dcba250465
+
+## retrofit
+
+- https://getstream.io/blog/modeling-retrofit-responses/

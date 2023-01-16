@@ -72,6 +72,19 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+
+    //api
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+
+    //Moshi
+    implementation 'com.squareup.moshi:moshi:1.12.0'
+    implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
+
+    // leaks
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
     testImplementation 'junit:junit:4.13.2'
 
     testImplementation "org.robolectric:robolectric:4.9.1"
