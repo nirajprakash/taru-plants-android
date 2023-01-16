@@ -7,7 +7,7 @@ import retrofit2.http.GET
 /**
  * Created by Niraj on 16-01-2023.
  */
-interface IpApi {
+interface ApiIp {
 
     @GET("json")
     suspend fun getIp(

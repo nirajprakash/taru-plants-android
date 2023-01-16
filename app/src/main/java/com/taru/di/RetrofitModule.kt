@@ -1,8 +1,10 @@
 package com.taru.di
 
 import android.app.Application
+import android.util.Log
 import com.taru.App
 import com.taru.BuildConfig
+import com.taru.data.remote.ip.ApiIp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,6 +73,7 @@ object RetrofitModule {
 //        httpClient.addInterceptor(authInterceptor)
 
         if (BuildConfig.DEBUG) {
+            Log.d("retrofit", "provideOkHttpClient: ")
             val logging = HttpLoggingInterceptor()
             // set your desired log level
             logging.level = HttpLoggingInterceptor.Level.BODY
@@ -97,6 +100,9 @@ object RetrofitModule {
         .build()
 
 
+    @Singleton
+    @Provides
+    fun provideApiIp(retrofit: Retrofit): ApiIp = retrofit.create(ApiIp::class.java)
 
 
     /*

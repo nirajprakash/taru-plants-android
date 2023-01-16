@@ -34,7 +34,11 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
 
                     is DomainResult.Failure -> {
                         // _mEventAds.postValue(LiveDataEvent(it.value.items))
-                        Log.d("AdListViewModel", "getList: failure")
+
+                        if(it.throwable!=null){
+                            it.throwable.printStackTrace()
+                        }
+                        Log.d("AdListViewModel", "getList: failure ${it.throwable}")
 
                     }
                 }
