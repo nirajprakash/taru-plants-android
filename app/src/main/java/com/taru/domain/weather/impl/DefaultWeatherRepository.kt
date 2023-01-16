@@ -20,7 +20,7 @@ class DefaultWeatherRepository @Inject constructor(
     override suspend fun getDetail(): DomainResult<ModelWeather> {
         return when(val result = remoteIpSource.getIp()){
             is ApiResult.Success ->{
-                DomainResult.Success(ModelWeather(result.data.lat, result.data.lng))
+                DomainResult.Success(ModelWeather(result.data.lat, result.data.lon))
 
             }
             is ApiResult.Exception ->{
