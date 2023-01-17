@@ -5,6 +5,7 @@ import android.util.Log
 import com.taru.App
 import com.taru.BuildConfig
 import com.taru.data.remote.ip.ApiIp
+import com.taru.data.remote.weather.ApiWeather
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -27,6 +29,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
+    private const val RETROFIT_IP = "Retrofit.ip"
+    private const val RETROFIT_WEATHER = "Retrofit.weather"
     @Provides
     fun provideCacheInterceptor() = Interceptor { chain ->
         var request = chain.request()
@@ -90,6 +94,7 @@ object RetrofitModule {
     }
 
 
+    @Named(RETROFIT_IP)
     @Singleton
     @Provides
     fun provideRetrofitIp(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
@@ -100,9 +105,27 @@ object RetrofitModule {
         .build()
 
 
+
+
+    @Named(RETROFIT_WEATHER)
     @Singleton
     @Provides
-    fun provideApiIp(retrofit: Retrofit): ApiIp = retrofit.create(ApiIp::class.java)
+    fun provideRetrofitWeather(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl("https://api.openweathermap.org/data/2.5/")
+        .client(okHttpClient)
+//        .addCallAdapterFactory(retrofitAuthAdapterFactory)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build()
+
+
+
+    @Singleton
+    @Provides
+    fun provideApiIp(@Named(RETROFIT_IP) retrofit: Retrofit): ApiIp = retrofit.create(ApiIp::class.java)
+
+    @Singleton
+    @Provides
+    fun provideApiWeather(@Named(RETROFIT_WEATHER) retrofit: Retrofit): ApiWeather = retrofit.create(ApiWeather::class.java)
 
 
     /*

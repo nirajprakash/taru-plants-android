@@ -6,6 +6,11 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
+
 android {
     namespace 'com.taru'
     compileSdk 33
@@ -16,6 +21,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
