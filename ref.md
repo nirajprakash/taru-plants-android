@@ -50,10 +50,23 @@
 
 # room
 
+- https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1
+
+## setup
+
+- https://github.com/KadirKuruca/NewsApp-MVVM-Hilt-Room-Retrofit
+- props by update
+- https://stackoverflow.com/questions/64080963/room-is-there-any-way-to-not-insert-update-value-if-null
+
+## projects
+- https://gist.github.com/florina-muntenescu/1c78858f286d196d545c038a71a3e864
+- https://github.com/android/sunflower/blob/main/app/src/main/java/com/google/samples/apps/sunflower/data/GardenPlantingDao.kt
+
 ## converter
 
 - https://github.com/martinraj/Android-Geo-Remainder-Alarm/blob/master/app/src/main/java/com/marty/georemainder/dbutilities/LatLngConverter.java
 - https://stackoverflow.com/questions/48554515/how-to-retrieve-data-based-on-the-closest-distance-in-room-persistance
+
 
 # paging
 
@@ -70,6 +83,7 @@
 ## keys hide
 
 - https://gist.github.com/loftywaif002/f2ebe2024ad73d6a579285dcba250465
+
 
 ## retrofit
 

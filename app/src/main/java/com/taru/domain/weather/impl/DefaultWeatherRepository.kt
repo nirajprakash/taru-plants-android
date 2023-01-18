@@ -2,6 +2,7 @@ package com.taru.domain.weather.impl
 
 import android.util.Log
 import com.taru.data.base.remote.ApiResult
+import com.taru.data.local.db.location.LocalLocationSource
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource
 import com.taru.domain.base.result.DomainResult
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class DefaultWeatherRepository @Inject constructor(
     private val remoteIpSource: RemoteIpSource,
 
-    private val remoteWeatherSource: RemoteWeatherSource
+    private val remoteWeatherSource: RemoteWeatherSource,
+    private val localLocationSource: LocalLocationSource
 ) : WeatherRepository {
     override suspend fun getDetail(): DomainResult<ModelWeather> {
 
