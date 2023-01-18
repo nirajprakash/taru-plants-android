@@ -1,6 +1,7 @@
 package com.taru.domain.weather.impl
 
 import android.util.Log
+import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.location.LocalLocationSource
 import com.taru.data.remote.ip.RemoteIpSource
@@ -10,6 +11,7 @@ import com.taru.domain.weather.enitity.ModelWeather
 import com.taru.domain.weather.repository.WeatherRepository
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.android.scopes.ViewModelScoped
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -36,23 +38,47 @@ class DefaultWeatherRepository @Inject constructor(
 
         // local Db Check for location
 
-        var result = remoteWeatherSource.getCurrent(ipResult.data.lat, ipResult.data.lon)
+        val locationResult =
+            localLocationSource.getLastNearest(ipResult.data.lat, ipResult.data.lon)
 
-        return when(result){
-            is ApiResult.Success ->{
-                Log.d("getDetail", "getDetail: ${result.data}")
-                DomainResult.Success(ModelWeather(result.data.coord.lat, result.data.coord.lon))
+        val location = if (locationResult is LocalResult.Success) {
+            locationResult.data
+        } else {
+            null
+        }
+
+        Log.d("DefaultWeatherRepository", "getDetail location: $location")
+
+        val apiResult =
+            if (location != null) {
+                // TODO get local weather
+                remoteWeatherSource.getCurrent(location.lat, location.lon)
+            } else {
+                remoteWeatherSource.getCurrent(ipResult.data.lat, ipResult.data.lon)
+            }
+
+
+        val result =  when (apiResult) {
+            is ApiResult.Success -> {
+                Log.d("getDetail", "getDetail: ${apiResult.data}")
+                DomainResult.Success(ModelWeather(apiResult.data.coord.lat, apiResult.data.coord.lon))
 
             }
-            is ApiResult.Exception ->{
-                DomainResult.Failure(result.throwable)
+            is ApiResult.Exception -> {
+                DomainResult.Failure(apiResult.throwable)
 
             }
-            is ApiResult.Message ->{
+            is ApiResult.Message -> {
                 DomainResult.Failure(Throwable("Not item found"))
 
             }
         }
+        if(location!=null){
+            location.weatherUnix = (Date().time/1000).toInt()
+            localLocationSource.update(location)
+        }
+
+        return  result
 
 //        return DomainResult.Success(ModelWeather(ipResult.data.lat, ipResult.data.lon))
 

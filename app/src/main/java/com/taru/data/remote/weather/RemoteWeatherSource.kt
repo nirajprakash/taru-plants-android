@@ -13,14 +13,14 @@ class RemoteWeatherSource @Inject constructor(
     var apiWeather: ApiWeather
 ){
 
-    suspend fun  getCurrent(lat: Double, lon: Double) = withContext(Dispatchers.IO) {
+    suspend fun  getCurrent(lat: Float, lon: Float) = withContext(Dispatchers.IO) {
 
         return@withContext handleApi { apiWeather.getCurrent(lat, lon) }
 
 
     }
 
-    suspend fun  getForecast(lat: Double, lon: Double) = withContext(Dispatchers.IO) {
+    suspend fun  getForecast(lat: Float, lon: Float) = withContext(Dispatchers.IO) {
 
         return@withContext handleApi { apiWeather.getForecast(lat, lon) }
 

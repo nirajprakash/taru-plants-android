@@ -1,6 +1,7 @@
 package com.taru.data.local.db.location
 
 import android.location.Location
+import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -16,7 +17,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class LocalLocationSource @Inject constructor(
-    var locationRoomDao: LocationRoomDao
+    private var locationRoomDao: LocationRoomDao
 ){
 
     suspend fun  getLastNearest(lat: Float, lon: Float) = withContext(Dispatchers.IO) {
@@ -33,12 +34,15 @@ class LocalLocationSource @Inject constructor(
             locB.longitude = locations[0].lon.toDouble()
 
             val distance = locA.distanceTo(locB)
+            Log.d("LocalLocationSource", "getLastNearest: $distance")
             if(distance< 500 ){
+
+
                 return@withContext LocalResult.Success(locations[0])
             }
         }
 
-        var id = locationRoomDao.insert(LocationRoomEntity(0, lat, lon))
+        var id = locationRoomDao.insert(LocationRoomEntity( lat=lat, lon=lon))
 
 
         var location = locationRoomDao.getById(id.toInt())
@@ -59,6 +63,12 @@ class LocalLocationSource @Inject constructor(
             return@withContext LocalResult.Message(404, "Not found")
 
 //        }
+
+    }
+
+    suspend fun update(location: LocationRoomEntity) {
+
+        var locations = locationRoomDao.update(location)
 
     }
 

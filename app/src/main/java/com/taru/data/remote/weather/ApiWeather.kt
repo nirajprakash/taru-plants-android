@@ -14,12 +14,12 @@ interface ApiWeather {
 
 
     @GET("weather")
-    suspend fun getCurrent( @Query("lat") lat: Double,  @Query("lon") lon: Double,
+    suspend fun getCurrent( @Query("lat") lat: Float,  @Query("lon") lon: Float,
                             @Query("appid") appId: String = BuildConfig.WEATHER_KEY
     ): Response<WeatherCurrentDto>
 
     @GET("weather")
-    suspend fun getForecast( @Query("lat") lat: Double,  @Query("lon") lon: Double,
+    suspend fun getForecast( @Query("lat") lat: Float,  @Query("lon") lon: Float,
                              @Query("cnt") count: Int = 10,
                             @Query("appid") appId: String = BuildConfig.WEATHER_KEY
     ): Response<WeatherCurrentDto>
