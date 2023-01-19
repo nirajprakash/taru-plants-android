@@ -11,8 +11,8 @@ import com.taru.data.local.db.base.RoomDaoBase
 interface LocationRoomDao: RoomDaoBase<LocationRoomEntity> {
 
     /**
-     * Get a user by id.
-     * @return the user from the table with a specific id.
+     * Get by id.
+     * @return {@link [LocationRoomEntity](com.taru.data.local.db.location.LocationRoomEntity)} from the table with a specific id.
      */
     @Query("SELECT * FROM Location WHERE id = :id")
     suspend fun getById(id: Int):LocationRoomEntity?

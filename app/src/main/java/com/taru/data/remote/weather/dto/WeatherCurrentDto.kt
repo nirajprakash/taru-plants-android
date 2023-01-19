@@ -10,11 +10,11 @@ import com.taru.data.remote.weather.dto.inner.WeatherMainDto
  */
 @JsonClass(generateAdapter = true)
 data class WeatherCurrentDto(
-    val id: Long,
+    val id: Int,
     val coord: WeatherLocationDto,
     val weather: List<WeatherDto>,
     val main: WeatherMainDto,
     val visibility: Int,
-    val dt: Long
+    val dt: Int
 ) {
 }
