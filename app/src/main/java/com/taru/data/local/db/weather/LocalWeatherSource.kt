@@ -1,10 +1,6 @@
 package com.taru.data.local.db.weather
 
-import android.location.Location
-import android.util.Log
 import com.taru.data.base.local.LocalResult
-import com.taru.data.local.db.location.LocationRoomDao
-import com.taru.data.local.db.location.LocationRoomEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,7 +13,7 @@ import javax.inject.Singleton
 class LocalWeatherSource @Inject constructor(
     private var weatherCurrentDao: WeatherCurrentDao
 ) {
-    suspend fun  getLast(locationId: Int) = withContext(Dispatchers.IO) {
+    suspend fun  getLastCurrent(locationId: Int) = withContext(Dispatchers.IO) {
 
 
         var locations = weatherCurrentDao.findByLocationId(locationId)
@@ -30,5 +26,14 @@ class LocalWeatherSource @Inject constructor(
 
         return@withContext LocalResult.Message(404, "Not found")
 
+    }
+
+    suspend fun add(weatherCurrent: WeatherCurrentRoomEntity) = withContext(Dispatchers.IO) {
+        val id = weatherCurrentDao.insert(weatherCurrent)
+
+        return@withContext LocalResult.Success(id)
+
+
+//        return@withContext LocalResult.Message(404, "Not found")
     }
 }

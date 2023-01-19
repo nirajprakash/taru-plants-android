@@ -24,7 +24,7 @@ data class WeatherCurrentRoomEntity(
     val visibility: Int,
     val cityId: Int,
     val dt: Int,
-    @Embedded val weather: WeatherSubEntity?,
+    @Embedded(prefix = "weather_")  val weather: WeatherSubEntity?,
     @Embedded(prefix = "attr_") val attrs: WeatherAttrEntity
 ) {
 }

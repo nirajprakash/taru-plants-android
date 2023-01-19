@@ -4,12 +4,14 @@ import android.util.Log
 import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.location.LocalLocationSource
+import com.taru.data.local.db.weather.LocalWeatherSource
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource
+import com.taru.data.remote.weather.toRoomEntity
 import com.taru.domain.base.result.DomainResult
+import com.taru.domain.weather.WeatherConstants
 import com.taru.domain.weather.enitity.ModelWeather
 import com.taru.domain.weather.repository.WeatherRepository
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.android.scopes.ViewModelScoped
 import java.util.*
 import javax.inject.Inject
@@ -23,7 +25,9 @@ class DefaultWeatherRepository @Inject constructor(
     private val remoteIpSource: RemoteIpSource,
 
     private val remoteWeatherSource: RemoteWeatherSource,
-    private val localLocationSource: LocalLocationSource
+    private val localLocationSource: LocalLocationSource,
+
+    private val localWeatherSource: LocalWeatherSource
 ) : WeatherRepository {
     override suspend fun getDetail(): DomainResult<ModelWeather> {
 
@@ -47,20 +51,37 @@ class DefaultWeatherRepository @Inject constructor(
             null
         }
 
-        Log.d("DefaultWeatherRepository", "getDetail location: $location")
+        if(location == null){
+            return DomainResult.Failure(Throwable("Unable to save location"))
 
-        val apiResult =
-            if (location != null) {
-                // TODO get local weather
-                remoteWeatherSource.getCurrent(location.lat, location.lon)
-            } else {
-                remoteWeatherSource.getCurrent(ipResult.data.lat, ipResult.data.lon)
-            }
+        }
+        var date = (Date().time/1000).toInt()
+
+        Log.d("DefaultWeatherRepository", "getDetail location: $location")
+        val weatherResult =  if(location.weatherUnix!=null  && location.weatherUnix!! > date - WeatherConstants.CURRENT_REFRESH_PERIOD){
+                localWeatherSource.getLastCurrent(location.id)
+            }else null
+
+
+        if(weatherResult!=null && weatherResult is LocalResult.Success){
+            Log.d("DefaultWeatherRepository", "weatherResult : ${weatherResult.data}")
+
+            return   DomainResult.Success(ModelWeather(location.lat, location.lon))
+
+        }
+
+        val apiResult = remoteWeatherSource.getCurrent(location.lat, location.lon)
+
+        Log.d("DefaultWeatherRepository", "apiCall :")
 
 
         val result =  when (apiResult) {
             is ApiResult.Success -> {
-                Log.d("getDetail", "getDetail: ${apiResult.data}")
+                Log.d("getDetail", "apiCall result: ${apiResult.data}")
+                location.weatherUnix = apiResult.data.dt
+                var weatherCurrent = apiResult.data.toRoomEntity(location.id)
+                localWeatherSource.add(weatherCurrent)
+                localLocationSource.update(location)
                 DomainResult.Success(ModelWeather(apiResult.data.coord.lat, apiResult.data.coord.lon))
 
             }
@@ -73,10 +94,8 @@ class DefaultWeatherRepository @Inject constructor(
 
             }
         }
-        if(location!=null){
-            location.weatherUnix = (Date().time/1000).toInt()
-            localLocationSource.update(location)
-        }
+
+
 
         return  result
 
@@ -99,6 +118,6 @@ class DefaultWeatherRepository @Inject constructor(
     }
 
     override suspend fun getForecast(): DomainResult<ModelWeather> {
-        return DomainResult.Success(ModelWeather(0.1, 0.2))
+        return DomainResult.Success(ModelWeather(0.1F, 0.2F))
     }
 }
