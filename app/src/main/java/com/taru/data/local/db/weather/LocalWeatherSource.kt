@@ -11,7 +11,10 @@ import javax.inject.Singleton
  */
 @Singleton
 class LocalWeatherSource @Inject constructor(
-    private var weatherCurrentDao: WeatherCurrentDao
+    private var weatherCurrentDao: WeatherCurrentDao,
+
+    private var weatherForecastDao: WeatherForecastDao,
+    private var weatherForecastEntryDao: WeatherForecastEntryDao
 ) {
     suspend fun  getLastCurrent(locationId: Int) = withContext(Dispatchers.IO) {
 
@@ -34,6 +37,18 @@ class LocalWeatherSource @Inject constructor(
         return@withContext LocalResult.Success(id)
 
 
+//        return@withContext LocalResult.Message(404, "Not found")
+    }
+
+    suspend fun addForecast(weatherForecast: WeatherForecastRoomEntity) = withContext(Dispatchers.IO) {
+        val id = weatherForecastDao.insert(weatherForecast)
+        return@withContext LocalResult.Success(id)
+//        return@withContext LocalResult.Message(404, "Not found")
+    }
+
+    suspend fun addForecastEntries(weatherForecastEntries: List<ForecastEntryEntity>) = withContext(Dispatchers.IO) {
+        val ids = weatherForecastEntryDao.insert(*weatherForecastEntries.toTypedArray())
+        return@withContext LocalResult.Success(ids)
 //        return@withContext LocalResult.Message(404, "Not found")
     }
 }

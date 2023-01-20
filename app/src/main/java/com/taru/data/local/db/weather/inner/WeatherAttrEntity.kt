@@ -1,4 +1,4 @@
-package com.taru.data.local.db.weather
+package com.taru.data.local.db.weather.inner
 
 import com.squareup.moshi.Json
 

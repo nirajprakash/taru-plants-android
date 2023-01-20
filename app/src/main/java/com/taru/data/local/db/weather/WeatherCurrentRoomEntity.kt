@@ -3,6 +3,8 @@ package com.taru.data.local.db.weather
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.taru.data.local.db.location.LocationRoomEntity
+import com.taru.data.local.db.weather.inner.WeatherAttrEntity
+import com.taru.data.local.db.weather.inner.WeatherSubEntity
 
 /**
  * Created by Niraj on 19-01-2023.
@@ -13,9 +15,7 @@ import com.taru.data.local.db.location.LocationRoomEntity
     foreignKeys =
     [ForeignKey(
         onDelete = CASCADE, entity = LocationRoomEntity::class, parentColumns = ["id"],
-        childColumns = ["locationId"],
-
-
+        childColumns = ["locationId"]
     )]
 )
 data class WeatherCurrentRoomEntity(

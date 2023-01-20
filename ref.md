@@ -51,7 +51,7 @@
 # room
 
 - https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1
-
+- https://normanaspx.medium.com/android-room-how-works-one-to-many-relationship-example-e8a17531a3bb
 ## setup
 
 - https://github.com/KadirKuruca/NewsApp-MVVM-Hilt-Room-Retrofit

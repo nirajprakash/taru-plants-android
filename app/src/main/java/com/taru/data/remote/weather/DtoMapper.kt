@@ -1,8 +1,8 @@
 package com.taru.data.remote.weather
 
-import com.taru.data.local.db.weather.WeatherAttrEntity
+import com.taru.data.local.db.weather.inner.WeatherAttrEntity
 import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
-import com.taru.data.local.db.weather.WeatherSubEntity
+import com.taru.data.local.db.weather.inner.WeatherSubEntity
 import com.taru.data.remote.weather.dto.WeatherCurrentDto
 
 /**
