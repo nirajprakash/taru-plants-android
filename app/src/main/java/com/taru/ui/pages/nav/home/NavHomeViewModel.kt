@@ -3,6 +3,7 @@ package com.taru.ui.pages.nav.home
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.taru.domain.base.result.DomainResult
+import com.taru.domain.weather.usecase.GetWeatherForecastUseCase
 import com.taru.domain.weather.usecase.GetWeatherUseCase
 import com.taru.ui.base.ViewModelBase
 import com.taru.ui.nav.NavManager
@@ -15,7 +16,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 internal class NavHomeViewModel @Inject constructor(private val navManager: NavManager,
-                                           private val getWeatherUseCase: GetWeatherUseCase): ViewModelBase(){
+                                           private val getWeatherUseCase: GetWeatherUseCase,
+                                                    private val getWeatherForecastUseCase: GetWeatherForecastUseCase): ViewModelBase(){
 
     init {
         getWeather()
@@ -39,6 +41,29 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                             it.throwable.printStackTrace()
                         }
                         Log.d("AdListViewModel", "getList: failure ${it.throwable}")
+
+                    }
+                }
+
+            }
+
+            getWeatherForecastUseCase().also {
+
+
+                when(it) {
+                    is DomainResult.Success -> {
+                        Log.d("TAG", "F: initList: ${it.value}")
+                        /*mCurrentList = it.value.items
+                        _mEventAds.postValue(LiveDataEvent(it.value.items))*/
+                    }
+
+                    is DomainResult.Failure -> {
+                        // _mEventAds.postValue(LiveDataEvent(it.value.items))
+
+                        if(it.throwable!=null){
+                            it.throwable.printStackTrace()
+                        }
+                        Log.d("AdListViewModel", "F: getList: failure ${it.throwable}")
 
                     }
                 }

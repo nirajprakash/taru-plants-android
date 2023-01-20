@@ -20,7 +20,7 @@ import com.taru.data.local.db.weather.inner.WeatherSubEntity
     )]
 )
 data class ForecastEntryEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val forecastId: Int,
     val dt: Int,
     @Embedded(prefix = "weather_") val weather: WeatherSubEntity?,

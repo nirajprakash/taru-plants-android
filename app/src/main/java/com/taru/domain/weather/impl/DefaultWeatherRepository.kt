@@ -7,6 +7,7 @@ import com.taru.data.local.db.location.LocalLocationSource
 import com.taru.data.local.db.weather.LocalWeatherSource
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource
+import com.taru.data.remote.weather.getEntries
 import com.taru.data.remote.weather.toRoomEntity
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.weather.WeatherConstants
@@ -127,6 +128,84 @@ class DefaultWeatherRepository @Inject constructor(
     }
 
     override suspend fun getForecast(): DomainResult<ModelWeather> {
-        return DomainResult.Success(ModelWeather(0.1F, 0.2F))
+        var ipResult = remoteIpSource.getIp()
+        if (ipResult !is ApiResult.Success) {
+            return if (ipResult is ApiResult.Exception) {
+                DomainResult.Failure(ipResult.throwable)
+            } else {
+                DomainResult.Failure(Throwable("F: location item found"))
+            }
+        }
+
+        // local Db Check for location
+
+        val locationResult =
+            localLocationSource.getLastNearest(ipResult.data.lat, ipResult.data.lon)
+
+        val location = if (locationResult is LocalResult.Success) {
+            locationResult.data
+        } else {
+            null
+        }
+
+        if (location == null) {
+            return DomainResult.Failure(Throwable("F: Unable to save location"))
+
+        }
+        var date = (Date().time / 1000).toInt()
+
+        Log.d("DefaultWeatherRepository", "F: getDetail date: $date location: $location")
+        val weatherResult =
+            if (location.forecastUnix != null && location.forecastUnix!! > date - WeatherConstants.FORECAST_REFRESH_PERIOD) {
+                localWeatherSource.getLastForecast(location.id)
+            } else {
+                localWeatherSource.removeForecastForLocation(location.id)
+                null
+            }
+
+
+        if (weatherResult != null && weatherResult is LocalResult.Success) {
+            Log.d("DefaultWeatherRepository", "F: weatherResult : ${weatherResult.data}")
+
+            return DomainResult.Success(ModelWeather(location.lat, location.lon))
+
+        }
+
+        val apiResult = remoteWeatherSource.getForecast(location.lat, location.lon)
+
+        Log.d("DefaultWeatherRepository", "F: apiCall :")
+
+
+        val result = when (apiResult) {
+            is ApiResult.Success -> {
+                Log.d("getDetail", "F: apiCall result: ${apiResult.data}")
+                var weatherForecast = apiResult.data.toRoomEntity(location.id)
+                location.forecastUnix = weatherForecast.dt
+                var idResult = localWeatherSource.addForecast(weatherForecast)
+                /*if(id !is LocalResult.Success){
+                    DomainResult.Failure(Throwable("Not item found"))
+
+                }*/
+                localWeatherSource.addForecastEntries(apiResult.data.getEntries(idResult.data.toInt()))
+                localLocationSource.update(location)
+                DomainResult.Success(
+                    ModelWeather(
+                        location.lat,
+                        location.lon
+                    )
+                )
+
+            }
+            is ApiResult.Exception -> {
+                DomainResult.Failure(apiResult.throwable)
+
+            }
+            is ApiResult.Message -> {
+                DomainResult.Failure(Throwable("Not item found"))
+
+            }
+        }
+        return   result; //DomainResult.Success(ModelWeather(0.1F, 0.2F))
     }
 }
+

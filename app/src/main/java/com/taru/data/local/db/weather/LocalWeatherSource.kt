@@ -39,6 +39,19 @@ class LocalWeatherSource @Inject constructor(
 //        return@withContext LocalResult.Message(404, "Not found")
     }
 
+    suspend fun  getLastForecast(locationId: Int) = withContext(Dispatchers.IO) {
+
+
+        var locations = weatherForecastDao.findByLocationId(locationId)
+
+        if(locations.isNotEmpty()){
+            return@withContext LocalResult.Success(locations[0])
+        }
+
+        return@withContext LocalResult.Message(404, "Not found")
+
+    }
+
     suspend fun addForecast(weatherForecast: WeatherForecastRoomEntity) = withContext(Dispatchers.IO) {
         val id = weatherForecastDao.insert(weatherForecast)
         return@withContext LocalResult.Success(id)

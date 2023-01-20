@@ -12,4 +12,5 @@ data class WeatherForecastDto(
     val city: WeatherCityDto,
     val cnt: Int,
     val list: List<WeatherForecastDayDto>) {
+
 }
