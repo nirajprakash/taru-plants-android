@@ -53,10 +53,10 @@ fun WeatherForecastDto.getEntries(id: Int): List<ForecastEntryEntity> {
         val weather = first?.let { it1 -> WeatherSubEntity(first.id, it1.main) }
         ForecastEntryEntity(
             forecastId = id, dt = it.dt, weather = weather, attrs = WeatherAttrEntity(
-                tempMin = it.temp.min, tempMax = it.temp.max,
-                humidity = it.humidity,
-                pressure = it.pressure,
-                temp = null
+                tempMin = it.main.tempMin, tempMax = it.main.tempMax,
+                humidity = it.main.humidity,
+                pressure = it.main.pressure,
+                temp = it.main.temp
             )
         )
     }.toList()

@@ -19,9 +19,9 @@ interface ApiWeather {
                             @Query("appid") appId: String = BuildConfig.WEATHER_KEY
     ): Response<WeatherCurrentDto>
 
-    @GET("weather")
+    @GET("forecast")
     suspend fun getForecast( @Query("lat") lat: Float,  @Query("lon") lon: Float,
-                             @Query("cnt") count: Int = 10,
+//                             @Query("cnt") count: Int = 10,
                             @Query("appid") appId: String = BuildConfig.WEATHER_KEY
     ): Response<WeatherForecastDto>
 }
