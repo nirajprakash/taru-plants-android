@@ -51,22 +51,26 @@ class DefaultWeatherRepository @Inject constructor(
             null
         }
 
-        if(location == null){
+        if (location == null) {
             return DomainResult.Failure(Throwable("Unable to save location"))
 
         }
-        var date = (Date().time/1000).toInt()
+        var date = (Date().time / 1000).toInt()
 
-        Log.d("DefaultWeatherRepository", "getDetail location: $location")
-        val weatherResult =  if(location.weatherUnix!=null  && location.weatherUnix!! > date - WeatherConstants.CURRENT_REFRESH_PERIOD){
+        Log.d("DefaultWeatherRepository", "getDetail date: $date location: $location")
+        val weatherResult =
+            if (location.weatherUnix != null && location.weatherUnix!! > date - WeatherConstants.CURRENT_REFRESH_PERIOD) {
                 localWeatherSource.getLastCurrent(location.id)
-            }else null
+            } else {
+                localWeatherSource.removeCurrentForLocation(location.id)
+                null
+            }
 
 
-        if(weatherResult!=null && weatherResult is LocalResult.Success){
+        if (weatherResult != null && weatherResult is LocalResult.Success) {
             Log.d("DefaultWeatherRepository", "weatherResult : ${weatherResult.data}")
 
-            return   DomainResult.Success(ModelWeather(location.lat, location.lon))
+            return DomainResult.Success(ModelWeather(location.lat, location.lon))
 
         }
 
@@ -75,14 +79,19 @@ class DefaultWeatherRepository @Inject constructor(
         Log.d("DefaultWeatherRepository", "apiCall :")
 
 
-        val result =  when (apiResult) {
+        val result = when (apiResult) {
             is ApiResult.Success -> {
                 Log.d("getDetail", "apiCall result: ${apiResult.data}")
                 location.weatherUnix = apiResult.data.dt
                 var weatherCurrent = apiResult.data.toRoomEntity(location.id)
                 localWeatherSource.add(weatherCurrent)
                 localLocationSource.update(location)
-                DomainResult.Success(ModelWeather(apiResult.data.coord.lat, apiResult.data.coord.lon))
+                DomainResult.Success(
+                    ModelWeather(
+                        apiResult.data.coord.lat,
+                        apiResult.data.coord.lon
+                    )
+                )
 
             }
             is ApiResult.Exception -> {
@@ -97,7 +106,7 @@ class DefaultWeatherRepository @Inject constructor(
 
 
 
-        return  result
+        return result
 
 //        return DomainResult.Success(ModelWeather(ipResult.data.lat, ipResult.data.lon))
 

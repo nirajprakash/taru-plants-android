@@ -25,4 +25,13 @@ interface LocationRoomDao: RoomDaoBase<LocationRoomEntity> {
 
     @Query("SELECT * FROM Location ORDER BY ABS(lat - :latitude) + ABS(lon - :longitude) ASC LIMIT :limit")
     suspend fun findByDistance(latitude:Float,longitude:Float, limit: Int = 1): List<LocationRoomEntity>
+
+/*
+    @Query("SELECT * FROM Location ORDER BY ABS(lat - :latitude) + ABS(lon - :longitude) ASC, forecastUnix DESC LIMIT :limit")
+    suspend fun findByDistanceForForecast(latitude:Float,longitude:Float, limit: Int = 1): List<LocationRoomEntity>
+
+    @Query("SELECT * FROM Location ORDER BY ABS(lat - :latitude) + ABS(lon - :longitude) ASC, weatherUnix DESC LIMIT :limit")
+    suspend fun findByDistanceForCurrent(latitude:Float,longitude:Float, limit: Int = 1): List<LocationRoomEntity>
+*/
+
 }

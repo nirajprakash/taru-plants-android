@@ -7,8 +7,10 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.taru.data.base.local.LocalResult
 import com.taru.data.remote.ip.ApiIp
+import com.taru.domain.weather.WeatherConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,14 +20,20 @@ import javax.inject.Singleton
 @Singleton
 class LocalLocationSource @Inject constructor(
     private var locationRoomDao: LocationRoomDao
-){
+) {
 
-    suspend fun  getLastNearest(lat: Float, lon: Float) = withContext(Dispatchers.IO) {
+    suspend fun getLastNearest(lat: Float, lon: Float) = withContext(Dispatchers.IO) {
 
 
-        var locations = locationRoomDao.findByDistance(lat, lon)
+        val locations = locationRoomDao.findByDistance(lat, lon)
 
-        if(locations.isNotEmpty()){
+            /*if(isForForecast){
+            locationRoomDao.findByDistanceForForecast(lat, lon)
+        }else{
+            locationRoomDao.findByDistanceForCurrent(lat, lon)
+        }*/
+
+        if (locations.isNotEmpty()) {
             var locA = Location("A")
             locA.latitude = lat.toDouble()
             locA.longitude = lon.toDouble()
@@ -35,32 +43,50 @@ class LocalLocationSource @Inject constructor(
 
             val distance = locA.distanceTo(locB)
             Log.d("LocalLocationSource", "getLastNearest: $distance")
-            if(distance< 500 ){
-
+            if (distance < 500) {
 
                 return@withContext LocalResult.Success(locations[0])
+               /* var date = (Date().time/1000).toInt()
+                var period = if(isForForecast){
+                    WeatherConstants.FORECAST_REFRESH_PERIOD
+                }else {
+                    WeatherConstants.CURRENT_REFRESH_PERIOD
+                }
+                var dt = if(isForForecast){
+                    locations[0].forecastUnix
+                }else {
+                    locations[0].weatherUnix
+                }
+
+                if(dt!=null  && dt > date -period){
+                    return@withContext LocalResult.Success(locations[0])
+                }*/
+
+
+
             }
         }
 
-        var id = locationRoomDao.insert(LocationRoomEntity( lat=lat, lon=lon))
+        var id = locationRoomDao.insert(
+            LocationRoomEntity(
+                lat = lat,
+                lon = lon,
+//                dt = (Date().time / 1000).toInt()
+            )
+        )
 
 
         var location = locationRoomDao.getById(id.toInt())
-        if(location!=null){
+        if (location != null) {
             return@withContext LocalResult.Success(location)
         }
-
-
-
-
-
 
 
 //        Log.d("LocalAdsSource", "getAds: ${data}")
         /*if(data!=null){
             return@withContext LocalResult.Success(data)
         }else {*/
-            return@withContext LocalResult.Message(404, "Not found")
+        return@withContext LocalResult.Message(404, "Not found")
 
 //        }
 

@@ -5,6 +5,7 @@ package com.taru.domain.weather
  */
 object WeatherConstants {
 
-    var CURRENT_REFRESH_PERIOD = 2*60*60
+//    var CURRENT_REFRESH_PERIOD = 2*60*60
+    var CURRENT_REFRESH_PERIOD = 6*60
     var FORECAST_REFRESH_PERIOD = 4*60*60
 }

@@ -38,4 +38,12 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideWeatherCurrentDao(db: AppDatabase) = db.weatherCurrent()
+
+    @Singleton
+    @Provides
+    fun provideWeatherForecastDao(db: AppDatabase) = db.weatherForecast()
+
+    @Singleton
+    @Provides
+    fun provideWeatherForecastEntry(db: AppDatabase) = db.weatherForecastEntry()
 }

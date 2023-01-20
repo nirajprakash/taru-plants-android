@@ -1,5 +1,6 @@
 package com.taru.data.local.db.weather
 
+import android.util.Log
 import com.taru.data.base.local.LocalResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,9 +24,7 @@ class LocalWeatherSource @Inject constructor(
 
         if(locations.isNotEmpty()){
                 return@withContext LocalResult.Success(locations[0])
-
         }
-
 
         return@withContext LocalResult.Message(404, "Not found")
 
@@ -50,5 +49,16 @@ class LocalWeatherSource @Inject constructor(
         val ids = weatherForecastEntryDao.insert(*weatherForecastEntries.toTypedArray())
         return@withContext LocalResult.Success(ids)
 //        return@withContext LocalResult.Message(404, "Not found")
+    }
+
+    suspend fun removeForecastForLocation(locationId: Int): LocalResult<Int> {
+        val affected = weatherForecastDao.deleteByLocationId(locationId)
+        Log.d("LocalWeatherSource", "removeForecastForLocation: $affected")
+        return LocalResult.Success(affected)
+    }
+    suspend fun removeCurrentForLocation(locationId: Int): LocalResult<Int> {
+        val affected = weatherCurrentDao.deleteByLocationId(locationId)
+        Log.d("LocalWeatherSource", "removeForLocation: $locationId $affected")
+        return LocalResult.Success(affected)
     }
 }
