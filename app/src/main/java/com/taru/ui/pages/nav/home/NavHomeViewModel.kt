@@ -1,7 +1,10 @@
 package com.taru.ui.pages.nav.home
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.weather.usecase.GetWeatherForecastUseCase
 import com.taru.domain.weather.usecase.GetWeatherUseCase
@@ -19,6 +22,7 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                                            private val getWeatherUseCase: GetWeatherUseCase,
                                                     private val getWeatherForecastUseCase: GetWeatherForecastUseCase): ViewModelBase(){
 
+    val bCurrentWeather = MutableLiveData<WeatherCurrentRoomEntity>()
     init {
         getWeather()
     }
@@ -30,6 +34,7 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                 when(it) {
                     is DomainResult.Success -> {
                         Log.d("TAG", "initList: ${it.value}")
+                        bCurrentWeather.postValue(it.value!!)
                         /*mCurrentList = it.value.items
                         _mEventAds.postValue(LiveDataEvent(it.value.items))*/
                     }

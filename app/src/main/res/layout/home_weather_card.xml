@@ -49,7 +49,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="22C"
-        android:text="22C"/>
+        android:text='@{(bViewModel.bCurrentWeather.attrs.temp)+" \u2103" }'
+        />
 
     <TextView
 
@@ -67,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/home_weather_card_temp"
         app:layout_constraintStart_toEndOf="@+id/home_weather_card_temp"
         tools:text="Partially Cloud"
-        android:text="Partially Cloud"/>
+        android:text="@{bViewModel.bCurrentWeather.weather.main}"/>
 
     <LinearLayout
         android:id="@+id/home_weather_card_pressure_ll"
@@ -96,7 +97,7 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/white"
 
-            android:text="800mb"
+            android:text='@{bViewModel.bCurrentWeather.attrs.pressure+ "mb"}'
             tools:text="800mb" />
     </LinearLayout>
 
@@ -126,8 +127,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/md_theme_light_onSurface"
-
-            android:text="4.3 Km"
+            android:text='@{bViewModel.bCurrentWeather.visibility + " m"}'
 
             tools:text="4.3 Km" />
     </LinearLayout>
@@ -159,8 +159,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/md_theme_light_onSurface"
+            android:text='@{bViewModel.bCurrentWeather.attrs.humidity + "%"}'
 
-            android:text="87%"
             tools:text="87%" />
     </LinearLayout>
     <androidx.constraintlayout.helper.widget.Flow

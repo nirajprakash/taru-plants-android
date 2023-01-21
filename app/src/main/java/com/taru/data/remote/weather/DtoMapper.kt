@@ -8,6 +8,7 @@ import com.taru.data.local.db.weather.WeatherForecastRoomEntity
 import com.taru.data.local.db.weather.inner.WeatherSubEntity
 import com.taru.data.remote.weather.dto.WeatherCurrentDto
 import com.taru.data.remote.weather.dto.WeatherForecastDto
+import com.taru.domain.weather.WeatherConstants
 import java.util.*
 
 /**
@@ -26,11 +27,11 @@ fun WeatherCurrentDto.toRoomEntity(locationId: Int): WeatherCurrentRoomEntity {
         locationId = locationId,
         dt = dt,
         attrs = WeatherAttrEntity(
-            main.temp,
+            main.temp - WeatherConstants.KELVIN,
             main.pressure,
             main.humidity,
-            main.tempMin,
-            main.tempMax
+            main.tempMin - WeatherConstants.KELVIN,
+            main.tempMax - WeatherConstants.KELVIN
         )
     )
 
@@ -53,10 +54,11 @@ fun WeatherForecastDto.getEntries(id: Int): List<ForecastEntryEntity> {
         val weather = first?.let { it1 -> WeatherSubEntity(first.id, it1.main) }
         ForecastEntryEntity(
             forecastId = id, dt = it.dt, weather = weather, attrs = WeatherAttrEntity(
-                tempMin = it.main.tempMin, tempMax = it.main.tempMax,
+                tempMin = it.main.tempMin - WeatherConstants.KELVIN,
+                tempMax = it.main.tempMax - WeatherConstants.KELVIN,
                 humidity = it.main.humidity,
                 pressure = it.main.pressure,
-                temp = it.main.temp
+                temp = it.main.temp - WeatherConstants.KELVIN
             )
         )
     }.toList()

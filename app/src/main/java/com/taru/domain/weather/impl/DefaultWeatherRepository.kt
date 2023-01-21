@@ -5,6 +5,7 @@ import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.location.LocalLocationSource
 import com.taru.data.local.db.weather.LocalWeatherSource
+import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource
 import com.taru.data.remote.weather.getEntries
@@ -30,7 +31,7 @@ class DefaultWeatherRepository @Inject constructor(
 
     private val localWeatherSource: LocalWeatherSource
 ) : WeatherRepository {
-    override suspend fun getDetail(): DomainResult<ModelWeather> {
+    override suspend fun getDetail(): DomainResult<WeatherCurrentRoomEntity> {
 
         var ipResult = remoteIpSource.getIp()
         if (ipResult !is ApiResult.Success) {
@@ -71,7 +72,7 @@ class DefaultWeatherRepository @Inject constructor(
         if (weatherResult != null && weatherResult is LocalResult.Success) {
             Log.d("DefaultWeatherRepository", "weatherResult : ${weatherResult.data}")
 
-            return DomainResult.Success(ModelWeather(location.lat, location.lon))
+            return DomainResult.Success(weatherResult.data)
 
         }
 
@@ -88,10 +89,7 @@ class DefaultWeatherRepository @Inject constructor(
                 localWeatherSource.add(weatherCurrent)
                 localLocationSource.update(location)
                 DomainResult.Success(
-                    ModelWeather(
-                        apiResult.data.coord.lat,
-                        apiResult.data.coord.lon
-                    )
+                    weatherCurrent
                 )
 
             }
