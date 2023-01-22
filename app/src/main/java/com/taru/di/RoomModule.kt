@@ -46,4 +46,9 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideWeatherForecastEntry(db: AppDatabase) = db.weatherForecastEntry()
+
+
+    @Singleton
+    @Provides
+    fun provideCachedRemoteKey(db: AppDatabase) = db.cachedRemoteKey()
 }

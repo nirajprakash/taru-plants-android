@@ -5,6 +5,7 @@ import android.util.Log
 import com.taru.App
 import com.taru.BuildConfig
 import com.taru.data.remote.ip.ApiIp
+import com.taru.data.remote.plants.ApiPlants
 import com.taru.data.remote.weather.ApiWeather
 import dagger.Module
 import dagger.Provides
@@ -31,6 +32,7 @@ object RetrofitModule {
 
     private const val RETROFIT_IP = "Retrofit.ip"
     private const val RETROFIT_WEATHER = "Retrofit.weather"
+    private const val RETROFIT_TREFLE = "Retrofit.Trefle"
     @Provides
     fun provideCacheInterceptor() = Interceptor { chain ->
         var request = chain.request()
@@ -119,6 +121,17 @@ object RetrofitModule {
 
 
 
+    @Named(RETROFIT_TREFLE)
+    @Singleton
+    @Provides
+    fun provideRetrofitTrefle(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl("https://trefle.io/api/v1/")
+        .client(okHttpClient)
+//        .addCallAdapterFactory(retrofitAuthAdapterFactory)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build()
+
+
     @Singleton
     @Provides
     fun provideApiIp(@Named(RETROFIT_IP) retrofit: Retrofit): ApiIp = retrofit.create(ApiIp::class.java)
@@ -126,6 +139,10 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun provideApiWeather(@Named(RETROFIT_WEATHER) retrofit: Retrofit): ApiWeather = retrofit.create(ApiWeather::class.java)
+
+    @Singleton
+    @Provides
+    fun provideApiTrefle(@Named(RETROFIT_TREFLE) retrofit: Retrofit): ApiPlants = retrofit.create(ApiPlants::class.java)
 
 
     /*
