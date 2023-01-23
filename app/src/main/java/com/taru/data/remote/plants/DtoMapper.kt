@@ -1,11 +1,7 @@
 package com.taru.data.remote.plants
 
-import com.taru.data.local.db.plants.PlantSearchEntryEntity
-import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
-import com.taru.data.local.db.weather.inner.WeatherAttrEntity
-import com.taru.data.local.db.weather.inner.WeatherSubEntity
+import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.remote.plants.dto.inner.PlantsSearchEntryDto
-import com.taru.domain.weather.WeatherConstants
 
 /**
  * Created by Niraj on 22-01-2023.

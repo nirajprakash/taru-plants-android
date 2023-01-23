@@ -13,9 +13,9 @@ class RemotePlantsSource @Inject constructor(
     var apiPlants: ApiPlants
 ){
 
-    suspend fun  plantsByQuery(query: String?) = withContext(Dispatchers.IO) {
+    suspend fun  plantsByQuery(query: String?, page: Int ) = withContext(Dispatchers.IO) {
 
-        return@withContext handleApi { apiPlants.byQ(query) }
+        return@withContext handleApi { apiPlants.byQ(query, page = page) }
 
 
     }

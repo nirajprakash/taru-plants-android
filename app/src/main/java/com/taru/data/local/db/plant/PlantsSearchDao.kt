@@ -1,4 +1,4 @@
-package com.taru.data.local.db.plants
+package com.taru.data.local.db.plant
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

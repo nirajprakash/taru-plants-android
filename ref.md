@@ -48,10 +48,12 @@
 ## search
 - https://github.com/material-components/material-components-android/blob/master/docs/components/Search.md
 
+
 # room
 
 - https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1
 - https://normanaspx.medium.com/android-room-how-works-one-to-many-relationship-example-e8a17531a3bb
+
 ## setup
 
 - https://github.com/KadirKuruca/NewsApp-MVVM-Hilt-Room-Retrofit
@@ -71,15 +73,25 @@
 # paging
 
 ## Remote mediator with prepend
+
 - https://proandroiddev.com/caching-and-pagination-with-paging-3-in-android-jetpack-compose-b636aaf116ce
 - https://github.com/ersiver/Newsster/blob/master/app/src/main/java/com/ersiver/newsster/repository/NewssterRemoteMediator.kt
+
 ## Remote mediator without prepend
+
 - https://developer.android.com/topic/libraries/architecture/paging/v3-network-db
 - https://github.com/nameisjayant/Paging3-with-RoomDatabase-and-Retrofit-in-Android-Kotlin/blob/master/app/src/main/java/com/example/roomdatabasewithpaging3/Data/Repository/DogsRemoteMediator.kt
 - https://github.com/ronnieotieno/Android-Paging-3-with-MVVM-Retrofit-and-Flow/blob/master/app/src/main/java/dev/ronnie/allplayers/data/remotediator/PlayersRemoteMediator.kt
 
+## pager with search query
 
-## https://members.ip-api.com/#pricing
+- https://developer.android.com/codelabs/android-paging#6
+  
+  <!-- cached -->
+- https://proandroiddev.com/google-news-clone-in-kotlin-using-paging-3-and-hilt-2127d19fe09d
+
+
+# https://members.ip-api.com/#pricing
 
 - https://stackoverflow.com/questions/14101070/how-to-determine-location-of-device-in-android-using-ip-address
 - http://ip-api.com/json
@@ -92,3 +104,6 @@
 ## retrofit
 
 - https://getstream.io/blog/modeling-retrofit-responses/
+
+
+
