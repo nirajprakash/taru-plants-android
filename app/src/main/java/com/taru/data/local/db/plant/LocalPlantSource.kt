@@ -1,5 +1,6 @@
 package com.taru.data.local.db.plant
 
+import androidx.paging.PagingSource
 import com.taru.data.base.local.LocalResult
 import com.taru.data.local.db.weather.WeatherCurrentDao
 import com.taru.data.remote.plants.dto.PlantsSearchDto
@@ -17,14 +18,14 @@ class LocalPlantSource @Inject constructor(
     private var plantsSearchDao: PlantsSearchDao,
 ){
 
-    suspend fun  getPageSource(q: String) = withContext(Dispatchers.IO) {
+     fun  getPageSource(q: String): PagingSource<Int, PlantSearchEntryEntity> {
 
 
         var pageSource = plantsSearchDao.paginated(q)
 
 
 
-        return@withContext LocalResult.Success(pageSource)
+        return pageSource
 
     }
 
