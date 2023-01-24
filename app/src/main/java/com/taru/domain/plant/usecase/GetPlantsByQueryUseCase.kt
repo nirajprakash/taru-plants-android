@@ -16,5 +16,5 @@ import javax.inject.Inject
 
 internal class GetPlantsByQueryUseCase  @Inject constructor(private var plantRepository: PlantRepository)  {
 
-    suspend operator fun invoke(q:String ): DomainResult<Flow<PagingData<PlantSearchEntryEntity>>> = plantRepository.searchPaginated(q)
+    operator fun invoke(q:String ): Flow<PagingData<PlantSearchEntryEntity>> = plantRepository.searchPaginated(q)
 }

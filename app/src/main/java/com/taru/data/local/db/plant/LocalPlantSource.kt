@@ -30,7 +30,7 @@ class LocalPlantSource @Inject constructor(
     }
 
     suspend fun addAll(entryEntityList: List<PlantSearchEntryEntity>)= withContext(Dispatchers.IO)  {
-        val ids =  plantsSearchDao.insert(*entryEntityList.toTypedArray())
+        val ids =  plantsSearchDao.insert(entryEntityList)
         return@withContext LocalResult.Success(ids)
     }
 

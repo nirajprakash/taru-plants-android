@@ -137,11 +137,12 @@ class SearchFragment : FragmentBase(true){
         }
     }
 
-    private fun getPlantsSearchEntries(){
+    private suspend fun getPlantsSearchEntries(){
         job?.cancel()
+        mViewModel.loadSearch("").collectLatest { mPagingAdapter.submitData(it) }
         job = lifecycleScope.launch {
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
-            mViewModel.loadSearch("")?.collectLatest { mPagingAdapter.submitData(it) }
+
         }
     }
 

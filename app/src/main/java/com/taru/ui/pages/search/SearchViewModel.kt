@@ -21,17 +21,17 @@ import javax.inject.Inject
 internal class SearchViewModel @Inject constructor(
     val plantsByQueryUseCase: GetPlantsByQueryUseCase
 ): ViewModelBase() {
-    suspend fun loadSearch(q:String): Flow<PagingData<PlantSearchEntryEntity>>? {
+    fun loadSearch(q:String): Flow<PagingData<PlantSearchEntryEntity>> {
         var result = plantsByQueryUseCase.invoke(q)
-
-        if(result is DomainResult.Success){
-           var pagingData = result.value.cachedIn(viewModelScope)
+        return result.cachedIn(viewModelScope)
+       /* if(result is DomainResult.Success){
+           var pagingData =
             return pagingData
 
         }else {
 
         }
-        return  null
+        return  null*/
 
 
     }

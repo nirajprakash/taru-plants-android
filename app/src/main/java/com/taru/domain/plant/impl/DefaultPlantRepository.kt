@@ -37,15 +37,15 @@ class DefaultPlantRepository @Inject constructor(
 
 
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun searchPaginated(q: String): DomainResult.Success<Flow<PagingData<PlantSearchEntryEntity>>> {
+    override  fun searchPaginated(q: String): Flow<PagingData<PlantSearchEntryEntity>> {
         val pagingSourceFactory =
             { localPlantSource.getPageSource(q) }
-        return DomainResult.Success(Pager(
-            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300, enablePlaceholders = true),
+        return Pager(
+            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
 
             remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeySource, db),
             pagingSourceFactory = pagingSourceFactory
-        ).flow)
+        ).flow
     }
 
     override suspend fun clearData(): DomainResult.Success<Unit> {

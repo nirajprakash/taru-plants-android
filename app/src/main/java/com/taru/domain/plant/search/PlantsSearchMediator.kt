@@ -18,6 +18,7 @@ import com.taru.data.remote.plants.RemotePlantsConstants
 import com.taru.data.remote.plants.RemotePlantsSource
 import com.taru.data.remote.plants.toRoomEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,6 +29,8 @@ import javax.inject.Singleton
 /**
  * Created by Niraj on 22-01-2023.
  */
+
+// https://stackoverflow.com/questions/66813622/android-paging-3-loadtype-append-returns-null-remote-keys
 @OptIn(ExperimentalPagingApi::class)
 class PlantsSearchMediator @Inject constructor(
     var q: String,
@@ -41,6 +44,10 @@ class PlantsSearchMediator @Inject constructor(
 //        return
         return InitializeAction.SKIP_INITIAL_REFRESH
     }*/
+
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
+    }
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PlantSearchEntryEntity>
@@ -65,13 +72,13 @@ class PlantsSearchMediator @Inject constructor(
                 }
 
                 LoadType.PREPEND -> {
-                    Log.d("PlantSearchMediator", "1 prepend")
+                    Log.d("PlantSearchMediator", "prepend")
                     return MediatorResult.Success(endOfPaginationReached = true)
                 }
 
                 LoadType.APPEND -> {
 //                    Timber.i("APPEND")
-                    Log.d("PlantSearchMediator", "1 APPEND")
+                    Log.d("PlantSearchMediator", "APPEND, ${state.lastItemOrNull()}")
 
                     val remoteKey = getLastRemoteKey(state)
 
@@ -130,6 +137,9 @@ class PlantsSearchMediator @Inject constructor(
                 )
             }
 
+//            delay(200)
+
+
             Log.d("PlantSearchMediator", "withTransaction:${loadKey} ${page} ")
 
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
@@ -151,6 +161,10 @@ class PlantsSearchMediator @Inject constructor(
     private suspend fun getLastRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
         return withContext(Dispatchers.IO) {
             Log.d("PlantsSearchMediator", "getLastRemoteKey: ${state.pages.lastOrNull()?.data?.size}")
+            if(state.lastItemOrNull()==null){
+                return@withContext cachedRemoteKeySource.getKeyFirst(refType =  DatabaseConstants.Cached.REF_TYPE_PLANT, q = q).lastOrNull()
+            }
+
             state.pages
                 .lastOrNull { it.data.isNotEmpty() }
                 ?.data?.lastOrNull()

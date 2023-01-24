@@ -17,6 +17,10 @@ interface RoomDaoBase<T> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(obj: T): Long
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(obj: List<T>): List<Long>
+
+
     /**
      * Insert an array of objects in the database.
      *
