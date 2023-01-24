@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.cached.CachedRemoteKeyDao
+import com.taru.data.local.db.cached.CachedRemoteKeySource
 import com.taru.data.local.db.plant.LocalPlantSource
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.remote.plants.RemotePlantsConstants
@@ -29,7 +30,7 @@ class DefaultPlantRepository @Inject constructor(
     private val remotePlantsSource: RemotePlantsSource,
     private val localPlantSource: LocalPlantSource,
 
-    private var cachedRemoteKeyDao: CachedRemoteKeyDao,
+    private var cachedRemoteKeySource: CachedRemoteKeySource,
     val db: AppDatabase
 ): PlantRepository {
 
@@ -42,14 +43,14 @@ class DefaultPlantRepository @Inject constructor(
         return DomainResult.Success(Pager(
             config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300, enablePlaceholders = true),
 
-            remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeyDao, db),
+            remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeySource, db),
             pagingSourceFactory = pagingSourceFactory
         ).flow)
     }
 
     override suspend fun clearData(): DomainResult.Success<Unit> {
         localPlantSource.removeAll()
-       withContext(Dispatchers.IO) { cachedRemoteKeyDao.deleteAll() }
+       withContext(Dispatchers.IO) { cachedRemoteKeySource.deleteAll() }
         return DomainResult.Success(Unit)
     }
 }

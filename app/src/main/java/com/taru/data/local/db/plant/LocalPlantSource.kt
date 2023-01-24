@@ -21,7 +21,7 @@ class LocalPlantSource @Inject constructor(
      fun  getPageSource(q: String): PagingSource<Int, PlantSearchEntryEntity> {
 
 
-        var pageSource = plantsSearchDao.paginated(q)
+        val pageSource = plantsSearchDao.paginated(q)
 
 
 

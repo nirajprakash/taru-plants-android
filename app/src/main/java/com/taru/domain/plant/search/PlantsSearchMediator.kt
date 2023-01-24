@@ -11,6 +11,7 @@ import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.DatabaseConstants
 import com.taru.data.local.db.cached.CachedRemoteKeyDao
 import com.taru.data.local.db.cached.CachedRemoteKeyEntity
+import com.taru.data.local.db.cached.CachedRemoteKeySource
 import com.taru.data.local.db.plant.LocalPlantSource
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.remote.plants.RemotePlantsConstants
@@ -32,14 +33,14 @@ class PlantsSearchMediator @Inject constructor(
     var q: String,
     var remotePlantsSource: RemotePlantsSource,
     var localPlantSource: LocalPlantSource,
-    var cachedRemoteKeyDao: CachedRemoteKeyDao,
+    var cachedRemoteKeySource: CachedRemoteKeySource,
     val db: AppDatabase
 ) : RemoteMediator<Int, PlantSearchEntryEntity>() {
-
-    /*override suspend fun initialize(): InitializeAction {
+/*
+    override suspend fun initialize(): InitializeAction {
+//        return
         return InitializeAction.SKIP_INITIAL_REFRESH
-    }
-*/
+    }*/
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PlantSearchEntryEntity>
@@ -109,7 +110,14 @@ class PlantsSearchMediator @Inject constructor(
             db.withTransaction {
                 val nextKey = page + 1
 
-                cachedRemoteKeyDao.insert(
+
+                localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
+                    plantsSearchEntryDto.toRoomEntity(
+                        page*RemotePlantsConstants.PAGE_SIZE + index,
+                        q
+                    )
+                })
+                cachedRemoteKeySource.insert(
                     CachedRemoteKeyEntity(
                         nextKey = nextKey,
                         refId = remoteData.data.lastOrNull()?.id ?:-1,
@@ -120,13 +128,10 @@ class PlantsSearchMediator @Inject constructor(
                         isEndReached = endOfPaginationReached
                     )
                 )
-                localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
-                    plantsSearchEntryDto.toRoomEntity(
-                        page*RemotePlantsConstants.PAGE_SIZE + index,
-                        q
-                    )
-                })
             }
+
+            Log.d("PlantSearchMediator", "withTransaction:${loadKey} ${page} ")
+
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)
@@ -139,19 +144,20 @@ class PlantsSearchMediator @Inject constructor(
     private suspend fun getFirstRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
         return withContext(Dispatchers.IO) {
             Log.d("PlantsSearchMediator", "getFirstRemoteKey: $q")
-            cachedRemoteKeyDao.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull()
+            cachedRemoteKeySource.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull()
         }
     }
 
     private suspend fun getLastRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
         return withContext(Dispatchers.IO) {
+            Log.d("PlantsSearchMediator", "getLastRemoteKey: ${state.pages.lastOrNull()?.data?.size}")
             state.pages
                 .lastOrNull { it.data.isNotEmpty() }
                 ?.data?.lastOrNull()
                 ?.let { plantEntry ->
 
                     Log.d("PlantsSearchMediator", "getLastRemoteKey: $plantEntry")
-                    cachedRemoteKeyDao.getKey(
+                    cachedRemoteKeySource.getKey(
                         plantEntry.plantId,
                         DatabaseConstants.Cached.REF_TYPE_PLANT,
                         q
