@@ -1,11 +1,14 @@
 package com.taru.ui.pages.search
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.plant.usecase.GetPlantsByQueryUseCase
 import com.taru.ui.base.ViewModelBase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -18,12 +21,18 @@ import javax.inject.Inject
 internal class SearchViewModel @Inject constructor(
     val plantsByQueryUseCase: GetPlantsByQueryUseCase
 ): ViewModelBase() {
-    suspend fun loadSearch(q:String){
+    suspend fun loadSearch(q:String): Flow<PagingData<PlantSearchEntryEntity>>? {
         var result = plantsByQueryUseCase.invoke(q)
 
         if(result is DomainResult.Success){
            var pagingData = result.value.cachedIn(viewModelScope)
+            return pagingData
+
+        }else {
+
         }
+        return  null
+
 
     }
 

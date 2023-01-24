@@ -10,7 +10,9 @@ import com.taru.data.local.db.base.RoomDaoBase
  */
 @Dao
 interface PlantsSearchDao: RoomDaoBase<PlantSearchEntryEntity> {
-    @Query("SELECT * FROM PlantsSearch WHERE q = :q ORDER BY index ASC")
+    @Query("SELECT * FROM PlantsSearch WHERE q = :q ORDER BY `index` ASC")
     fun paginated(q: String): PagingSource<Int, PlantSearchEntryEntity>
+    @Query("DELETE FROM PlantsSearch")
+    fun deleteAll()
 
 }

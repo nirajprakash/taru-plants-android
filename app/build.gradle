@@ -22,6 +22,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
+        buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -94,6 +95,10 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    // paging Data
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+
 
     // room
     implementation "androidx.room:room-runtime:$room_version"
@@ -110,6 +115,10 @@ dependencies {
 
 // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common:$paging_version"
+
 
     testImplementation 'junit:junit:4.13.2'
 

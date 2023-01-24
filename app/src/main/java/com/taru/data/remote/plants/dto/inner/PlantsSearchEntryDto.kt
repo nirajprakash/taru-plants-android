@@ -1,5 +1,6 @@
 package com.taru.data.remote.plants.dto.inner
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.Field
 
@@ -12,8 +13,8 @@ data class PlantsSearchEntryDto(
     val family: String,
     val slug: String,
 
-    @Field("common_name") val commonName: String,
-    @Field("scientific_name") val scientificName: String,
-    @Field("image_url") val imageUrl: String
+    @Json(name="common_name") val commonName: String?,
+    @Json(name ="scientific_name") val scientificName: String?,
+    @Json(name="image_url") val imageUrl: String?
 ) {
 }

@@ -12,4 +12,6 @@ import kotlinx.coroutines.flow.Flow
 interface PlantRepository {
     suspend fun searchPaginated(q: String): DomainResult<Flow<PagingData<PlantSearchEntryEntity>>>
     //PagingData<PlantSearchEntryEntity>
+
+    suspend fun clearData(): DomainResult<Unit>
 }

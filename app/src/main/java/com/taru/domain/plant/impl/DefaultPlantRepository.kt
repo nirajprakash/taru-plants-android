@@ -14,7 +14,9 @@ import com.taru.domain.base.result.DomainResult
 import com.taru.domain.plant.repository.PlantRepository
 import com.taru.domain.plant.search.PlantsSearchMediator
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.suspendCoroutine
@@ -43,5 +45,11 @@ class DefaultPlantRepository @Inject constructor(
             remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeyDao, db),
             pagingSourceFactory = pagingSourceFactory
         ).flow)
+    }
+
+    override suspend fun clearData(): DomainResult.Success<Unit> {
+        localPlantSource.removeAll()
+       withContext(Dispatchers.IO) { cachedRemoteKeyDao.deleteAll() }
+        return DomainResult.Success(Unit)
     }
 }

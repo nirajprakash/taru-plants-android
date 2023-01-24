@@ -9,7 +9,7 @@ import com.taru.data.remote.plants.dto.inner.PlantsMetaDto
  */
 @JsonClass(generateAdapter = true)
 data class PlantsSearchDto(
-    val id: String,
+//    val id: String,
     val data: List<PlantsSearchEntryDto>,
     val meta: PlantsMetaDto
 ) {

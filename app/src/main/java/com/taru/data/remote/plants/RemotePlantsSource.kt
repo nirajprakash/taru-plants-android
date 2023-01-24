@@ -15,7 +15,7 @@ class RemotePlantsSource @Inject constructor(
 
     suspend fun  plantsByQuery(query: String?, page: Int ) = withContext(Dispatchers.IO) {
 
-        return@withContext handleApi { apiPlants.byQ(query, page = page) }
+        return@withContext handleApi { if(query!=null && query.trim().isNotEmpty()) apiPlants.byQ(query, page = page) else apiPlants.default( page = page) }
 
 
     }

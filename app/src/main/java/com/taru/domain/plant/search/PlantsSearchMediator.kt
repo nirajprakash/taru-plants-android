@@ -1,5 +1,6 @@
 package com.taru.domain.plant.search
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -29,15 +30,16 @@ import javax.inject.Singleton
 @OptIn(ExperimentalPagingApi::class)
 class PlantsSearchMediator @Inject constructor(
     var q: String,
-var remotePlantsSource: RemotePlantsSource,
-var localPlantSource: LocalPlantSource,
-var cachedRemoteKeyDao: CachedRemoteKeyDao,
+    var remotePlantsSource: RemotePlantsSource,
+    var localPlantSource: LocalPlantSource,
+    var cachedRemoteKeyDao: CachedRemoteKeyDao,
     val db: AppDatabase
-): RemoteMediator<Int, PlantSearchEntryEntity>() {
+) : RemoteMediator<Int, PlantSearchEntryEntity>() {
 
-    override suspend fun initialize(): InitializeAction {
+    /*override suspend fun initialize(): InitializeAction {
         return InitializeAction.SKIP_INITIAL_REFRESH
     }
+*/
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PlantSearchEntryEntity>
@@ -46,39 +48,55 @@ var cachedRemoteKeyDao: CachedRemoteKeyDao,
 
         try {
 
+            Log.d("PlantSearchMediator", "1 type: $loadType")
             val loadKey = when (loadType) {
                 LoadType.REFRESH -> {
+                    Log.d("PlantSearchMediator", "1 refresh")
+
 //                    Timber.i("REFRESH")
-                    if(getFirstRemoteKey(state) !=null)  MediatorResult.Success(endOfPaginationReached = false)
+                    val cachedremotekey = getFirstRemoteKey(state)
+
+                    Log.d("PlantSearchMediator", "load refresh: $cachedremotekey")
+                    if (cachedremotekey != null) return MediatorResult.Success(
+                        endOfPaginationReached = false
+                    )
                     null
                 }
 
                 LoadType.PREPEND -> {
-                  return MediatorResult.Success(endOfPaginationReached = true)
+                    Log.d("PlantSearchMediator", "1 prepend")
+                    return MediatorResult.Success(endOfPaginationReached = true)
                 }
 
                 LoadType.APPEND -> {
 //                    Timber.i("APPEND")
+                    Log.d("PlantSearchMediator", "1 APPEND")
 
                     val remoteKey = getLastRemoteKey(state)
+
+                    Log.d("PlantSearchMediator", "load append: $remoteKey")
                     if (remoteKey?.nextKey == null)
-                       return MediatorResult.Success(endOfPaginationReached = true)
+                        return MediatorResult.Success(endOfPaginationReached = true)
                     remoteKey
                 }
             }
 
             if (loadKey != null) {
+                Log.d("PlantSearchMediator", "loadKey: $loadKey")
                 if (loadKey.isEndReached) return MediatorResult.Success(endOfPaginationReached = true)
             }
+
+            Log.d("PlantSearchMediator", "load: $loadKey")
 
             val page: Int = loadKey?.nextKey ?: RemotePlantsConstants.PAGE_FIRST
             val apiResponse = remotePlantsSource.plantsByQuery(q, page)
 
-            if(apiResponse !is ApiResult.Success){
+            if (apiResponse !is ApiResult.Success) {
                 // TODO error apiResponse.data
-                if(apiResponse is ApiResult.Exception){
+                if (apiResponse is ApiResult.Exception) {
+                    apiResponse.throwable.printStackTrace()
                     return MediatorResult.Error(apiResponse.throwable)
-                }else if(apiResponse is ApiResult.Message){
+                } else if (apiResponse is ApiResult.Message) {
                     return MediatorResult.Error(Throwable("Network mess: ${apiResponse.message}"))
 
                 }
@@ -94,7 +112,7 @@ var cachedRemoteKeyDao: CachedRemoteKeyDao,
                 cachedRemoteKeyDao.insert(
                     CachedRemoteKeyEntity(
                         nextKey = nextKey,
-                        refId = 1,
+                        refId = remoteData.data.lastOrNull()?.id ?:-1,
                         refType = DatabaseConstants.Cached.REF_TYPE_PLANT,
                         q = q,
                         prevKey = null,
@@ -102,7 +120,12 @@ var cachedRemoteKeyDao: CachedRemoteKeyDao,
                         isEndReached = endOfPaginationReached
                     )
                 )
-                localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto -> plantsSearchEntryDto.toRoomEntity(index, q) })
+                localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
+                    plantsSearchEntryDto.toRoomEntity(
+                        page*RemotePlantsConstants.PAGE_SIZE + index,
+                        q
+                    )
+                })
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
@@ -112,17 +135,28 @@ var cachedRemoteKeyDao: CachedRemoteKeyDao,
         }
 
     }
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>) : CachedRemoteKeyEntity? {
-        return  withContext(Dispatchers.IO){ cachedRemoteKeyDao.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull()
+
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
+        return withContext(Dispatchers.IO) {
+            Log.d("PlantsSearchMediator", "getFirstRemoteKey: $q")
+            cachedRemoteKeyDao.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull()
         }
     }
 
-    private suspend fun getLastRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>) : CachedRemoteKeyEntity? {
-        return withContext(Dispatchers.IO){
+    private suspend fun getLastRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
+        return withContext(Dispatchers.IO) {
             state.pages
-                .lastOrNull{it.data.isNotEmpty()}
+                .lastOrNull { it.data.isNotEmpty() }
                 ?.data?.lastOrNull()
-                ?.let { plantEntry -> cachedRemoteKeyDao.getKey(plantEntry.plantId, DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull() }
+                ?.let { plantEntry ->
+
+                    Log.d("PlantsSearchMediator", "getLastRemoteKey: $plantEntry")
+                    cachedRemoteKeyDao.getKey(
+                        plantEntry.plantId,
+                        DatabaseConstants.Cached.REF_TYPE_PLANT,
+                        q
+                    ).firstOrNull()
+                }
         }
     }
 }

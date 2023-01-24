@@ -87,6 +87,14 @@
                 android:onClick="@{() -> viewModel.navigateToDefault()}"
                 android:text="Default" />
 
+            <Button
+                android:id="@+id/labs_main_fragment_clear_btn"
+                style="@style/Widget.Jl.App.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:onClick="@{() -> viewModel.clearPlants()}"
+                android:text="Clear" />
 
 
         </LinearLayout>

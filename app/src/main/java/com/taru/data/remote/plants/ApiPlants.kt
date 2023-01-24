@@ -13,7 +13,14 @@ import retrofit2.http.Query
 interface ApiPlants {
     @GET("plants/search")
     suspend fun byQ(@Query("q") searchQ: String?,
-                           @Query("page") page: Int = 0
+                           @Query("page") page: Int = 0,
+                    @Query("token") token: String = BuildConfig.TREFLE_KEY
+    ): Response<PlantsSearchDto>
+
+    @GET("plants")
+    suspend fun default(
+                    @Query("page") page: Int = 0,
+                    @Query("token") token: String = BuildConfig.TREFLE_KEY
     ): Response<PlantsSearchDto>
 
 }

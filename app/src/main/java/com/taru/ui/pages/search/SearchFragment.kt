@@ -18,8 +18,12 @@ import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
 import com.taru.ui.pages.nav.plants.recommended.ModelPlant
 import com.taru.ui.pages.nav.plants.recommended.PlantsAdapter
 import com.taru.ui.pages.search.autocomplete.SearchAutoCompleteAdapter
+import com.taru.ui.pages.search.plants.PlantsPagingAdapter
 import com.taru.ui.pages.search.plants.SearchPlantsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * Created by Niraj on 14-01-2023.
@@ -32,8 +36,9 @@ class SearchFragment : FragmentBase(true){
     private lateinit var vBinding: SearchFragmentBinding
 
     private lateinit var mListAdapterAutoComplete: SearchAutoCompleteAdapter
-    private lateinit var mListAdapter: SearchPlantsAdapter
-
+//    private lateinit var mListAdapter: SearchPlantsAdapter
+    private lateinit var mPagingAdapter: PlantsPagingAdapter
+    private var job: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,10 +59,10 @@ class SearchFragment : FragmentBase(true){
         mListAdapterAutoComplete = SearchAutoCompleteAdapter(){
 
         }
-        mListAdapter = SearchPlantsAdapter() {
+      /*  mListAdapter = SearchPlantsAdapter() {
                 modelPlant ->
         //navigateToDetail(modelPlant.id)
-        }
+        }*/
 
         lifecycleScope.launchWhenCreated {
 //            vBinding.weatherImage.load(R.drawable.pic_weather)
@@ -75,7 +80,10 @@ class SearchFragment : FragmentBase(true){
 
             mListAdapterAutoComplete.submitList(list)
 
-            vBinding.recyclerview.adapter = mListAdapter
+            initPagingAdapter()
+            getPlantsSearchEntries()
+
+         /*   vBinding.recyclerview.adapter = mListAdapter
             var list2 = mutableListOf(
                 ModelPlant(0), ModelPlant(1), ModelPlant(2),
                 ModelPlant(3), ModelPlant(4), ModelPlant(5),
@@ -83,7 +91,7 @@ class SearchFragment : FragmentBase(true){
             )
 
 
-            mListAdapter.submitList(list2)
+            mListAdapter.submitList(list2)*/
         }
 
         vBinding.searchView
@@ -116,4 +124,25 @@ class SearchFragment : FragmentBase(true){
         }
 
     }
+
+    private fun initPagingAdapter() {
+        mPagingAdapter = PlantsPagingAdapter {  }
+        vBinding.recyclerview.adapter = mPagingAdapter
+
+        mPagingAdapter.addLoadStateListener { loadState ->
+            Log.d("SearchFragment", "loadState:  ${loadState}")
+           /* binding.articleList.isVisible = loadState.refresh is LoadState.NotLoading
+            binding.progress.isVisible = loadState.refresh is LoadState.Loading
+            manageErrors(loadState)*/
+        }
+    }
+
+    private fun getPlantsSearchEntries(){
+        job?.cancel()
+        job = lifecycleScope.launch {
+            Log.d("SearchFragment", "getPlantsSearchEntries: job")
+            mViewModel.loadSearch("")?.collectLatest { mPagingAdapter.submitData(it) }
+        }
+    }
+
 }

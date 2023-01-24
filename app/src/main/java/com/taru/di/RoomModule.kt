@@ -51,4 +51,10 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideCachedRemoteKey(db: AppDatabase) = db.cachedRemoteKey()
+
+
+
+    @Singleton
+    @Provides
+    fun providePlantsSearchDao(db: AppDatabase) = db.plantsSearchDao()
 }

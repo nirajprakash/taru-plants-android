@@ -33,4 +33,9 @@ class LocalPlantSource @Inject constructor(
         val ids =  plantsSearchDao.insert(*entryEntityList.toTypedArray())
         return@withContext LocalResult.Success(ids)
     }
+
+    suspend fun removeAll() = withContext(Dispatchers.IO) {
+        plantsSearchDao.deleteAll()
+
+    }
 }

@@ -3,33 +3,32 @@ package com.taru.ui.pages.search.plants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.taru.R
+import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.databinding.SearchPlantsItemBinding
 import com.taru.ui.pages.nav.plants.recommended.ModelPlant
 
+
+//import androidx.paging.PagingDataAdapter
 /**
- * Created by Niraj on 15-01-2023.
+ * Created by Niraj on 24-01-2023.
  */
-class SearchPlantsAdapter( val mOnClick: (ModelPlant) -> Unit) : ListAdapter<ModelPlant, SearchPlantsAdapter.ItemViewHolder>(
-    ModelPlant.diffCallback) {
+class PlantsPagingAdapter(val mOnClick: (PlantSearchEntryEntity) -> Unit) : PagingDataAdapter<PlantSearchEntryEntity, PlantsPagingAdapter.ItemViewHolder>(PlantSearchEntryEntity.diffCallback) {
 
-
-
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val entry = getItem(position) ?: return
+        holder.bind(entry)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return viewHolder(parent, this)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
-    inner class ItemViewHolder(var binding: SearchPlantsItemBinding) : RecyclerView.ViewHolder(binding.root),
-        View.OnClickListener {
-        fun bind(plant: ModelPlant) {
+    inner class ItemViewHolder(var binding: SearchPlantsItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        fun bind(plantSearchEntryEntity: PlantSearchEntryEntity) {
             binding.searchPlantsItemImage.load(R.drawable.pic_tool_category)
             binding.bOnClick =  this
             binding.executePendingBindings()
@@ -37,17 +36,17 @@ class SearchPlantsAdapter( val mOnClick: (ModelPlant) -> Unit) : ListAdapter<Mod
 
         override fun onClick(v: View?) {
             var posi = absoluteAdapterPosition
-            mOnClick(getItem(posi))
+            getItem(posi)?.let { mOnClick(it) }
         }
 
 
     }
-
     companion object {
-        fun viewHolder(parent: ViewGroup, adapter: SearchPlantsAdapter): ItemViewHolder {
+        fun viewHolder(parent: ViewGroup, adapter: PlantsPagingAdapter): PlantsPagingAdapter.ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = SearchPlantsItemBinding.inflate(layoutInflater, parent, false)
             return adapter.ItemViewHolder(binding)
         }
     }
+
 }

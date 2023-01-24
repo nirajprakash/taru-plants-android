@@ -6,6 +6,8 @@ import com.taru.data.local.db.cached.CachedRemoteKeyDao
 import com.taru.data.local.db.cached.CachedRemoteKeyEntity
 import com.taru.data.local.db.location.LocationRoomDao
 import com.taru.data.local.db.location.LocationRoomEntity
+import com.taru.data.local.db.plant.PlantSearchEntryEntity
+import com.taru.data.local.db.plant.PlantsSearchDao
 import com.taru.data.local.db.weather.*
 
 /**
@@ -15,8 +17,10 @@ import com.taru.data.local.db.weather.*
     entities = [LocationRoomEntity::class,
         WeatherCurrentRoomEntity::class,
         WeatherForecastRoomEntity::class,
-        ForecastEntryEntity::class],
-    version = 3,
+        ForecastEntryEntity::class,
+               PlantSearchEntryEntity::class,
+               CachedRemoteKeyEntity::class],
+    version = 4,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -25,4 +29,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun weatherForecast(): WeatherForecastDao
     abstract fun weatherForecastEntry(): WeatherForecastEntryDao
     abstract fun cachedRemoteKey(): CachedRemoteKeyDao
+    abstract fun plantsSearchDao(): PlantsSearchDao
 }

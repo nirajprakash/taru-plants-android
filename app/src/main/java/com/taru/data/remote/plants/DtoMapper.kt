@@ -12,12 +12,12 @@ fun PlantsSearchEntryDto.toRoomEntity(position: Int, q: String): PlantSearchEntr
      return PlantSearchEntryEntity(
      q=q,
         index = position,
-        commonName = commonName,
+        commonName = commonName?:"",
         family = family,
         imageUrl = imageUrl,
         plantId = id,
         slug = slug,
-        scientificName = scientificName
+        scientificName = scientificName?:""
     )
 
 }
