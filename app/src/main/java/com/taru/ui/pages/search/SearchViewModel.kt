@@ -1,5 +1,6 @@
 package com.taru.ui.pages.search
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -41,6 +42,7 @@ internal class SearchViewModel @Inject constructor(
     }
 
     fun loadRecentSearch(q:String?): Flow<PagingData<PlantRecentSearchEntity>> {
+        Log.d("SearchViewModel", "loadRecentSearch: ${q?.length} ${q}")
         var result = recentPlantByQueryUseCase.invoke(q)
         return result.cachedIn(viewModelScope)
     }

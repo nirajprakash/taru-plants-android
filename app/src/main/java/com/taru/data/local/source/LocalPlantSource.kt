@@ -1,5 +1,6 @@
 package com.taru.data.local.source
 
+import android.util.Log
 import androidx.paging.PagingSource
 import com.taru.data.base.local.LocalResult
 import com.taru.data.local.db.plant.PlantRecentSearchDao
@@ -45,8 +46,10 @@ class LocalPlantSource @Inject constructor(
 
     fun getPlantRecentSearchPageSource(q: String?): PagingSource<Int, PlantRecentSearchEntity> {
         if (q != null) {
+            Log.d("LocalPlantSource", "getPlantRecentSearchPageSource not null: $q")
             return plantRecentSearchDao.paginated("%$q%")
         }
+        Log.d("LocalPlantSource", "getPlantRecentSearchPageSource null: $q")
         return plantRecentSearchDao.paginated() // return pageSource
     }
 
