@@ -3,8 +3,8 @@ package com.taru.domain.weather.impl
 import android.util.Log
 import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
-import com.taru.data.local.db.location.LocalLocationSource
-import com.taru.data.local.db.weather.LocalWeatherSource
+import com.taru.data.local.source.LocalLocationSource
+import com.taru.data.local.source.LocalWeatherSource
 import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource

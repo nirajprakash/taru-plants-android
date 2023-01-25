@@ -1,0 +1,564 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 5,
+    "identityHash": "84448f6550548f5dfe9534460e476802",
+    "entities": [
+      {
+        "tableName": "Location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lat` REAL NOT NULL, `lon` REAL NOT NULL, `weatherUnix` INTEGER, `forecastUnix` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lon",
+            "columnName": "lon",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weatherUnix",
+            "columnName": "weatherUnix",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "forecastUnix",
+            "columnName": "forecastUnix",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_Location_lat_lon",
+            "unique": true,
+            "columnNames": [
+              "lat",
+              "lon"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_Location_lat_lon` ON `${TABLE_NAME}` (`lat`, `lon`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "WeatherCurrent",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `locationId` INTEGER NOT NULL, `visibility` INTEGER NOT NULL, `cityId` INTEGER NOT NULL, `dt` INTEGER NOT NULL, `weather_id` INTEGER, `weather_main` TEXT, `attr_temp` REAL, `attr_pressure` INTEGER NOT NULL, `attr_humidity` INTEGER NOT NULL, `attr_tempMin` REAL NOT NULL, `attr_tempMax` REAL NOT NULL, FOREIGN KEY(`locationId`) REFERENCES `Location`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationId",
+            "columnName": "locationId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visibility",
+            "columnName": "visibility",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cityId",
+            "columnName": "cityId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dt",
+            "columnName": "dt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weather.id",
+            "columnName": "weather_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.main",
+            "columnName": "weather_main",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attrs.temp",
+            "columnName": "attr_temp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attrs.pressure",
+            "columnName": "attr_pressure",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.humidity",
+            "columnName": "attr_humidity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.tempMin",
+            "columnName": "attr_tempMin",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.tempMax",
+            "columnName": "attr_tempMax",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_WeatherCurrent_locationId",
+            "unique": false,
+            "columnNames": [
+              "locationId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_WeatherCurrent_locationId` ON `${TABLE_NAME}` (`locationId`)"
+          },
+          {
+            "name": "index_WeatherCurrent_dt",
+            "unique": false,
+            "columnNames": [
+              "dt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_WeatherCurrent_dt` ON `${TABLE_NAME}` (`dt`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Location",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "locationId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "WeatherForecast",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `count` INTEGER NOT NULL, `dt` INTEGER NOT NULL, `locationId` INTEGER NOT NULL, FOREIGN KEY(`locationId`) REFERENCES `Location`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "count",
+            "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dt",
+            "columnName": "dt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationId",
+            "columnName": "locationId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_WeatherForecast_locationId",
+            "unique": false,
+            "columnNames": [
+              "locationId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_WeatherForecast_locationId` ON `${TABLE_NAME}` (`locationId`)"
+          },
+          {
+            "name": "index_WeatherForecast_dt",
+            "unique": false,
+            "columnNames": [
+              "dt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_WeatherForecast_dt` ON `${TABLE_NAME}` (`dt`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Location",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "locationId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ForecastEntry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `forecastId` INTEGER NOT NULL, `dt` INTEGER NOT NULL, `weather_id` INTEGER, `weather_main` TEXT, `attr_temp` REAL, `attr_pressure` INTEGER NOT NULL, `attr_humidity` INTEGER NOT NULL, `attr_tempMin` REAL NOT NULL, `attr_tempMax` REAL NOT NULL, FOREIGN KEY(`forecastId`) REFERENCES `WeatherForecast`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "forecastId",
+            "columnName": "forecastId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dt",
+            "columnName": "dt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weather.id",
+            "columnName": "weather_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weather.main",
+            "columnName": "weather_main",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attrs.temp",
+            "columnName": "attr_temp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attrs.pressure",
+            "columnName": "attr_pressure",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.humidity",
+            "columnName": "attr_humidity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.tempMin",
+            "columnName": "attr_tempMin",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attrs.tempMax",
+            "columnName": "attr_tempMax",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ForecastEntry_forecastId",
+            "unique": false,
+            "columnNames": [
+              "forecastId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ForecastEntry_forecastId` ON `${TABLE_NAME}` (`forecastId`)"
+          },
+          {
+            "name": "index_ForecastEntry_dt",
+            "unique": false,
+            "columnNames": [
+              "dt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ForecastEntry_dt` ON `${TABLE_NAME}` (`dt`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "WeatherForecast",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "forecastId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "PlantsSearch",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `plantId` INTEGER NOT NULL, `q` TEXT NOT NULL, `index` INTEGER NOT NULL, `family` TEXT NOT NULL, `slug` TEXT NOT NULL, `commonName` TEXT NOT NULL, `scientificName` TEXT NOT NULL, `imageUrl` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plantId",
+            "columnName": "plantId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "q",
+            "columnName": "q",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "family",
+            "columnName": "family",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "commonName",
+            "columnName": "commonName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "scientificName",
+            "columnName": "scientificName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_PlantsSearch_index_q",
+            "unique": true,
+            "columnNames": [
+              "index",
+              "q"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_PlantsSearch_index_q` ON `${TABLE_NAME}` (`index`, `q`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "CachedRemoteKey",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `refId` INTEGER NOT NULL, `q` TEXT NOT NULL, `refType` INTEGER NOT NULL, `nextKey` INTEGER, `prevKey` INTEGER, `isEndReached` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "refId",
+            "columnName": "refId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "q",
+            "columnName": "q",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "refType",
+            "columnName": "refType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextKey",
+            "columnName": "nextKey",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "prevKey",
+            "columnName": "prevKey",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isEndReached",
+            "columnName": "isEndReached",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_CachedRemoteKey_q_refId_refType",
+            "unique": true,
+            "columnNames": [
+              "q",
+              "refId",
+              "refType"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_CachedRemoteKey_q_refId_refType` ON `${TABLE_NAME}` (`q`, `refId`, `refType`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "PlantRecentSearch",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `q` TEXT NOT NULL, `dt` INTEGER NOT NULL, `imageUrl` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "q",
+            "columnName": "q",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dt",
+            "columnName": "dt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_PlantRecentSearch_dt",
+            "unique": false,
+            "columnNames": [
+              "dt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PlantRecentSearch_dt` ON `${TABLE_NAME}` (`dt`)"
+          },
+          {
+            "name": "index_PlantRecentSearch_q",
+            "unique": true,
+            "columnNames": [
+              "q"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_PlantRecentSearch_q` ON `${TABLE_NAME}` (`q`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '84448f6550548f5dfe9534460e476802')"
+    ]
+  }
+}

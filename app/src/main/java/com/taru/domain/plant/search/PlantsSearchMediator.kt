@@ -9,22 +9,18 @@ import androidx.room.withTransaction
 import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.DatabaseConstants
-import com.taru.data.local.db.cached.CachedRemoteKeyDao
 import com.taru.data.local.db.cached.CachedRemoteKeyEntity
-import com.taru.data.local.db.cached.CachedRemoteKeySource
-import com.taru.data.local.db.plant.LocalPlantSource
+import com.taru.data.local.source.CachedRemoteKeySource
+import com.taru.data.local.source.LocalPlantSource
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.remote.plants.RemotePlantsConstants
 import com.taru.data.remote.plants.RemotePlantsSource
 import com.taru.data.remote.plants.toRoomEntity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
-import java.io.InvalidObjectException
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by Niraj on 22-01-2023.
@@ -128,7 +124,7 @@ class PlantsSearchMediator @Inject constructor(
                     CachedRemoteKeyEntity(
                         nextKey = nextKey,
                         refId = remoteData.data.lastOrNull()?.id ?:-1,
-                        refType = DatabaseConstants.Cached.REF_TYPE_PLANT,
+                        refType = DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH,
                         q = q,
                         prevKey = null,
 
@@ -154,7 +150,7 @@ class PlantsSearchMediator @Inject constructor(
     private suspend fun getFirstRemoteKey(state: PagingState<Int, PlantSearchEntryEntity>): CachedRemoteKeyEntity? {
         return withContext(Dispatchers.IO) {
             Log.d("PlantsSearchMediator", "getFirstRemoteKey: $q")
-            cachedRemoteKeySource.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT, q).firstOrNull()
+            cachedRemoteKeySource.getKeyFirst(DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH, q).firstOrNull()
         }
     }
 
@@ -162,7 +158,7 @@ class PlantsSearchMediator @Inject constructor(
         return withContext(Dispatchers.IO) {
             Log.d("PlantsSearchMediator", "getLastRemoteKey: ${state.pages.lastOrNull()?.data?.size}")
             if(state.lastItemOrNull()==null){
-                return@withContext cachedRemoteKeySource.getKeyFirst(refType =  DatabaseConstants.Cached.REF_TYPE_PLANT, q = q).lastOrNull()
+                return@withContext cachedRemoteKeySource.getKeyFirst(refType =  DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH, q = q).lastOrNull()
             }
 
             state.pages
@@ -173,7 +169,7 @@ class PlantsSearchMediator @Inject constructor(
                     Log.d("PlantsSearchMediator", "getLastRemoteKey: $plantEntry")
                     cachedRemoteKeySource.getKey(
                         plantEntry.plantId,
-                        DatabaseConstants.Cached.REF_TYPE_PLANT,
+                        DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH,
                         q
                     ).firstOrNull()
                 }

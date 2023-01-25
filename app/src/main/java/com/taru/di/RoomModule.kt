@@ -57,4 +57,10 @@ object RoomModule {
     @Singleton
     @Provides
     fun providePlantsSearchDao(db: AppDatabase) = db.plantsSearchDao()
+
+
+
+    @Singleton
+    @Provides
+    fun providePlantRecentSearchDao(db: AppDatabase) = db.plantRecentSearchDao()
 }

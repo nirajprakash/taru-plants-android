@@ -1,7 +1,8 @@
-package com.taru.data.local.db.weather
+package com.taru.data.local.source
 
 import android.util.Log
 import com.taru.data.base.local.LocalResult
+import com.taru.data.local.db.weather.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

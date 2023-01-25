@@ -1,16 +1,12 @@
-package com.taru.data.local.db.location
+package com.taru.data.local.source
 
 import android.location.Location
 import android.util.Log
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.taru.data.base.local.LocalResult
-import com.taru.data.remote.ip.ApiIp
-import com.taru.domain.weather.WeatherConstants
+import com.taru.data.local.db.location.LocationRoomDao
+import com.taru.data.local.db.location.LocationRoomEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 

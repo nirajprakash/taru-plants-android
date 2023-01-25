@@ -3,9 +3,10 @@ package com.taru.ui.pages.search
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
-import com.taru.domain.base.result.DomainResult
 import com.taru.domain.plant.usecase.GetPlantsByQueryUseCase
+import com.taru.domain.plant.usecase.PlantRecentSearchUseCase
 import com.taru.ui.base.ViewModelBase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -19,8 +20,11 @@ import javax.inject.Inject
 // https://proandroiddev.com/google-news-clone-in-kotlin-using-paging-3-and-hilt-2127d19fe09d
 @HiltViewModel
 internal class SearchViewModel @Inject constructor(
-    val plantsByQueryUseCase: GetPlantsByQueryUseCase
+    private val plantsByQueryUseCase: GetPlantsByQueryUseCase,
+    private val recentPlantByQueryUseCase: PlantRecentSearchUseCase
 ): ViewModelBase() {
+
+
     fun loadSearch(q:String): Flow<PagingData<PlantSearchEntryEntity>> {
         var result = plantsByQueryUseCase.invoke(q)
         return result.cachedIn(viewModelScope)
@@ -34,6 +38,11 @@ internal class SearchViewModel @Inject constructor(
         return  null*/
 
 
+    }
+
+    fun loadRecentSearch(q:String?): Flow<PagingData<PlantRecentSearchEntity>> {
+        var result = recentPlantByQueryUseCase.invoke(q)
+        return result.cachedIn(viewModelScope)
     }
 
 }

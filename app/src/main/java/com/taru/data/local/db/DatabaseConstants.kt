@@ -9,6 +9,6 @@ object DatabaseConstants {
     const val DATABASE_NAME = "taru_db"
 
     object Cached{
-        const val REF_TYPE_PLANT = 1
+        const val REF_TYPE_PLANT_SEARCH = 1
     }
 }
