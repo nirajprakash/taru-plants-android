@@ -80,7 +80,7 @@ class ScanFragment : FragmentBase(true) {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    fun bindPreview(cameraProvider : ProcessCameraProvider) {
+    private fun bindPreview(cameraProvider : ProcessCameraProvider) {
         var preview : Preview = Preview.Builder()
             .build()
 

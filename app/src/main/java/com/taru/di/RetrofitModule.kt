@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.taru.App
 import com.taru.BuildConfig
+import com.taru.data.remote.identify.ApiIdentify
 import com.taru.data.remote.ip.ApiIp
 import com.taru.data.remote.plants.ApiPlants
 import com.taru.data.remote.weather.ApiWeather
@@ -33,6 +34,7 @@ object RetrofitModule {
     private const val RETROFIT_IP = "Retrofit.ip"
     private const val RETROFIT_WEATHER = "Retrofit.weather"
     private const val RETROFIT_TREFLE = "Retrofit.Trefle"
+    private const val RETROFIT_PLANTNET = "Retrofit.PlantNet"
     @Provides
     fun provideCacheInterceptor() = Interceptor { chain ->
         var request = chain.request()
@@ -130,6 +132,15 @@ object RetrofitModule {
 //        .addCallAdapterFactory(retrofitAuthAdapterFactory)
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
+    @Named(RETROFIT_PLANTNET)
+    @Singleton
+    @Provides
+    fun provideRetrofitPlantNet(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl("https://my-api.plantnet.org/v2/")
+        .client(okHttpClient)
+//        .addCallAdapterFactory(retrofitAuthAdapterFactory)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build()
 
 
     @Singleton
@@ -143,6 +154,9 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun provideApiTrefle(@Named(RETROFIT_TREFLE) retrofit: Retrofit): ApiPlants = retrofit.create(ApiPlants::class.java)
+    @Singleton
+    @Provides
+    fun provideApiIdentify(@Named(RETROFIT_PLANTNET) retrofit: Retrofit): ApiIdentify = retrofit.create(ApiIdentify::class.java)
 
 
     /*

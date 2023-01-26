@@ -47,20 +47,21 @@ object RoomModule {
     @Provides
     fun provideWeatherForecastEntry(db: AppDatabase) = db.weatherForecastEntry()
 
-
     @Singleton
     @Provides
     fun provideCachedRemoteKey(db: AppDatabase) = db.cachedRemoteKey()
-
-
 
     @Singleton
     @Provides
     fun providePlantsSearchDao(db: AppDatabase) = db.plantsSearchDao()
 
+    @Singleton
+    @Provides
+    fun providePlantRecentSearchDao(db: AppDatabase) = db.plantRecentSearchDao()
 
 
     @Singleton
     @Provides
-    fun providePlantRecentSearchDao(db: AppDatabase) = db.plantRecentSearchDao()
+    fun provideIdentifyLogDao(db: AppDatabase) = db.identifyLogDao()
+
 }

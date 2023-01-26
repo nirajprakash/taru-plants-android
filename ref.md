@@ -105,5 +105,19 @@
 
 - https://getstream.io/blog/modeling-retrofit-responses/
 
+## mutlipart
+
+- https://davidamunga.medium.com/working-with-multipart-form-data-using-retrofit-for-android-280307f23258
+
+- https://stackoverflow.com/a/61592000
+
+- https://gist.github.com/carolinemusyoka/5fbb9ecfd40319b49f5717d0357a5856
+
+# camera
+
+- https://developer.android.com/codelabs/camerax-getting-started#4
+
+
+#
 
 
