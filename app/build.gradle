@@ -23,6 +23,7 @@ android {
         versionName "1.0"
         buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
         buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
+        buildConfigField "String", "PLANTNET_KEY", localProperties['plantnetKey']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -109,8 +110,15 @@ dependencies {
 
     // optional - Paging 3 Integration
     implementation "androidx.room:room-paging:$room_version"
+
+    // Compressor
+    implementation 'id.zelory:compressor:3.0.1'
+    implementation 'com.github.Shouheng88:compressor:1.6.0'
+
+
     // leaks
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
 
 
 // optional - Test helpers
