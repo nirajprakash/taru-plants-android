@@ -1,5 +1,7 @@
 package com.taru.di
 
+import com.taru.domain.identify.impl.DefaultIdentifyRepository
+import com.taru.domain.identify.repository.IdentifyRepository
 import com.taru.domain.plant.impl.DefaultPlantRepository
 import com.taru.domain.plant.repository.PlantRepository
 import com.taru.domain.weather.impl.DefaultWeatherRepository
@@ -20,5 +22,8 @@ abstract class RemoteDataModule {
     abstract fun bindWeatherRepository(impl: DefaultWeatherRepository): WeatherRepository
     @Binds
     abstract fun bindPlantRepository(impl: DefaultPlantRepository): PlantRepository
+
+    @Binds
+    abstract fun bindIdentifyRepository(impl: DefaultIdentifyRepository): IdentifyRepository
 
 }

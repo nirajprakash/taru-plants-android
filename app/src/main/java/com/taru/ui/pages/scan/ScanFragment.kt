@@ -3,21 +3,26 @@ package com.taru.ui.pages.scan
 import android.Manifest
 import android.Manifest.permission.CAMERA
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
+import androidx.camera.core.impl.LiveDataObservable
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
 import com.permissionx.guolindev.PermissionX
+import com.taru.R
 import com.taru.databinding.NavHomeFragmentBinding
 import com.taru.databinding.ScanFragmentBinding
+import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.home.NavHomeViewModel
 import com.taru.ui.pages.nav.home.category.HomeCategoryAdapter
@@ -53,6 +58,43 @@ class ScanFragment : FragmentBase(true) {
         lifecycleScope.launchWhenCreated {
             getPermission()
         }
+
+        vBinding.bottomAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_scan_action_image -> {
+                    Log.d("ScanFragment", "onClickPickImage: ")
+
+
+                    true
+
+                }else -> false
+            }
+        }
+
+    }
+
+    override fun setupViewModelObservers() {
+        super.setupViewModelObservers()
+
+        mViewModel.mEventButtonAllowed.observe(viewLifecycleOwner, LiveDataObserver {
+            if(!it){
+                Snackbar.make(requireContext(),
+                    vBinding.coordinator,
+                    "Quota limit Exceeded !! Try Next Day",
+                    Snackbar.LENGTH_LONG).show()
+            }else {
+                /*Snackbar.make(requireContext(),
+                    vBinding.coordinator,
+                    "Try Next Day",
+                    Snackbar.LENGTH_LONG).show()*/
+
+            }
+
+        })
+
+        mViewModel.bIsButtonEnabled.observe(viewLifecycleOwner) {
+            vBinding.bottomAppBar.menu.findItem(R.id.menu_scan_action_image).isEnabled = it
+        }
     }
 
     private fun getPermission(){
@@ -63,9 +105,9 @@ class ScanFragment : FragmentBase(true) {
             }
             .request { allGranted, grantedList, deniedList ->
                 if (allGranted) {
-
                     Toast.makeText(requireContext(), "All permissions are granted", Toast.LENGTH_LONG).show()
-                setupCamera()
+                    setupCamera()
+                    mViewModel.enableButton()
                 } else {
                     Toast.makeText(requireContext(), "These permissions are denied: $deniedList", Toast.LENGTH_LONG).show()
                 }
@@ -91,6 +133,7 @@ class ScanFragment : FragmentBase(true) {
         preview.setSurfaceProvider(vBinding.previewView.getSurfaceProvider())
 
         var camera = cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, preview)
+
 
     }
 }

@@ -13,6 +13,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?colorSurface">
@@ -80,8 +81,7 @@
             app:fabCradleRoundedCornerRadius="@dimen/dp_12"
             app:fabAlignmentMode="center"
             app:fabAnchorMode="cradle"
-
-            app:contentInsetEnd="0dp"
+             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
@@ -90,7 +90,9 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{bViewModel.bIsButtonEnabled}"
             app:layout_anchor="@id/bottomAppBar"
+            android:onClick="@{() -> bViewModel.onClickScan()}"
             app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.circle"
             app:srcCompat="@drawable/ic_if_scan" />
 

@@ -9,6 +9,7 @@ import com.taru.data.local.source.LocalPlantSource
 import com.taru.data.remote.identify.RemoteIdentifySource
 import com.taru.data.remote.plants.RemotePlantsSource
 import com.taru.domain.base.result.DomainResult
+import com.taru.domain.identify.IdentifyConstants
 import com.taru.domain.identify.model.ModelIdentified
 import com.taru.domain.identify.repository.IdentifyRepository
 import kotlinx.coroutines.flow.Flow
@@ -36,8 +37,12 @@ class DefaultIdentifyRepository  @Inject constructor(
     override suspend fun isAllowed(): DomainResult<Boolean> {
         var countResult = localLogSource.getCountForDay()
 
-        // TODO add check here
-        return DomainResult.Success(true)
+        if(countResult< IdentifyConstants.ALLOWED_COUNT){
+            return DomainResult.Success(true)
+        }
+        return DomainResult.Success(false)
+
+
     }
 
 }
