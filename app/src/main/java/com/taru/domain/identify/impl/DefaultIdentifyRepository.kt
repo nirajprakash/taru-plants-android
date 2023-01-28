@@ -3,6 +3,7 @@ package com.taru.domain.identify.impl
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
@@ -47,6 +48,7 @@ class DefaultIdentifyRepository  @Inject constructor(
         val localresult = remoteIdentifySource.identify(organ, file)
         if(localresult is ApiResult.Success){
             // TODO add into log
+//            Log.d("DefaultIdentityRepository", "identify: ${localresult.data}")
            return DomainResult.Success(localresult.data.toDomainModel(uri))
         }else if(localresult is ApiResult.Exception){
             localresult.throwable.printStackTrace()

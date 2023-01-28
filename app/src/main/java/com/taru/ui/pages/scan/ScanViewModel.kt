@@ -10,6 +10,7 @@ import com.taru.domain.identify.usecase.IdentifyUseCase
 import com.taru.domain.identify.usecase.IsAllowedUseCase
 import com.taru.tools.livedata.LiveDataEvent
 import com.taru.ui.base.ViewModelBase
+import com.taru.ui.nav.NavManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ScanViewModel @Inject constructor(
 
+    private val navManager: NavManager,
     private val isAllowedUseCase: IsAllowedUseCase,
     private val identifyUseCase: IdentifyUseCase
 //    private val
@@ -32,6 +34,7 @@ internal class ScanViewModel @Inject constructor(
     private val _mEventOnActionScan = MutableLiveData<LiveDataEvent<Boolean>>()
     var mEventOnActionScan: LiveData<LiveDataEvent<Boolean>> = _mEventOnActionScan
 
+    var bScanMessage = MutableLiveData<String>()
     init {
 
     }
@@ -70,7 +73,8 @@ internal class ScanViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (mUri == null) return@launch
-            identify(organ, mUri!!)
+            navigateToResult()
+            // TODO uncomment identify(organ, mUri!!)
         }
 
     }
@@ -79,6 +83,9 @@ internal class ScanViewModel @Inject constructor(
 //        identifyUseCase.invoke("organ");
         var result = identifyUseCase.invoke(organ, uri)
         if (result is DomainResult.Success) {
+            var message = result.value.keywords.joinToString(separator = ", ")
+            bScanMessage.postValue(message)
+
             Log.d("ScanViewModel", "identify: ${result.value}")
         }else {
             if(result is DomainResult.Failure){
@@ -86,6 +93,11 @@ internal class ScanViewModel @Inject constructor(
             }
         }
 
+    }
+
+    private fun navigateToResult(){
+        if(mUri == null)return
+        navManager.navigate(ScanFragmentDirections.navigateToResult(mUri!!.toString(), arrayOf("Aswder", "water", "drink")))
     }
 
 

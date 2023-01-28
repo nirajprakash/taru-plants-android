@@ -114,6 +114,11 @@ class ScanFragment : FragmentBase(true) {
         mViewModel.mEventOnActionScan.observe(viewLifecycleOwner) {
             takePhoto()
         }
+
+        mViewModel.bScanMessage.observe(viewLifecycleOwner) {
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
     }
 
 

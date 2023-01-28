@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bViewModel"
+            type="com.taru.ui.pages.scan.result.ScanResultViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="@dimen/dp_0">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:logo="@drawable/ic_logo_taru"
+                app:menu="@menu/menu_app"
+                app:title="Taru"
+                app:titleCentered="true" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <View
+                android:id="@+id/scan_result_fragment_icon_area"
+                android:layout_width="@dimen/dp_64"
+                android:layout_height="@dimen/dp_64"
+                android:background="@drawable/dr_circle_surface_alpha"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/scan_result_fragment_icon"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:contentDescription="Scan Result"
+                app:layout_constraintBottom_toBottomOf="@id/scan_result_fragment_icon_area"
+                app:layout_constraintEnd_toEndOf="@id/scan_result_fragment_icon_area"
+                app:layout_constraintStart_toStartOf="@id/scan_result_fragment_icon_area"
+                app:layout_constraintTop_toTopOf="@id/scan_result_fragment_icon_area"
+                app:srcCompat="@drawable/ic_if_scan"
+                app:tint="@color/colorOnSurface" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/scan_result_fragment_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:bindCoilSrc="@{bViewModel.bImageUri}"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                app:layout_constraintDimensionRatio="3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/scan_result_fragment_title"
+                app:layout_constraintTop_toBottomOf="@id/scan_result_fragment_icon_area"
+                app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
+                tools:src="@drawable/pic_tool_category" />
+
+           <!-- <ImageView
+                android:id="@+id/scan_result_fragment_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:bindCoilSrc="@{bViewModel.bImageUri}"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                app:layout_constraintDimensionRatio="3:4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/scan_result_fragment_title"
+                app:layout_constraintTop_toBottomOf="@id/scan_result_fragment_icon_area"
+                />-->
+
+            <TextView
+
+                android:id="@+id/scan_result_fragment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_24"
+
+                android:text="Detected As"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/colorOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scan_result_fragment_image"
+                app:layout_constraintBottom_toTopOf="@id/scan_result_fragment_subtitle"
+                tools:text="Radish" />
+
+            <TextView
+                android:id="@+id/scan_result_fragment_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_4"
+
+                android:text="click any one to search more:"
+
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                android:textColor="@color/color_on_surface_54"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scan_result_fragment_title"
+                app:layout_constraintBottom_toTopOf="@id/scan_result_fragment_keywords"/>
+
+
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/scan_result_fragment_keywords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scan_result_fragment_image">
+
+
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Africa"
+                    app:chipBackgroundColor="@color/colorSurface"
+                    style="@style/Widget.Jl.App.Chip.Plain"/>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Europe"
+                    app:chipBackgroundColor="@color/colorSurface"
+                    style="@style/Widget.Jl.App.Chip.Plain"/>
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

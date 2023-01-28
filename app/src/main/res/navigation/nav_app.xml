@@ -51,13 +51,31 @@
         android:name="com.taru.ui.pages.scan.ScanFragment"
         android:label="Scan"
         tools:layout="@layout/scan_fragment">
+        <action android:id="@+id/navigate_to_result"
+            app:destination="@id/scan_result"/>
+
     </fragment>
+
+    <fragment
+        android:id="@+id/scan_result"
+        android:name="com.taru.ui.pages.scan.result.ScanResultFragment"
+        android:label="Scan Result"
+        tools:layout="@layout/scan_result_fragment">
+        <argument android:name="imageUri"
+            app:argType="string"/>
+
+        <argument android:name="keywords"
+            app:argType="string[]"/>
+    </fragment>
+
     <fragment
         android:id="@+id/weather"
         android:name="com.taru.ui.pages.weather.WeatherFragment"
         android:label="Weather"
         tools:layout="@layout/weather_fragment">
     </fragment>
+
+
 
     <fragment
         android:id="@+id/search"
