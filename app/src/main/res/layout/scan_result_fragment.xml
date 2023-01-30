@@ -137,19 +137,7 @@
 
 
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Africa"
-                    app:chipBackgroundColor="@color/colorSurface"
-                    style="@style/Widget.Jl.App.Chip.Plain"/>
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Europe"
-                    app:chipBackgroundColor="@color/colorSurface"
-                    style="@style/Widget.Jl.App.Chip.Plain"/>
             </com.google.android.material.chip.ChipGroup>
 
 

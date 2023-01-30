@@ -12,11 +12,12 @@
 
     <style name="Widget.Jl.App.Chip" parent="Widget.Material3.Chip.Suggestion">
         <item name="android:textAppearance">@style/Typo.Jl.chipText</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="chipStrokeColor">@color/md_white_1000_10</item>
-        <item name="chipBackgroundColor">@color/md_white_1000_10</item>
+<!--        <item name="android:textColor">@color/colorOnSurface</item>-->
+        <item name="chipStrokeColor">@color/color_surface_4</item>
+
+        <item name="chipBackgroundColor">@color/colorCard</item>
         <item name="chipCornerRadius">@dimen/dp_16</item>
-        <item name="chipSurfaceColor">@android:color/transparent</item>
+        <item name="chipSurfaceColor">@color/colorCard</item>
     </style>
 
     <style name="Widget.Jl.App.Chip.Plain" parent="Widget.Jl.App.Chip">
