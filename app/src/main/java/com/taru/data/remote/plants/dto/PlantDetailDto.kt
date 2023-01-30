@@ -11,7 +11,7 @@ import retrofit2.http.Field
  */
 
 @JsonClass(generateAdapter = true)
-data class PlantDetailDto(var id: String,
+data class PlantDetailDto(var id: Int,
                           @Field(value= "main_species_id") var mainSpeciesId: String,
                           @Field(value = "image_url" ) val imageUrl: String,
                           val vegetable: Boolean?,

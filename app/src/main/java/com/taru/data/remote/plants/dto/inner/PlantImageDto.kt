@@ -8,5 +8,6 @@ import retrofit2.http.Field
  */
 
 @JsonClass(generateAdapter = true)
-data class PlantImageDto(var id: String, @Field("image_url") var imageUrl: String, ) {
+data class PlantImageDto(var id: Int,
+                         @Field("image_url") var imageUrl: String ) {
 }

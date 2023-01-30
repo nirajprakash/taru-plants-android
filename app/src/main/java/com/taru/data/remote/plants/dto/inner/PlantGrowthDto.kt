@@ -12,7 +12,7 @@ data class PlantGrowthDto(
     @Field("ph_maximum") var phMaximum: Float?,
     @Field("ph_minimum") var phMinimum: Float?,
     @Field("light") var light: Int?,
-    @Field("atmospheric_humidity") var atmosphericHumidity: Int?,
+    @Field("atmospheric_humidity") var atmosphericHumidity: Float?,
     @Field("soil_humidity") var soilHumidity: Float?,
     @Field("bloom_months") var bloomMonths: List<String>,
     @Field("growth_months") var growthMonths: List<String>,
