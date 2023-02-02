@@ -13,6 +13,6 @@ interface PlantDetailDao : RoomDaoBase<PlantEntity>  {
 
     @Transaction
     @Query("SELECT * FROM Plants WHERE id=:plantId")
-    suspend fun plantId(plantId:Int): PlantDetailRoomData
+    suspend fun byId(plantId:Int): PlantDetailRoomData?
 
 }

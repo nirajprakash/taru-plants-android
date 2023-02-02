@@ -20,5 +20,11 @@ class RemotePlantsSource @Inject constructor(
 
     }
 
+    suspend fun plantDetailById(id: Int) = withContext(Dispatchers.IO){
+        return@withContext handleApi {  apiPlants.byId(id) }
+
+
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.taru.domain.plant.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingData
+import com.taru.data.local.db.plant.PlantDetailRoomData
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.domain.base.result.DomainResult
@@ -17,6 +18,7 @@ interface PlantRepository {
 
 
     suspend fun addRecentSearches(search: List<PlantRecentSearchEntity>): DomainResult<List<Long>>
+    suspend fun getPlantDetail(plantId: Int): DomainResult<PlantDetailRoomData>
     suspend fun clearData(): DomainResult<Unit>
 
 }

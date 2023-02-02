@@ -3,10 +3,7 @@ package com.taru.data.local.source
 import android.util.Log
 import androidx.paging.PagingSource
 import com.taru.data.base.local.LocalResult
-import com.taru.data.local.db.plant.PlantRecentSearchDao
-import com.taru.data.local.db.plant.PlantRecentSearchEntity
-import com.taru.data.local.db.plant.PlantSearchEntryEntity
-import com.taru.data.local.db.plant.PlantsSearchDao
+import com.taru.data.local.db.plant.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,6 +17,8 @@ class LocalPlantSource @Inject constructor(
 
     private var plantRecentSearchDao: PlantRecentSearchDao,
     private var plantsSearchDao: PlantsSearchDao,
+    private var plantDetailDao: PlantDetailDao,
+    private var plantImageDao: PlantImageDao,
 ) {
 
     fun getPlantsSearchPageSource(q: String): PagingSource<Int, PlantSearchEntryEntity> {
@@ -35,9 +34,7 @@ class LocalPlantSource @Inject constructor(
 
     suspend fun removeAll() = withContext(Dispatchers.IO) {
         plantsSearchDao.deleteAll()
-
     }
-
 
     suspend fun addRecentSearch(entities: List<PlantRecentSearchEntity>) = withContext(Dispatchers.IO) {
         val id = plantRecentSearchDao.insert(entities)
@@ -51,6 +48,25 @@ class LocalPlantSource @Inject constructor(
         }
         Log.d("LocalPlantSource", "getPlantRecentSearchPageSource null: $q")
         return plantRecentSearchDao.paginated() // return pageSource
+    }
+
+
+    suspend fun addPlant(plantDetail: PlantEntity) = withContext(Dispatchers.IO) {
+        val id = plantDetailDao.insert(plantDetail)
+        return@withContext id
+    }
+
+    suspend fun addPlantImages(imageList: List<PlantImageEntity>) = withContext(Dispatchers.IO) {
+        val ids = plantImageDao.insert(imageList)
+        return@withContext ids
+    }
+
+    suspend fun  getPlantDetail(plantId: Int) = withContext(Dispatchers.IO) {
+        val plantDetail = plantDetailDao.byId(plantId)
+        if(plantDetail!=null){
+            return@withContext LocalResult.Success(plantDetail)
+        }
+        return@withContext LocalResult.Message(404, "Not found")
     }
 
 }

@@ -62,6 +62,18 @@ object RoomModule {
 
     @Singleton
     @Provides
+    fun providePlantDao(db: AppDatabase) = db.plantDao()
+
+    @Singleton
+    @Provides
+    fun providePlantDetailDao(db: AppDatabase) = db.plantDetailDao()
+
+    @Singleton
+    @Provides
+    fun providePlantImageDao(db: AppDatabase) = db.plantImageDao()
+
+    @Singleton
+    @Provides
     fun provideIdentifyLogDao(db: AppDatabase) = db.identifyLogDao()
 
 }

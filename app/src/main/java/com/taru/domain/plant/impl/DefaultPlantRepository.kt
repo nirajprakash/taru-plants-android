@@ -4,14 +4,19 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.room.withTransaction
 import com.taru.data.base.local.LocalResult
+import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.AppDatabase
+import com.taru.data.local.db.plant.PlantDetailRoomData
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.source.CachedRemoteKeySource
 import com.taru.data.local.source.LocalPlantSource
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.remote.plants.RemotePlantsConstants
 import com.taru.data.remote.plants.RemotePlantsSource
+import com.taru.data.remote.plants.getImageEntities
+import com.taru.data.remote.plants.toRoomEntity
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.plant.repository.PlantRepository
 import com.taru.domain.plant.search.PlantsSearchMediator
@@ -70,6 +75,44 @@ class DefaultPlantRepository @Inject constructor(
             }
         }*/
         return DomainResult.Success(localresult.data)
+    }
+
+    override suspend fun getPlantDetail(plantId: Int): DomainResult<PlantDetailRoomData> {
+        var localresult = localPlantSource.getPlantDetail(plantId)
+        if(localresult is LocalResult.Success){
+            return DomainResult.Success(localresult.data)
+        }
+
+        var remoteResult = remotePlantsSource.plantDetailById(plantId)
+        val remotePlant = if (remoteResult is ApiResult.Success) {
+            remoteResult.data
+        } else {
+            null
+        }
+        if (remotePlant == null) {
+
+            if(remoteResult is ApiResult.Exception){
+                remoteResult.throwable.printStackTrace()
+            }
+            return DomainResult.Failure(Throwable("Unable to get Plant"))
+
+        }
+
+        db.withTransaction {
+           var id = localPlantSource.addPlant(remotePlant.toRoomEntity())
+
+            var ids = localPlantSource.addPlantImages(remotePlant.getImageEntities())
+
+
+        }
+
+        localresult = localPlantSource.getPlantDetail(plantId)
+
+        if(localresult is LocalResult.Success){
+            return DomainResult.Success(localresult.data)
+        }
+        return  DomainResult.Failure(Throwable("Finally failed"))
+
     }
 
     override suspend fun clearData(): DomainResult.Success<Unit> {

@@ -26,7 +26,7 @@ interface ApiPlants {
     ): Response<PlantsSearchDto>
 
     @GET("plants/{plantId}")
-    suspend fun byId(@Path("plantId") plantId: String?,
+    suspend fun byId(@Path("plantId") plantId: Int,
                     @Query("token") token: String = BuildConfig.TREFLE_KEY
     ): Response<PlantDetailDto>
 
