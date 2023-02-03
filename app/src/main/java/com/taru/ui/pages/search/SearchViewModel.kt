@@ -25,9 +25,13 @@ internal class SearchViewModel @Inject constructor(
     private val recentPlantByQueryUseCase: PlantRecentSearchUseCase
 ): ViewModelBase() {
 
+    var mQuery : String = ""
+    fun setQ(q: String){
+        mQuery = q
+    }
 
-    fun loadSearch(q:String): Flow<PagingData<PlantSearchEntryEntity>> {
-        var result = plantsByQueryUseCase.invoke(q)
+    fun loadSearch(): Flow<PagingData<PlantSearchEntryEntity>> {
+        var result = plantsByQueryUseCase.invoke(mQuery)
         return result.cachedIn(viewModelScope)
        /* if(result is DomainResult.Success){
            var pagingData =

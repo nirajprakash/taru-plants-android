@@ -1,5 +1,6 @@
 package com.taru.data.local.db.base.converter
 
+import android.util.Log
 import androidx.room.TypeConverter
 
 /**
@@ -7,14 +8,19 @@ import androidx.room.TypeConverter
  */
 class StringListConverter {
     @TypeConverter
-    fun fromString(stringListString: String?): List<String> {
-        return stringListString?.split(",")?.map { it } ?: listOf()
+    fun fromString(stringListString: String): List<String> {
+        if(stringListString.isEmpty()){
+            return emptyList()
+        }
+        return stringListString.split(",").map { it }
     }
 
     @TypeConverter
-    fun toString(stringList: List<String>): String? {
+    fun toString(stringList: List<String>): String {
+
+        Log.d("StringListConverter", "toString: ${stringList.size}")
         if(stringList.isEmpty()){
-            return  null
+            return  ""
         }
         return stringList.joinToString(separator = ",")
     }

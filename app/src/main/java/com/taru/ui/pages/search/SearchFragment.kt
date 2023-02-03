@@ -10,10 +10,13 @@ import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.taru.databinding.SearchFragmentBinding
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.plants.recent.ModelRecent
 import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
+import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
 import com.taru.ui.pages.search.autocomplete.SearchAutoCompleteAdapter
 import com.taru.ui.pages.search.plants.PlantsPagingAdapter
 import com.taru.ui.pages.search.recent.RecentPagingAdapter
@@ -27,6 +30,7 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class SearchFragment : FragmentBase(true){
+
 
     private var mBackCallback: OnBackPressedCallback? = null
     private val mViewModel: SearchViewModel by viewModels()
@@ -102,6 +106,9 @@ class SearchFragment : FragmentBase(true){
             .setOnEditorActionListener { v, actionId, event ->
                 vBinding.searchBar.setText(vBinding.searchView.getText())
                 vBinding.searchView.hide()
+                mViewModel.setQ(vBinding.searchView.text.toString())
+                getPlantsSearchEntries()
+//                mViewModel.loadSearch()
                 false
             }
         vBinding.searchView
@@ -132,7 +139,9 @@ class SearchFragment : FragmentBase(true){
     }
 
     private fun initPagingAdapter() {
-        mPagingAdapter = PlantsPagingAdapter {  }
+        mPagingAdapter = PlantsPagingAdapter {
+            navigateToDetail(it.plantId)
+        }
         vBinding.recyclerview.adapter = mPagingAdapter
 
         mPagingAdapter.addLoadStateListener { loadState ->
@@ -142,6 +151,11 @@ class SearchFragment : FragmentBase(true){
             manageErrors(loadState)*/
         }
     }
+
+    private fun navigateToDetail(plantId: Int) {
+        findNavController().navigate(SearchFragmentDirections.navigateToPlantDetail(plantId))
+    }
+
     private fun initPagingAdapterRecent() {
 
 
@@ -159,7 +173,7 @@ class SearchFragment : FragmentBase(true){
     private  fun getPlantsSearchEntries(){
         plantsJob?.cancel()
         plantsJob = lifecycleScope.launch {
-            mViewModel.loadSearch("").collectLatest { mPagingAdapter.submitData(it) }
+            mViewModel.loadSearch().collectLatest { mPagingAdapter.submitData(it) }
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }

@@ -45,6 +45,9 @@
         android:name="com.taru.ui.pages.detail.PlantDetailFragment"
         android:label="Plant Detail"
         tools:layout="@layout/plant_detail_fragment">
+        <argument android:name="plantId"
+            app:argType="integer"/>
+
     </fragment>
     <fragment
         android:id="@+id/scan"
@@ -82,5 +85,7 @@
         android:name="com.taru.ui.pages.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/search_fragment">
+        <action android:id="@+id/navigate_to_plant_detail"
+            app:destination="@id/plant_detail"/>
     </fragment>
 </navigation>

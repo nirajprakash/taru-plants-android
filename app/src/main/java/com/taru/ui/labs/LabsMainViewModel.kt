@@ -1,11 +1,9 @@
 package com.taru.ui.labs
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
-import com.taru.domain.plant.usecase.AddPlantRecentSearchUseCase
+import com.taru.domain.plant.usecase.AddPlantRecentSearchesUseCase
 import com.taru.domain.plant.usecase.DeleteAllPlantsUseCase
 import com.taru.tools.livedata.LiveDataEvent
 import com.taru.ui.base.ViewModelBase
@@ -20,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LabsMainViewModel @Inject constructor(
     private val deleteAllPlantsUseCase: DeleteAllPlantsUseCase,
-    private val addPlantRecentSearchUseCase: AddPlantRecentSearchUseCase
+    private val addPlantRecentSearchesUseCase: AddPlantRecentSearchesUseCase
 ) : ViewModelBase() {
 
     private val _mEventNavigate = MutableLiveData<LiveDataEvent<Int>>()
@@ -46,7 +44,7 @@ class LabsMainViewModel @Inject constructor(
     fun addDummyRecentPlant() {
         viewModelScope.launch {
             var time = (Date().time / 1000).toInt()
-            addPlantRecentSearchUseCase.invoke(
+            addPlantRecentSearchesUseCase.invoke(
                 listOf(
                     PlantRecentSearchEntity(
                         q = "r",

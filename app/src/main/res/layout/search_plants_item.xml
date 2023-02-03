@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="bModel"
+            type="com.taru.data.local.db.plant.PlantSearchEntryEntity" />
+
+        <variable
             name="bOnClick"
             type="View.OnClickListener" />
 
@@ -44,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Radish"
-        android:text="Radish"
+        android:text="@{bModel.commonName}"
         android:gravity="center_horizontal"
         android:textColor="@color/colorOnSurface"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -65,6 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="16:6"
         android:id="@+id/search_plants_item_image"
+        app:bindCoilSrc="@{bModel.imageUrl}"
 
         app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
         tools:src="@drawable/pic_tool_category"
@@ -77,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Common Name:"
-        android:text="Common Name:"
+        android:text="Scientific Name:"
         android:gravity="center_horizontal"
         android:textColor="@color/color_on_surface_54"
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -95,7 +100,7 @@
         android:layout_height="wrap_content"
         tools:text="Common Nettle"
 
-        android:text="Common Nettle"
+        android:text="@{bModel.scientificName}"
         android:gravity="start"
         android:textColor="@color/colorOnSurface"
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -131,7 +136,7 @@
         android:layout_height="wrap_content"
         tools:text="Urticaceae"
 
-        android:text="Urticaceae"
+        android:text="@{bModel.family}"
         android:gravity="start"
         android:textColor="@color/colorOnSurface"
         android:textAppearance="@style/TextAppearance.Material3.TitleSmall"

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.taru.R
 import com.taru.databinding.PlantDetailFragmentBinding
 import com.taru.ui.base.FragmentBase
+import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -17,6 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class PlantDetailFragment: FragmentBase(true) {
+
+    private val args: PlantDetailFragmentArgs by navArgs()
     private val mViewModel: PlantDetailViewModel by viewModels()
     private lateinit var vBinding: PlantDetailFragmentBinding
 
@@ -39,6 +43,7 @@ class PlantDetailFragment: FragmentBase(true) {
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
         lifecycleScope.launchWhenCreated {
+            mViewModel.initArgs(args)
             vBinding.plantDetailImage.load(R.drawable.pic_scan_1)
         }
     }

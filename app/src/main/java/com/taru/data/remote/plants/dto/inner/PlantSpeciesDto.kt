@@ -1,5 +1,6 @@
 package com.taru.data.remote.plants.dto.inner
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.Field
 
@@ -9,12 +10,12 @@ import retrofit2.http.Field
 
 @JsonClass(generateAdapter = true)
 data class PlantSpeciesDto(var id: String,
-                           @Field(value = "common_name" )  var name: String,
+                           @Json(name = "common_name" )  var name: String,
                            val edible: Boolean?,
-                           @Field(value = "edible_part") val ediblePart: List<String>,
+                           @Json(name = "edible_part") val ediblePart: List<String> ?= listOf(),
 
                            val images : Map<String, List<PlantImageDto>>,
                            val growth: PlantGrowthDto,
 
-) {
+                           ) {
 }

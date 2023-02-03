@@ -121,7 +121,7 @@
                     android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_24"
 
-                    android:text="Radish"
+                    android:text="@{bViewModel.bData.detail.commonName}"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/colorOnSurface"
                     app:layout_constraintStart_toStartOf="parent"
@@ -190,6 +190,7 @@
                     android:layout_width="match_parent"
 
                     android:layout_margin="@dimen/dp_24"
+                    app:bViewModel="@{bViewModel}"
                     />
                 <include
                     android:id="@+id/plant_detail_verticals"
@@ -201,7 +202,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-
+                    app:bModel="@{bViewModel.bData.detail}"
                     android:layout_margin="@dimen/dp_24"
                     tools:ignore="NotSibling" />
 

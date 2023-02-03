@@ -15,7 +15,7 @@ import retrofit2.http.Field
     indices=[Index("plantId"), Index("key")],
     foreignKeys =
     [ForeignKey(
-        onDelete = ForeignKey.CASCADE, entity = LocationRoomEntity::class, parentColumns = ["id"],
+        onDelete = ForeignKey.CASCADE, entity = PlantEntity::class, parentColumns = ["id"],
         childColumns = ["plantId"],
     )])
 data class PlantImageEntity(

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="bModel"
+            type="com.taru.data.local.db.plant.PlantEntity"
+
+            />
+        <!--<variable
+            name="bViewModel"
+            type="com.taru.ui.pages.detail.PlantDetailViewModel" />-->
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
 
     android:id="@+id/plant_detail_verticals"
@@ -7,10 +23,7 @@
 
 
     android:background="@drawable/dr_rect_round_32_back_alpha"
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+>
 
     <LinearLayout
         android:id="@+id/plant_detail_pressure_ll"
@@ -137,3 +150,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

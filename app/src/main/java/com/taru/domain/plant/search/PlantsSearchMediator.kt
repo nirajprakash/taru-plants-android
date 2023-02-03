@@ -10,6 +10,7 @@ import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.DatabaseConstants
 import com.taru.data.local.db.cached.CachedRemoteKeyEntity
+import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.source.CachedRemoteKeySource
 import com.taru.data.local.source.LocalPlantSource
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -131,6 +133,9 @@ class PlantsSearchMediator @Inject constructor(
                         isEndReached = endOfPaginationReached
                     )
                 )
+                // TODO add image reference
+                localPlantSource.addRecentSearch(PlantRecentSearchEntity(q=q, dt = (Date().time/1000).toInt(), imageUrl = null))
+
             }
 
 //            delay(200)

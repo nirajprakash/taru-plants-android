@@ -38,7 +38,7 @@ fun PlantDetailDto.toRoomEntity(): PlantEntity {
         vegetable = vegetable,
         speciesId = mainSpeciesId,
         edible = mainSpecies.edible,
-        ediblePart = mainSpecies.ediblePart,
+        ediblePart = mainSpecies.ediblePart?: listOf(),
         familyName = family.name,
         genusName = genus.name,
         speciesName = mainSpecies.name,
@@ -73,8 +73,8 @@ fun PlantGrowthDto.toRoomEntity(): PlantGrowthEntity {
 
     return PlantGrowthEntity(
         phMaximum = phMaximum, phMinimum = phMinimum,
-        atmHumidity = atmosphericHumidity, bloomMonths = bloomMonths,
-        fruitMonths = fruitMonths, growthMonths = growthMonths,
+        atmHumidity = atmosphericHumidity, bloomMonths = bloomMonths?: listOf(),
+        fruitMonths = fruitMonths?: listOf(), growthMonths = growthMonths?: listOf(),
         light = light,
         soilHumidity = soilHumidity, soilNutriments = soilNutriments, soilSalinity = soilSalinity
     )

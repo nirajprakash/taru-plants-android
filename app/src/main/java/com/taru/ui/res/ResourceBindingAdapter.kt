@@ -18,4 +18,14 @@ object ResourceBindingAdapter {
             view.load(it) //.into(view)
         }
     }
+
+    @BindingAdapter("app:bindCoilSrc")
+    @JvmStatic
+    fun setBindCoilSrc(view: ImageView, src: String?) {
+        // Important to break potential infinite loops.
+//        info { "loadinhg $src" }
+        src?.let {
+            view.load(it) //.into(view)
+        }
+    }
 }

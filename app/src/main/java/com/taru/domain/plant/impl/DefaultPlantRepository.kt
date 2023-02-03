@@ -84,8 +84,8 @@ class DefaultPlantRepository @Inject constructor(
         }
 
         var remoteResult = remotePlantsSource.plantDetailById(plantId)
-        val remotePlant = if (remoteResult is ApiResult.Success) {
-            remoteResult.data
+        val remotePlant = if (remoteResult is ApiResult.Success && remoteResult.data!=null) {
+            remoteResult.data.data
         } else {
             null
         }

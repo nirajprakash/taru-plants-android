@@ -2,6 +2,7 @@ package com.taru.data.remote.plants
 
 import com.taru.BuildConfig
 import com.taru.data.remote.plants.dto.PlantDetailDto
+import com.taru.data.remote.plants.dto.PlantDetailResponseDto
 import com.taru.data.remote.plants.dto.PlantsSearchDto
 import com.taru.data.remote.weather.dto.WeatherCurrentDto
 import retrofit2.Response
@@ -28,6 +29,6 @@ interface ApiPlants {
     @GET("plants/{plantId}")
     suspend fun byId(@Path("plantId") plantId: Int,
                     @Query("token") token: String = BuildConfig.TREFLE_KEY
-    ): Response<PlantDetailDto>
+    ): Response<PlantDetailResponseDto>
 
 }

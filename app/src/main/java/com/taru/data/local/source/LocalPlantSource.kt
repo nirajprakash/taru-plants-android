@@ -41,6 +41,11 @@ class LocalPlantSource @Inject constructor(
         return@withContext LocalResult.Success(id)
     }
 
+    suspend fun addRecentSearch(entity: PlantRecentSearchEntity) = withContext(Dispatchers.IO) {
+        val id = plantRecentSearchDao.insert(entity)
+        return@withContext LocalResult.Success(id)
+    }
+
     fun getPlantRecentSearchPageSource(q: String?): PagingSource<Int, PlantRecentSearchEntity> {
         if (q != null) {
             Log.d("LocalPlantSource", "getPlantRecentSearchPageSource not null: $q")

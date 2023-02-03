@@ -1,5 +1,6 @@
 package com.taru.data.remote.plants.dto.inner
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.Field
 
@@ -9,16 +10,16 @@ import retrofit2.http.Field
 
 @JsonClass(generateAdapter = true)
 data class PlantGrowthDto(
-    @Field("ph_maximum") var phMaximum: Float?,
-    @Field("ph_minimum") var phMinimum: Float?,
-    @Field("light") var light: Int?,
-    @Field("atmospheric_humidity") var atmosphericHumidity: Float?,
-    @Field("soil_humidity") var soilHumidity: Float?,
-    @Field("bloom_months") var bloomMonths: List<String>,
-    @Field("growth_months") var growthMonths: List<String>,
-    @Field("fruit_months") var fruitMonths: List<String>,
-    @Field("soil_nutriments") var soilNutriments: Int?,
-    @Field("soil_salinity") var soilSalinity: Int?
+    @Json(name = "ph_maximum") var phMaximum: Float?,
+    @Json(name = "ph_minimum") var phMinimum: Float?,
+    @Json(name = "light") var light: Int?,
+    @Json(name = "atmospheric_humidity") var atmosphericHumidity: Float?,
+    @Json(name = "soil_humidity") var soilHumidity: Float?,
+    @Json(name = "bloom_months") var bloomMonths: List<String>? = listOf(),
+    @Json(name = "growth_months") var growthMonths: List<String>? = listOf(),
+    @Json(name = "fruit_months") var fruitMonths: List<String>? = listOf(),
+    @Json(name = "soil_nutriments") var soilNutriments: Int?,
+    @Json(name = "soil_salinity") var soilSalinity: Int?
 
 ) {
 }

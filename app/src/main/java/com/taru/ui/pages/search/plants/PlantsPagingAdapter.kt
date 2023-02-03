@@ -31,6 +31,7 @@ class PlantsPagingAdapter(val mOnClick: (PlantSearchEntryEntity) -> Unit) : Pagi
         fun bind(plantSearchEntryEntity: PlantSearchEntryEntity) {
             binding.searchPlantsItemImage.load(R.drawable.pic_tool_category)
             binding.bOnClick =  this
+            binding.bModel = plantSearchEntryEntity
             binding.executePendingBindings()
         }
 

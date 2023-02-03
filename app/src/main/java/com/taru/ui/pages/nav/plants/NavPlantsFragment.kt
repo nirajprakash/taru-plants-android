@@ -97,6 +97,6 @@ class NavPlantsFragment: FragmentBase(false) {
     }
 
     private fun navigateToDetail(id: Int) {
-        findNavController().navigate(NavPlantsFragmentDirections.actionToDetail())
+        // TODO uncomment findNavController().navigate(NavPlantsFragmentDirections.actionToDetail(12))
     }
 }
