@@ -22,4 +22,17 @@
 <!--        <item name="fontWeight">400</item>-->
 <!--        <item name="android:textSize">@dimen/sp_14</item>-->
     </style>
+
+    <style name="Typo.Jl.Button" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
+    </style>
+
+    <style name="Typo.Jl.Button.Junkie" parent="Typo.Jl.Button">
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
+    </style>
+
+    <style name="Typo.Jl.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+<!--        <item name="fontFamily">@font/jost_regular</item>-->
+    </style>
+
 </resources>
