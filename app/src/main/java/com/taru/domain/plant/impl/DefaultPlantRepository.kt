@@ -61,6 +61,11 @@ class DefaultPlantRepository @Inject constructor(
         ).flow
     }
 
+    override suspend fun recentSearchList(): DomainResult<List<PlantRecentSearchEntity>> {
+        var localresult = localPlantSource.getPlantRecentSearchList()
+        return DomainResult.Success(localresult.data)
+    }
+
     override suspend fun addRecentSearches(search: List<PlantRecentSearchEntity>): DomainResult<List<Long>> {
         var localresult = localPlantSource.addRecentSearch(search)
         /*when (localresult) {

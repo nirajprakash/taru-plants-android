@@ -87,6 +87,6 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
     }
 
     fun navigateToSearch(){
-        navManager.navigate(NavHomeFragmentDirections.actionToSearch())
+        navManager.navigate(NavHomeFragmentDirections.actionToSearch(null))
     }
 }

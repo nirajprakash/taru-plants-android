@@ -16,7 +16,8 @@ interface PlantRecentSearchDao : RoomDaoBase<PlantRecentSearchEntity> {
 
     @Query("SELECT * FROM PlantRecentSearch WHERE q LIKE :q ORDER BY `dt` DESC")
     fun paginated(q: String): PagingSource<Int, PlantRecentSearchEntity>
-
+    @Query("SELECT * FROM PlantRecentSearch ORDER BY `dt` DESC LIMIT :limit")
+    fun list(limit: Int): List<PlantRecentSearchEntity>
 
 
 }

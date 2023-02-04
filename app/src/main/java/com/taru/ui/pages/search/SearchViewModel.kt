@@ -7,8 +7,9 @@ import androidx.paging.cachedIn
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.domain.plant.usecase.GetPlantsByQueryUseCase
-import com.taru.domain.plant.usecase.PlantRecentSearchUseCase
+import com.taru.domain.plant.usecase.GetPlantRecentSearchByQueryUseCase
 import com.taru.ui.base.ViewModelBase
+import com.taru.ui.pages.detail.PlantDetailFragmentArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -22,10 +23,14 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SearchViewModel @Inject constructor(
     private val plantsByQueryUseCase: GetPlantsByQueryUseCase,
-    private val recentPlantByQueryUseCase: PlantRecentSearchUseCase
+    private val recentPlantByQueryUseCase: GetPlantRecentSearchByQueryUseCase
 ): ViewModelBase() {
 
     var mQuery : String = ""
+
+    fun initArgs(args: SearchFragmentArgs) {
+        mQuery = args.q?:""
+    }
     fun setQ(q: String){
         mQuery = q
     }

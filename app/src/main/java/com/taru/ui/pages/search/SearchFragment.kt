@@ -14,9 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.taru.databinding.SearchFragmentBinding
 import com.taru.ui.base.FragmentBase
-import com.taru.ui.pages.nav.plants.recent.ModelRecent
-import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
-import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
+import com.taru.ui.pages.detail.PlantDetailFragmentArgs
 import com.taru.ui.pages.search.autocomplete.SearchAutoCompleteAdapter
 import com.taru.ui.pages.search.plants.PlantsPagingAdapter
 import com.taru.ui.pages.search.recent.RecentPagingAdapter
@@ -31,6 +29,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SearchFragment : FragmentBase(true){
 
+    private val args: SearchFragmentArgs by navArgs()
 
     private var mBackCallback: OnBackPressedCallback? = null
     private val mViewModel: SearchViewModel by viewModels()
@@ -82,6 +81,7 @@ class SearchFragment : FragmentBase(true){
 
 
             mListAdapterAutoComplete.submitList(list)*/
+            mViewModel.initArgs(args)
             initPagingAdapterRecent()
             getRecentSearchEntries(null)
 
@@ -99,6 +99,7 @@ class SearchFragment : FragmentBase(true){
 
             mListAdapter.submitList(list2)*/
         }
+        vBinding.searchBar.text = args.q
 
         vBinding.searchView
             .getEditText()
@@ -159,7 +160,14 @@ class SearchFragment : FragmentBase(true){
     private fun initPagingAdapterRecent() {
 
 
-        mPagingAdapterRecent = RecentPagingAdapter {  }
+        mPagingAdapterRecent = RecentPagingAdapter {
+            mViewModel.setQ(q = it.q)
+//            vBinding.searchView.setText(it.q)
+            vBinding.searchBar.text = it.q
+            vBinding.searchView.hide()
+            getPlantsSearchEntries()
+
+        }
         vBinding.searchViewRecyclerview.adapter = mPagingAdapterRecent
 
         mPagingAdapterRecent.addLoadStateListener { loadState ->

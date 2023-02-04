@@ -16,6 +16,7 @@ interface PlantRepository {
     //PagingData<PlantSearchEntryEntity>
     fun recentSearchPaginated(q: String?): Flow<PagingData<PlantRecentSearchEntity>>
 
+    suspend fun recentSearchList(): DomainResult<List<PlantRecentSearchEntity>>
 
     suspend fun addRecentSearches(search: List<PlantRecentSearchEntity>): DomainResult<List<Long>>
     suspend fun getPlantDetail(plantId: Int): DomainResult<PlantDetailRoomData>

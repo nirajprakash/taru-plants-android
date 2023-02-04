@@ -5,10 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.camera.core.impl.LiveDataObservable
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.taru.databinding.NavPlantsFragmentBinding
+import com.taru.tools.livedata.LiveDataEvent
+import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.plants.recent.ModelRecent
 import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
@@ -42,7 +45,9 @@ class NavPlantsFragment: FragmentBase(false) {
         super.onViewCreated(view, savedInstanceState)
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        mListAdapterRecent = RecentSearchAdapter()
+        mListAdapterRecent = RecentSearchAdapter(){
+            navigateToSearch(it.q)
+        }
         mListAdapter = PlantsAdapter() {
             modelPlant ->  navigateToDetail(modelPlant.id)
         }
@@ -65,14 +70,14 @@ class NavPlantsFragment: FragmentBase(false) {
                      return mListAdapter.getItemViewType(position)
                  }
              }*/
-            var list = mutableListOf(
+            /*var list = mutableListOf(
                 ModelRecent(0), ModelRecent(1), ModelRecent(2),
                 ModelRecent(3), ModelRecent(4), ModelRecent(5),
                 ModelRecent(6), ModelRecent(7), ModelRecent(8), ModelRecent(9)
-            )
+            )*/
 
 
-            mListAdapterRecent.submitList(list)
+//            mListAdapterRecent.submitList(list)
 
             vBinding.recyclerview.adapter = mListAdapter
             var list2 = mutableListOf(
@@ -92,8 +97,21 @@ class NavPlantsFragment: FragmentBase(false) {
 //                layoutManager.onRestoreInstanceState(it)
 //                mViewModel.saveListState(null)
             }*/
+            mViewModel.initList()
 
         }
+    }
+
+    private fun navigateToSearch(q: String) {
+        findNavController().navigate(NavPlantsFragmentDirections.actionToSearch(q))
+    }
+
+    override fun setupViewModelObservers() {
+        super.setupViewModelObservers()
+        mViewModel.mEventRecentSearchList.observe(viewLifecycleOwner, LiveDataObserver{
+            mListAdapterRecent.submitList(it)
+
+        })
     }
 
     private fun navigateToDetail(id: Int) {

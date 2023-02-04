@@ -27,6 +27,8 @@
         tools:layout="@layout/nav_plants_fragment">
         <action android:id="@+id/action_to_detail"
             app:destination="@id/plant_detail"/>
+        <action android:id="@+id/action_to_search"
+            app:destination="@id/search"/>
     </fragment>
     <fragment
         android:id="@+id/nav_cure"
@@ -85,6 +87,9 @@
         android:name="com.taru.ui.pages.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/search_fragment">
+        <argument android:name="q"
+            app:argType="string"
+            app:nullable="true" />
         <action android:id="@+id/navigate_to_plant_detail"
             app:destination="@id/plant_detail"/>
     </fragment>

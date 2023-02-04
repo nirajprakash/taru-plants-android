@@ -6,6 +6,9 @@
     <data>
 
         <import type="android.view.View" />
+        <variable
+            name="bModel"
+            type="com.taru.data.local.db.plant.PlantRecentSearchEntity" />
 
         <variable
             name="bOnClick"
@@ -51,6 +54,7 @@
             app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.18"
 
 
+            app:bindCoilSrc="@{bModel.imageUrl}"
             tools:src="@drawable/pic_tool_category" />
 
         <ImageView
@@ -71,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
             android:layout_marginEnd="@dimen/dp_20"
-            android:text="Radish"
+            android:text="@{bModel.q}"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"

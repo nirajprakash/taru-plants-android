@@ -3,6 +3,7 @@ package com.taru.data.local.source
 import android.util.Log
 import androidx.paging.PagingSource
 import com.taru.data.base.local.LocalResult
+import com.taru.data.local.db.DatabaseConstants
 import com.taru.data.local.db.plant.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -53,6 +54,10 @@ class LocalPlantSource @Inject constructor(
         }
         Log.d("LocalPlantSource", "getPlantRecentSearchPageSource null: $q")
         return plantRecentSearchDao.paginated() // return pageSource
+    }
+
+    suspend fun getPlantRecentSearchList() = withContext(Dispatchers.IO){
+       return@withContext LocalResult.Success(plantRecentSearchDao.list(DatabaseConstants.DEFAULT_LIST_SIZE))
     }
 
 

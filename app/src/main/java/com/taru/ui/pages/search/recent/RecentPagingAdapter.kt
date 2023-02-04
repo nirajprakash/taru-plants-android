@@ -29,8 +29,9 @@ class RecentPagingAdapter (val mOnClick: (PlantRecentSearchEntity) -> Unit) : Pa
 
     inner class ItemViewHolder(var binding: SearchAutocompleteItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         fun bind(plantSearchEntryEntity: PlantRecentSearchEntity) {
-            binding.searchAutocompleteItemImage.load(R.drawable.pic_tool_category)
+//            binding.searchAutocompleteItemImage.load(R.drawable.pic_tool_category)
             binding.bOnClick =  this
+            binding.bModel = plantSearchEntryEntity
             binding.executePendingBindings()
         }
 
