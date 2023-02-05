@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface PlantRepository {
     fun searchPaginated(q: String): Flow<PagingData<PlantSearchEntryEntity>>
+    fun filterPaginated(filterForEdible: Boolean, q: String): Flow<PagingData<PlantSearchEntryEntity>>
     //PagingData<PlantSearchEntryEntity>
     fun recentSearchPaginated(q: String?): Flow<PagingData<PlantRecentSearchEntity>>
 

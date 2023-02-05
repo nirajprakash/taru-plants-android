@@ -19,6 +19,7 @@ import com.taru.data.remote.plants.getImageEntities
 import com.taru.data.remote.plants.toRoomEntity
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.plant.repository.PlantRepository
+import com.taru.domain.plant.search.PlantsSearchFilterEdiblePartMediator
 import com.taru.domain.plant.search.PlantsSearchMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -48,6 +49,22 @@ class DefaultPlantRepository @Inject constructor(
             config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
 
             remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeySource, db),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    override fun filterPaginated(
+        filterForEdible: Boolean,
+        q: String
+    ): Flow<PagingData<PlantSearchEntryEntity>> {
+        val pagingSourceFactory =
+            { localPlantSource.getPlantsSearchPageSource("$filterForEdible:$q") }
+        return Pager(
+            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
+
+            remoteMediator = PlantsSearchFilterEdiblePartMediator(filterForEdible, q, remotePlantsSource,
+                localPlantSource, cachedRemoteKeySource, db),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }

@@ -20,6 +20,19 @@ class RemotePlantsSource @Inject constructor(
 
     }
 
+    suspend fun  plantsByFilter(query: String?, filterType: String, page: Int ) = withContext(Dispatchers.IO) {
+
+        val q: String = if(query!=null && query.trim().isNotEmpty()){
+            query
+        }else{
+            "null"
+        }
+
+        return@withContext handleApi {   apiPlants.byFilter( filters = mutableMapOf(filterType to q), page = page) }
+
+
+    }
+
     suspend fun plantDetailById(id: Int) = withContext(Dispatchers.IO){
         return@withContext handleApi {  apiPlants.byId(id) }
 

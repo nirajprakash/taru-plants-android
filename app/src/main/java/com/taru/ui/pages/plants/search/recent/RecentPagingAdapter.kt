@@ -1,15 +1,12 @@
-package com.taru.ui.pages.search.recent
+package com.taru.ui.pages.plants.search.recent
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.taru.R
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.databinding.SearchAutocompleteItemBinding
-import com.taru.databinding.SearchPlantsItemBinding
 
 /**
  * Created by Niraj on 25-01-2023.
@@ -43,7 +40,7 @@ class RecentPagingAdapter (val mOnClick: (PlantRecentSearchEntity) -> Unit) : Pa
 
     }
     companion object {
-        fun viewHolder(parent: ViewGroup, adapter: RecentPagingAdapter): RecentPagingAdapter.ItemViewHolder {
+        fun viewHolder(parent: ViewGroup, adapter: RecentPagingAdapter): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = SearchAutocompleteItemBinding.inflate(layoutInflater, parent, false)
             return adapter.ItemViewHolder(binding)

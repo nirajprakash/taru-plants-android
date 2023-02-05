@@ -84,9 +84,24 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.taru.ui.pages.search.SearchFragment"
+        android:name="com.taru.ui.pages.plants.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/search_fragment">
+        <argument android:name="q"
+            app:argType="string"
+            app:nullable="true" />
+        <action android:id="@+id/navigate_to_plant_detail"
+            app:destination="@id/plant_detail"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/plantsFiltered"
+        android:name="com.taru.ui.pages.plants.filtered.PlantsFilteredFragment"
+        android:label="Plants Filtered"
+        tools:layout="@layout/plants_filtered_fragment">
+        <argument android:name="filterForEdible"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <argument android:name="q"
             app:argType="string"
             app:nullable="true" />

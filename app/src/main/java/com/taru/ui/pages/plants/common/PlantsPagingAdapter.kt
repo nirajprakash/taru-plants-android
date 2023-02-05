@@ -1,4 +1,4 @@
-package com.taru.ui.pages.search.plants
+package com.taru.ui.pages.plants.common
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import coil.load
 import com.taru.R
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.databinding.SearchPlantsItemBinding
-import com.taru.ui.pages.nav.plants.recommended.ModelPlant
 
 
 //import androidx.paging.PagingDataAdapter
@@ -43,7 +42,7 @@ class PlantsPagingAdapter(val mOnClick: (PlantSearchEntryEntity) -> Unit) : Pagi
 
     }
     companion object {
-        fun viewHolder(parent: ViewGroup, adapter: PlantsPagingAdapter): PlantsPagingAdapter.ItemViewHolder {
+        fun viewHolder(parent: ViewGroup, adapter: PlantsPagingAdapter): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = SearchPlantsItemBinding.inflate(layoutInflater, parent, false)
             return adapter.ItemViewHolder(binding)

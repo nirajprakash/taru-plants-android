@@ -1,4 +1,4 @@
-package com.taru.ui.pages.search
+package com.taru.ui.pages.plants.search
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,6 @@ import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.domain.plant.usecase.GetPlantsByQueryUseCase
 import com.taru.domain.plant.usecase.GetPlantRecentSearchByQueryUseCase
 import com.taru.ui.base.ViewModelBase
-import com.taru.ui.pages.detail.PlantDetailFragmentArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.taru.ui.pages.search.autocomplete
+package com.taru.ui.pages.plants.search.autocomplete
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import coil.load
 import com.taru.R
 import com.taru.databinding.SearchAutocompleteItemBinding
 import com.taru.ui.pages.nav.plants.recent.ModelRecent
-import com.taru.ui.pages.nav.plants.recommended.ModelPlant
 
 /**
  * Created by Niraj on 15-01-2023.

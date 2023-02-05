@@ -9,6 +9,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 /**
  * Created by Niraj on 22-01-2023.
@@ -21,9 +22,15 @@ interface ApiPlants {
     ): Response<PlantsSearchDto>
 
     @GET("plants")
-    suspend fun default(
+    suspend fun byFilter(
+        @QueryMap filters: Map<String, String>,
                     @Query("page") page: Int = 0,
                     @Query("token") token: String = BuildConfig.TREFLE_KEY
+    ): Response<PlantsSearchDto>
+    @GET("plants")
+    suspend fun default(
+        @Query("page") page: Int = 0,
+        @Query("token") token: String = BuildConfig.TREFLE_KEY
     ): Response<PlantsSearchDto>
 
     @GET("plants/{plantId}")

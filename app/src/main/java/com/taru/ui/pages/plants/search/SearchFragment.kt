@@ -1,4 +1,4 @@
-package com.taru.ui.pages.search
+package com.taru.ui.pages.plants.search
 
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.taru.databinding.SearchFragmentBinding
 import com.taru.ui.base.FragmentBase
-import com.taru.ui.pages.detail.PlantDetailFragmentArgs
-import com.taru.ui.pages.search.autocomplete.SearchAutoCompleteAdapter
-import com.taru.ui.pages.search.plants.PlantsPagingAdapter
-import com.taru.ui.pages.search.recent.RecentPagingAdapter
+import com.taru.ui.pages.plants.search.autocomplete.SearchAutoCompleteAdapter
+import com.taru.ui.pages.plants.common.PlantsPagingAdapter
+import com.taru.ui.pages.plants.search.recent.RecentPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
