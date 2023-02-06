@@ -91,7 +91,7 @@ class LocalPlantSource @Inject constructor(
     suspend fun  getCategories() = withContext(Dispatchers.IO) {
         var data: ModelCategoriesList? = null
         try {
-            val jsonString = AssetsUtil.readJson(context, "data/plants_categories.json.json")
+            val jsonString = AssetsUtil.readJson(context, "data/plants_categories.json")
 
             val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             val jsonAdapter: JsonAdapter<ModelCategoriesList> = moshi.adapter(ModelCategoriesList::class.java)

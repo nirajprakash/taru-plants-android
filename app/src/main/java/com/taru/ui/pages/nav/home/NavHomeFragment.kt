@@ -43,7 +43,7 @@ class NavHomeFragment : FragmentBase(false) {
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        mListAdapter = HomeCategoryAdapter(){
+        mListAdapter = HomeCategoryAdapter {
                 navigateToFiltered(it)
         }
         /*{
@@ -78,6 +78,8 @@ class NavHomeFragment : FragmentBase(false) {
             vBinding.homeScannerCard.homeScannerCardImage1.load(R.drawable.pic_scan_1)
             vBinding.homeScannerCard.homeScannerCardImage2.load(R.drawable.pic_scan_2)
             vBinding.homeScannerCard.homeScannerCardImage3.load(R.drawable.pic_scan_3)
+
+            mViewModel.initData()
 //            throw RuntimeException("Test Crash")
 
             /*mViewModel.mListStateParcel?.let {

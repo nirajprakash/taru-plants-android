@@ -10,7 +10,7 @@ data class ModelCategory(
     val id : Int,
     var filterForEdible: Boolean,
     var imageSrc: String,
-    var q: String,
+    var q: String? = null,
     var title: String
 ) {
 

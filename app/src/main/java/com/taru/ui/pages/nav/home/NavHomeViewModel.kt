@@ -32,11 +32,12 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
 
     val bCurrentWeather = MutableLiveData<WeatherCurrentRoomEntity>()
     init {
-        getWeather()
-    }
-    private fun getWeather() {
-        viewModelScope.launch {
 
+    }
+
+    fun initData(){
+        getWeather()
+        viewModelScope.launch {
             getPlantCategoriesUseCase().also {
                 when(it) {
                     is DomainResult.Success -> {
@@ -59,6 +60,12 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                     }
                 }
             }
+        }
+    }
+    private fun getWeather() {
+
+        viewModelScope.launch {
+
             getWeatherUseCase().also {
 
 

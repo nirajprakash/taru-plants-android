@@ -17,7 +17,7 @@
     {
       "id":3,
       "filterForEdible": true,
-      "imageSrc": "file:///android_asset/cns/category/stem.png",
+      "imageSrc": "file:///android_asset/cns/category/stem.jpg",
       "q": "stem",
       "title": "Stem"
     },
