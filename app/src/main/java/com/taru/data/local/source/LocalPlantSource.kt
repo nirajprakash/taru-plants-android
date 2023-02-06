@@ -1,10 +1,18 @@
 package com.taru.data.local.source
 
+import android.content.Context
 import android.util.Log
 import androidx.paging.PagingSource
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.taru.data.base.local.LocalResult
+import com.taru.data.local.assets.AssetsUtil
+import com.taru.data.local.assets.entities.ModelCategoriesList
+import com.taru.data.local.assets.entities.ModelCategory
 import com.taru.data.local.db.DatabaseConstants
 import com.taru.data.local.db.plant.*
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,6 +24,7 @@ import javax.inject.Singleton
 @Singleton
 class LocalPlantSource @Inject constructor(
 
+    @ApplicationContext private var context: Context,
     private var plantRecentSearchDao: PlantRecentSearchDao,
     private var plantsSearchDao: PlantsSearchDao,
     private var plantDetailDao: PlantDetailDao,
@@ -77,6 +86,33 @@ class LocalPlantSource @Inject constructor(
             return@withContext LocalResult.Success(plantDetail)
         }
         return@withContext LocalResult.Message(404, "Not found")
+    }
+
+    suspend fun  getCategories() = withContext(Dispatchers.IO) {
+        var data: ModelCategoriesList? = null
+        try {
+            val jsonString = AssetsUtil.readJson(context, "data/plants_categories.json.json")
+
+            val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+            val jsonAdapter: JsonAdapter<ModelCategoriesList> = moshi.adapter(ModelCategoriesList::class.java)
+            data = jsonAdapter.fromJson(jsonString)
+
+        }catch (
+            e: Throwable
+        ){
+            e.printStackTrace()
+            return@withContext LocalResult.Exception(e)
+
+        }
+
+//        Log.d("LocalAdsSource", "getAds: ${data}")
+        if(data!=null){
+            return@withContext LocalResult.Success(data)
+        }else {
+            return@withContext LocalResult.Message(12, "Data Empty")
+
+        }
+
     }
 
 }

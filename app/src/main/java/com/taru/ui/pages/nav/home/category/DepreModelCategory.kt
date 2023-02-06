@@ -5,21 +5,21 @@ import androidx.recyclerview.widget.DiffUtil
 /**
  * Created by Niraj on 09-01-2023.
  */
-data class ModelCategory(var id: Int) {
+data class DepreModelCategory(var id: Int) {
 
     companion object {
-        var diffCallback: DiffUtil.ItemCallback<ModelCategory> =
-            object : DiffUtil.ItemCallback<ModelCategory>() {
+        var diffCallback: DiffUtil.ItemCallback<DepreModelCategory> =
+            object : DiffUtil.ItemCallback<DepreModelCategory>() {
 
                 override fun areItemsTheSame(
-                    oldItem: ModelCategory,
-                    newItem: ModelCategory
+                    oldItem: DepreModelCategory,
+                    newItem: DepreModelCategory
                 ): Boolean {
                     return oldItem.id == newItem.id                }
 
                 override fun areContentsTheSame(
-                    oldItem: ModelCategory,
-                    newItem: ModelCategory
+                    oldItem: DepreModelCategory,
+                    newItem: DepreModelCategory
                 ): Boolean {
                     return oldItem == newItem
                 }

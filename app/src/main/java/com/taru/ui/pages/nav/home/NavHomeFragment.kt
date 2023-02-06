@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.taru.R
+import com.taru.data.local.assets.entities.ModelCategory
 import com.taru.databinding.NavHomeFragmentBinding
+import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.home.category.HomeCategoryAdapter
-import com.taru.ui.pages.nav.home.category.ModelCategory
+import com.taru.ui.pages.nav.home.category.DepreModelCategory
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -42,7 +43,9 @@ class NavHomeFragment : FragmentBase(false) {
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        mListAdapter = HomeCategoryAdapter()
+        mListAdapter = HomeCategoryAdapter(){
+                navigateToFiltered(it)
+        }
         /*{
             Log.d("AdListFragment", "AdListAdapter: $it")
             navigateToDetail(it.key)
@@ -62,14 +65,14 @@ class NavHomeFragment : FragmentBase(false) {
                      return mListAdapter.getItemViewType(position)
                  }
              }*/
-            var list = mutableListOf(
-                ModelCategory(0), ModelCategory(1), ModelCategory(2),
-                ModelCategory(3), ModelCategory(4), ModelCategory(5),
-                ModelCategory(6), ModelCategory(7), ModelCategory(8), ModelCategory(9)
+            /*var list = mutableListOf(
+                DepreModelCategory(0), DepreModelCategory(1), DepreModelCategory(2),
+                DepreModelCategory(3), DepreModelCategory(4), DepreModelCategory(5),
+                DepreModelCategory(6), DepreModelCategory(7), DepreModelCategory(8), DepreModelCategory(9)
             )
 
 
-            mListAdapter.submitList(list)
+            mListAdapter.submitList(list)*/
 
             vBinding.homeWeatherCard.homeWeatherCardImage.load(R.drawable.pic_weather)
             vBinding.homeScannerCard.homeScannerCardImage1.load(R.drawable.pic_scan_1)
@@ -86,5 +89,17 @@ class NavHomeFragment : FragmentBase(false) {
 
         }
 
+    }
+
+    private fun navigateToFiltered(category: ModelCategory) {
+//        TODO("Not yet implemented")
+    }
+
+    override fun setupViewModelObservers() {
+        super.setupViewModelObservers()
+        mViewModel.mEventCategoryList.observe(viewLifecycleOwner, LiveDataObserver{
+            mListAdapter.submitList(it)
+
+        })
     }
 }

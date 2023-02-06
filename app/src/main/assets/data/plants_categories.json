@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "id":1,
+      "filterForEdible": false,
+      "imageSrc": "file:///android_asset/cns/category/all-edible.png",
+
+      "title": "Edible"
+    },
+    {
+      "id":2,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/root.jpeg",
+      "q": "roots",
+      "title": "Roots"
+    },
+    {
+      "id":3,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/stem.png",
+      "q": "stem",
+      "title": "Stem"
+    },
+    {
+      "id":4,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/leaves.jpg",
+      "q": "leaves",
+      "title": "Leaves"
+    },
+    {
+      "id":5,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/flowers.jpg",
+      "q": "flowers",
+      "title": "Flowers"
+    },
+    {
+      "id":6,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/fruits.jpg",
+      "q": "fruits",
+      "title": "Fruits"
+    },
+    {
+      "id":7,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/seeds.jpg",
+      "q": "seeds",
+      "title": "Seeds"
+    },
+    {
+      "id":8,
+      "filterForEdible": true,
+      "imageSrc": "file:///android_asset/cns/category/non-edible.png",
+      "title": "Not Edible"
+    }
+  ]
+}

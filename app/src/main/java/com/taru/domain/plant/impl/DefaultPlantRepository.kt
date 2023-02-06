@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.room.withTransaction
 import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
+import com.taru.data.local.assets.entities.ModelCategory
 import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.plant.PlantDetailRoomData
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
@@ -134,6 +135,20 @@ class DefaultPlantRepository @Inject constructor(
             return DomainResult.Success(localresult.data)
         }
         return  DomainResult.Failure(Throwable("Finally failed"))
+
+    }
+
+    override suspend fun getCategoryList(): DomainResult<List<ModelCategory>> {
+        var localresult = localPlantSource.getCategories()
+        if(localresult is LocalResult.Success){
+            return DomainResult.Success(localresult.data.items)
+        }
+        if(localresult is LocalResult.Exception){
+            localresult.throwable.printStackTrace()
+        }
+
+        return  DomainResult.Failure(Throwable("Finally failed"))
+
 
     }
 
