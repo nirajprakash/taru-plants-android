@@ -17,7 +17,9 @@ import com.google.android.material.color.MaterialColors
 import com.taru.R
 import com.taru.data.local.db.weather.ForecastEntryEntity
 import com.taru.databinding.WeatherFragmentBinding
+import com.taru.domain.chart.mpchart.LineChartBinderHelper
 import com.taru.domain.chart.mpchart.axis.MpChartTimestampAxisFormatter
+import com.taru.domain.chart.mpchart.entities.LineChartDataSetConfig
 import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +32,8 @@ class WeatherFragment : FragmentBase(true) {
 
     private var colorSurface: Int = Color.WHITE
     private var colorOnSurface: Int = Color.BLACK
+
+    private var mLineChartBinderHelper: LineChartBinderHelper = LineChartBinderHelper()
     private val mViewModel: WeatherViewModel by viewModels()
     private lateinit var vBinding: WeatherFragmentBinding
 
@@ -98,6 +102,12 @@ class WeatherFragment : FragmentBase(true) {
 //           axisRight.setDrawLabels(false)
             axisLeft.setDrawGridLines(true)
         }
+        var configs = mutableListOf(LineChartDataSetConfig(ContextCompat.getColor(requireContext(), R.color.chart_high), "Max"),
+            LineChartDataSetConfig(ContextCompat.getColor(requireContext(), R.color.chart_low), "Min"))
+
+
+        mLineChartBinderHelper.prepareDataSets(vBinding.weatherFragmentForecastChart, configs)
+        vChart.invalidate()
 
 
     }
@@ -117,6 +127,13 @@ class WeatherFragment : FragmentBase(true) {
 
     private fun bindToChart(entities: List<ForecastEntryEntity>) {
         //TODO("Not yet implemented")
+
+        var values = MutableList<FloatArray>(entities.size, init = {index -> floatArrayOf(entities[index].attrs.tempMax, entities[index].attrs.tempMin) })
+        var dts = MutableList<Int>(entities.size, init = {index -> entities[index].dt })
+
+        mLineChartBinderHelper.update(vBinding.weatherFragmentForecastChart, dts, values)
+
+
     }
 
     private fun applyAxis(lineChart: LineChart) {

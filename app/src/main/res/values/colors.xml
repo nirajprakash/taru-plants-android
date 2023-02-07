@@ -114,4 +114,7 @@
     <color name="taru_error_98">#fff8f7</color>
     <color name="taru_error_99">#fffbff</color>
     <color name="taru_error_100">#ffffff</color>
+
+    <color name="chart_high">#FF971E</color>
+    <color name="chart_low">#FFE34D</color>
 </resources>
