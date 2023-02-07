@@ -245,37 +245,57 @@
 
                 <TextView
 
-                    android:id="@+id/weather_forcast_title"
+                    android:id="@+id/weather_fragment_forecast_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_28"
 
                     android:layout_marginTop="@dimen/dp_32"
 
-                    android:textColor="@color/colorOnSurface"
+                    android:text="Forecast"
 
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/colorOnSurface"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/weather_verticals"
 
-                    android:text="Forecast"/>
+                    app:layout_constraintTop_toBottomOf="@id/weather_verticals" />
 
                 <TextView
 
-                    android:id="@+id/weather_forcast_subtitle"
+                    android:id="@+id/weather_fragment_forecast_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_28"
 
                     android:layout_marginTop="@dimen/dp_4"
 
-                    android:textColor="@color/color_on_surface_54"
+                    android:text="Next 15 days"
 
                     android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    android:textColor="@color/color_on_surface_54"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/weather_forcast_title"
 
-                    android:text="Next 15 days"/>
+                    app:layout_constraintTop_toBottomOf="@id/weather_fragment_forecast_title" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/dp_24"
+                    android:layout_marginVertical="@dimen/dp_8"
+                    app:layout_constraintDimensionRatio="4:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardBackgroundColor="@color/color_back_54"
+                    app:strokeColor="@color/colorBack"
+                    app:cardCornerRadius="@dimen/dp_28"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weather_fragment_forecast_subtitle">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/weather_fragment_forecast_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.card.MaterialCardView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,14 +90,14 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
 
             }
 
-            getWeatherForecastUseCase().also {
+            /*getWeatherForecastUseCase().also {
 
 
                 when(it) {
                     is DomainResult.Success -> {
                         Log.d("TAG", "F: initList: ${it.value}")
-                        /*mCurrentList = it.value.items
-                        _mEventAds.postValue(LiveDataEvent(it.value.items))*/
+                        *//*mCurrentList = it.value.items
+                        _mEventAds.postValue(LiveDataEvent(it.value.items))*//*
                     }
 
                     is DomainResult.Failure -> {
@@ -111,7 +111,7 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                     }
                 }
 
-            }
+            }*/
 
         }
     }

@@ -11,6 +11,8 @@ import com.taru.data.local.db.base.RoomDaoBase
 @Dao
 interface WeatherForecastDao : RoomDaoBase<WeatherForecastRoomEntity> {
 
+    @Query("SELECT * FROM WeatherForecast WHERE id = :id")
+    suspend fun byId(id:Int): WeatherForecastRoomData?
     @Transaction
     @Query("SELECT * FROM WeatherForecast WHERE locationId=:locationId ORDER BY dt ASC LIMIT :limit")
     suspend fun findByLocationId(locationId:Int, limit: Int = 1): List<WeatherForecastRoomData>

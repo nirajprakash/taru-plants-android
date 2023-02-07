@@ -6,6 +6,7 @@ import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.source.LocalLocationSource
 import com.taru.data.local.source.LocalWeatherSource
 import com.taru.data.local.db.weather.WeatherCurrentRoomEntity
+import com.taru.data.local.db.weather.WeatherForecastRoomData
 import com.taru.data.remote.ip.RemoteIpSource
 import com.taru.data.remote.weather.RemoteWeatherSource
 import com.taru.data.remote.weather.getEntries
@@ -125,7 +126,7 @@ class DefaultWeatherRepository @Inject constructor(
              }*/
     }
 
-    override suspend fun getForecast(): DomainResult<ModelWeather> {
+    override suspend fun getForecast(): DomainResult<WeatherForecastRoomData> {
         var ipResult = remoteIpSource.getIp()
         if (ipResult !is ApiResult.Success) {
             return if (ipResult is ApiResult.Exception) {
@@ -165,7 +166,7 @@ class DefaultWeatherRepository @Inject constructor(
         if (weatherResult != null && weatherResult is LocalResult.Success) {
             Log.d("DefaultWeatherRepository", "F: weatherResult : ${weatherResult.data}")
 
-            return DomainResult.Success(ModelWeather(location.lat, location.lon))
+            return DomainResult.Success(weatherResult.data)
 
         }
 
@@ -173,37 +174,36 @@ class DefaultWeatherRepository @Inject constructor(
 
         Log.d("DefaultWeatherRepository", "F: apiCall :")
 
-
-        val result = when (apiResult) {
-            is ApiResult.Success -> {
-                Log.d("getDetail", "F: apiCall result: ${apiResult.data}")
-                var weatherForecast = apiResult.data.toRoomEntity(location.id)
-                location.forecastUnix = weatherForecast.dt
-                var idResult = localWeatherSource.addForecast(weatherForecast)
-                /*if(id !is LocalResult.Success){
-                    DomainResult.Failure(Throwable("Not item found"))
-
-                }*/
-                localWeatherSource.addForecastEntries(apiResult.data.getEntries(idResult.data.toInt()))
-                localLocationSource.update(location)
-                DomainResult.Success(
-                    ModelWeather(
-                        location.lat,
-                        location.lon
-                    )
-                )
-
-            }
-            is ApiResult.Exception -> {
-                DomainResult.Failure(apiResult.throwable)
-
-            }
-            is ApiResult.Message -> {
+        if (apiResult is ApiResult.Success) {
+            Log.d("getDetail", "F: apiCall result: ${apiResult.data}")
+            var weatherForecast = apiResult.data.toRoomEntity(location.id)
+            location.forecastUnix = weatherForecast.dt
+            var idResult = localWeatherSource.addForecast(weatherForecast)
+            /*if(id !is LocalResult.Success){
                 DomainResult.Failure(Throwable("Not item found"))
 
+            }*/
+            localWeatherSource.addForecastEntries(apiResult.data.getEntries(idResult.data.toInt()))
+            localLocationSource.update(location)
+            var roomDataResult = localWeatherSource.getForecastById(location.id)
+
+            if (roomDataResult is LocalResult.Success) {
+                return DomainResult.Success(
+                    roomDataResult.data
+                )
             }
+
         }
-        return   result; //DomainResult.Success(ModelWeather(0.1F, 0.2F))
+        return if (apiResult is ApiResult.Exception) {
+            DomainResult.Failure(apiResult.throwable)
+
+        } else {
+            DomainResult.Failure(Throwable("Not item found"))
+
+        }
+
+
+//DomainResult.Success(ModelWeather(0.1F, 0.2F))
     }
 }
 
