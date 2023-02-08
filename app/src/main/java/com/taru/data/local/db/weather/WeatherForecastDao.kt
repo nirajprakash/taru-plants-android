@@ -20,5 +20,8 @@ interface WeatherForecastDao : RoomDaoBase<WeatherForecastRoomEntity> {
     @Query("DELETE FROM WeatherForecast WHERE locationId=:locationId")
     suspend fun deleteByLocationId(locationId:Int): Int
 
+    @Query("DELETE FROM WeatherForecast")
+    fun deleteAll()
+
 
 }

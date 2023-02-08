@@ -87,4 +87,10 @@ class LocalWeatherSource @Inject constructor(
         Log.d("LocalWeatherSource", "removeForLocation: $locationId $affected")
         return LocalResult.Success(affected)
     }
+
+    suspend fun removeAll() = withContext(Dispatchers.IO) {
+        weatherCurrentDao.deleteAll()
+        weatherForecastDao.deleteAll()
+    }
+
 }

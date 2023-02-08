@@ -1,10 +1,12 @@
 package com.taru.ui.labs
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.domain.plant.usecase.AddPlantRecentSearchesUseCase
 import com.taru.domain.plant.usecase.DeleteAllPlantsUseCase
+import com.taru.domain.weather.usecase.DeleteAllWeatherUseCase
 import com.taru.tools.livedata.LiveDataEvent
 import com.taru.ui.base.ViewModelBase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LabsMainViewModel @Inject constructor(
     private val deleteAllPlantsUseCase: DeleteAllPlantsUseCase,
+    private val deleteAllWeatherUseCase: DeleteAllWeatherUseCase,
     private val addPlantRecentSearchesUseCase: AddPlantRecentSearchesUseCase
 ) : ViewModelBase() {
 
@@ -33,6 +36,13 @@ class LabsMainViewModel @Inject constructor(
     fun navigateToApp() {
         _mEventNavigate.postValue(LiveDataEvent(LabsConstants.Navigation.NAV_APP))
 
+    }
+
+    fun clearWeather(){
+        viewModelScope.launch {
+            Log.d("LabsMainViewModel", "clearWeather: ")
+            deleteAllWeatherUseCase.invoke()
+        }
     }
 
     fun clearPlants() {

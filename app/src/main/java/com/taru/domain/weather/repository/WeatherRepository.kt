@@ -12,4 +12,6 @@ interface WeatherRepository {
 
     suspend fun getDetail(): DomainResult<WeatherCurrentRoomEntity>
     suspend fun getForecast(): DomainResult<WeatherForecastRoomData>
+
+    suspend fun clearData(): DomainResult<Unit>
 }

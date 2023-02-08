@@ -18,4 +18,7 @@ interface WeatherCurrentDao: RoomDaoBase<WeatherCurrentRoomEntity> {
 
     @Query("SELECT * FROM WeatherCurrent WHERE locationId=:locationId ORDER BY dt ASC LIMIT :limit")
     suspend fun findByLocationId(locationId:Int, limit: Int = 1): List<WeatherCurrentRoomEntity>
+
+    @Query("DELETE FROM WeatherCurrent")
+    fun deleteAll()
 }

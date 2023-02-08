@@ -16,6 +16,8 @@ import com.taru.domain.weather.WeatherConstants
 import com.taru.domain.weather.enitity.ModelWeather
 import com.taru.domain.weather.repository.WeatherRepository
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
@@ -185,7 +187,7 @@ class DefaultWeatherRepository @Inject constructor(
             }*/
             localWeatherSource.addForecastEntries(apiResult.data.getEntries(idResult.data.toInt()))
             localLocationSource.update(location)
-            var roomDataResult = localWeatherSource.getForecastById(location.id)
+            var roomDataResult = localWeatherSource.getForecastById(idResult.data.toInt())
 
             if (roomDataResult is LocalResult.Success) {
                 return DomainResult.Success(
@@ -203,7 +205,16 @@ class DefaultWeatherRepository @Inject constructor(
         }
 
 
+
+
 //DomainResult.Success(ModelWeather(0.1F, 0.2F))
     }
+    override suspend fun clearData(): DomainResult.Success<Unit> {
+        Log.d("DefaultWeatherRepository", "clearData:")
+        localWeatherSource.removeAll()
+//        withContext(Dispatchers.IO) { cachedRemoteKeySource.deleteAll() }
+        return DomainResult.Success(Unit)
+    }
+
 }
 

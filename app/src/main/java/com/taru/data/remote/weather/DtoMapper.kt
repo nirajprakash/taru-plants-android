@@ -10,6 +10,8 @@ import com.taru.data.remote.weather.dto.WeatherCurrentDto
 import com.taru.data.remote.weather.dto.WeatherForecastDto
 import com.taru.domain.weather.WeatherConstants
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Created by Niraj on 17-01-2023.
@@ -48,7 +50,62 @@ fun WeatherForecastDto.toRoomEntity(locationId: Int): WeatherForecastRoomEntity 
 
 
 fun WeatherForecastDto.getEntries(id: Int): List<ForecastEntryEntity> {
-    return list.map {
+
+    var result = mutableListOf<ForecastEntryEntity>()
+
+    var calender = Calendar.getInstance()
+
+    var currentDay = calender.get(Calendar.DAY_OF_MONTH)
+
+    var entry : ForecastEntryEntity? = null
+
+    var counter = 0
+//  TODO adjust weather  var weather
+    for (forecastDay in list){
+
+        calender.time = Date(forecastDay.dt*1000L)
+        var day =  calender.get(Calendar.DAY_OF_MONTH)
+        if(day>currentDay){
+            if(entry!=null){
+
+                entry.attrs.temp = entry.attrs.temp?.div(counter)
+                result.add(entry)
+                counter =0
+                entry = null
+            }
+            currentDay = day
+
+        }
+        val first = forecastDay.weather.firstOrNull()
+        val weather = first?.let { it1 -> WeatherSubEntity(first.id, it1.main) }
+
+        val tempMin =forecastDay.main.tempMin - WeatherConstants.KELVIN
+        val tempMax =forecastDay.main.tempMax - WeatherConstants.KELVIN
+        val tempAvg =forecastDay.main.temp - WeatherConstants.KELVIN
+
+        if(entry == null){
+            counter = 1
+            entry =  ForecastEntryEntity(
+                forecastId = id, dt = forecastDay.dt, weather = weather, attrs = WeatherAttrEntity(
+                    tempMin = tempMin,
+                    tempMax = tempMax,
+                    humidity = forecastDay.main.humidity,
+                    pressure = forecastDay.main.pressure,
+                    temp = tempAvg
+                )
+            )
+        }else{
+            counter++
+            entry.attrs.temp = tempAvg + (entry.attrs.temp?:0f)
+            entry.attrs.tempMin = min(tempMin , (entry.attrs.tempMin?:0f))
+            entry.attrs.tempMax = max(tempMin , (entry.attrs.tempMax?:0f))
+        }
+
+
+    }
+
+    return result
+/*    return list.map {
 
         val first = it.weather.firstOrNull()
         val weather = first?.let { it1 -> WeatherSubEntity(first.id, it1.main) }
@@ -61,6 +118,6 @@ fun WeatherForecastDto.getEntries(id: Int): List<ForecastEntryEntity> {
                 temp = it.main.temp - WeatherConstants.KELVIN
             )
         )
-    }.toList()
+    }.toList()*/
 
 }
