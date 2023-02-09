@@ -38,11 +38,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_48"
                     android:layout_gravity="center_vertical|end"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/colorOnSurface"
                     android:drawableStart="@drawable/ic_github"
                     android:text="Github"
+                    android:layout_marginEnd="@dimen/dp_20"
                     android:textAppearance="@style/Typo.Jl.Button"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/colorBack" />
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,7 +63,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Taru"
-                    android:textAppearance="@style/Typo.Jl.Headline.Large"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:textAppearance="@style/Typo.Jl.Headline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -86,17 +88,20 @@
                     android:layout_height="0dp"
                     app:bindCoilSrc="@{R.drawable.rectangle_16808}"
                     android:layout_marginHorizontal="@dimen/dp_24"
-                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintDimensionRatio="4:3"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_subtitle"
-                    app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.24"
                     tools:src="@drawable/pic_tool_category" />
 
                 <TextView
                     android:id="@+id/nav_about_fragment_detail1"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:layout_marginHorizontal="@dimen/dp_32"
                     android:layout_height="wrap_content"
                     android:text="This is an open-source project built with the help of third-party APIs."
@@ -122,7 +127,7 @@
                     android:id="@+id/nav_about_fragment_line"
                     android:layout_marginHorizontal="@dimen/dp_56"
                     android:layout_width="match_parent"
-                    android:layout_marginVertical="@dimen/dp_20"
+                    android:layout_marginVertical="@dimen/dp_24"
                     android:layout_height="1dp"
                     android:background="@color/color_on_surface_38"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_32"
                     android:text="Help me make projects that are free and open source for everyone. Check out and support projects on JunkieLabs.in. Let others know about this."
-                    android:textAppearance="@style/Typo.Jl.BodyLarge"
+                    android:textAppearance="@style/Typo.Jl.BodyMedium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_line"/>
@@ -148,10 +153,13 @@
                     android:id="@+id/button_junkiesLabs"
 
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginHorizontal="@dimen/dp_40"
                     android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_detail3"
 
                     android:textAppearance="@style/Typo.Jl.Button.Junkie"

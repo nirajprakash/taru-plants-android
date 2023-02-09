@@ -118,6 +118,12 @@
 - https://developer.android.com/codelabs/camerax-getting-started#4
 
 
-#
+# links
 
+## tips
+- https://getbusygardening.com/
+- https://www.gardeningknowhow.com/
+- https://gardeningtips.in/
 
+## farming guide
+- https://www.agrifarming.in/

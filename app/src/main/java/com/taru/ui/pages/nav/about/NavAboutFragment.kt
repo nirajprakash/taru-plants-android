@@ -1,5 +1,7 @@
 package com.taru.ui.pages.nav.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,5 +36,16 @@ class NavAboutFragment: FragmentBase(false) {
         super.onViewCreated(view, savedInstanceState)
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
+
+        vBinding.buttonGithub.setOnClickListener() {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://github.com/nirajprakash/android-testing"))
+            startActivity(intent)
+        }
+        vBinding.buttonJunkiesLabs.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://junkielabs.in"))
+            startActivity(intent)
+        }
     }
 }
