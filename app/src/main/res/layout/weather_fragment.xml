@@ -97,7 +97,9 @@
                     android:layout_marginStart="@dimen/dp_28"
                     android:layout_marginTop="@dimen/dp_12"
 
-                    android:text="22C"
+
+                    android:text='@{String.format("%.1f",bViewModel.bCurrentWeather.attrs.temp)+" \u2103" }'
+
 
                     android:textAppearance="@style/Typo.Jl.Headline.Large"
                     android:textColor="@color/colorOnSurface"
@@ -143,8 +145,8 @@
                             android:id="@+id/weather_pressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="800mb"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                            android:text='@{bViewModel.bCurrentWeather.attrs.pressure+ "mb"}'
 
                             android:textColor="@color/colorOnSurface"
                             tools:text="800mb" />
@@ -178,7 +180,7 @@
                             android:id="@+id/weather_visibility"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.3 Km"
+                            android:text='@{bViewModel.bCurrentWeather.visibility + " m"}'
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
 
                             android:textColor="@color/colorOnSurface"
@@ -214,7 +216,7 @@
                             android:id="@+id/weather_humidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="87%"
+                             android:text='@{bViewModel.bCurrentWeather.attrs.humidity + "%"}'
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="@color/colorOnSurface"
                             tools:text="87%" />
@@ -282,11 +284,12 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="@dimen/dp_24"
                     android:layout_marginVertical="@dimen/dp_8"
-                    app:layout_constraintDimensionRatio="4:3"
+                    app:layout_constraintDimensionRatio="7:6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:cardBackgroundColor="@color/color_back_54"
                     app:strokeColor="@color/colorBack"
                     app:cardCornerRadius="@dimen/dp_28"
+                    app:contentPadding="@dimen/dp_12"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/weather_fragment_forecast_subtitle">
@@ -294,7 +297,9 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/weather_fragment_forecast_chart"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+
+                        android:layout_height="match_parent"
+                        />
                 </com.google.android.material.card.MaterialCardView>
 
 

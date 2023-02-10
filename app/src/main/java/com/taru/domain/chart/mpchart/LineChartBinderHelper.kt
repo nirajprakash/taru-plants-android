@@ -141,11 +141,14 @@ class LineChartBinderHelper {
         val ds = LineDataSet(entries, label)
         ds.lineWidth = 1.4f
         ds.axisDependency = YAxis.AxisDependency.RIGHT
-        ds.setDrawCircles(false)
+        ds.setDrawCircles(true)
         ds.setDrawValues(true)
+        ds.setCircleColor(config.colorOnSurface)
+        ds.valueTextColor = config.colorOnSurface
 //        ds.isHighlightEnabled = true
 //        ds.setDrawHorizontalHighlightIndicator(true)
         ds.color = config.color
+        ds.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         //LOGV(TAG, "create: dataType: "+ dataTypes+", color: "+ mModelLineChart.getColor(dataTypes));
         return ds
     }

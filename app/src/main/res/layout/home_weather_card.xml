@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="22C"
-        android:text='@{(bViewModel.bCurrentWeather.attrs.temp)+" \u2103" }'
+        android:text='@{String.format("%.1f",bViewModel.bCurrentWeather.attrs.temp)+" \u2103" }'
         />
 
     <TextView

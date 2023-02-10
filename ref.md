@@ -118,6 +118,11 @@
 - https://developer.android.com/codelabs/camerax-getting-started#4
 
 
+#chart
+
+- https://github.com/PhilJay/MPAndroidChart/wiki/FillFormatter
+- https://stackoverflow.com/questions/43342597/android-fill-the-color-between-two-lines-using-mpandroidchart
+
 # links
 
 ## pests

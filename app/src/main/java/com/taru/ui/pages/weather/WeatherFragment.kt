@@ -1,6 +1,8 @@
 package com.taru.ui.pages.weather
 
 import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -91,7 +93,7 @@ class WeatherFragment : FragmentBase(true) {
             legend.setDrawInside(false)
             legend.textColor = colorOnSurface
 
-            setBackgroundColor(colorSurface)
+            setBackgroundColor(Color.TRANSPARENT)
             setDrawGridBackground(false)
             setDrawBorders(false)
 //            setDrawMarkers(true)
@@ -102,9 +104,19 @@ class WeatherFragment : FragmentBase(true) {
 //           axisRight.setDrawLabels(false)
             axisLeft.setDrawGridLines(true)
         }
-        var configs = mutableListOf(LineChartDataSetConfig(ContextCompat.getColor(requireContext(), R.color.chart_high), "Max"),
-            LineChartDataSetConfig(ContextCompat.getColor(requireContext(), R.color.chart_low), "Min"))
+        var colorHigh = ContextCompat.getColor(requireContext(), R.color.chart_high)
+        var colorLow = ContextCompat.getColor(requireContext(), R.color.chart_low)
+        var configs = mutableListOf(LineChartDataSetConfig(colorHigh, "Max", colorOnSurface),
+            LineChartDataSetConfig(colorLow, "Min", colorOnSurface))
 
+        /*val gradient = LinearGradient(
+            0f, 600f, 0f, 0f,
+            colorHigh,
+            colorLow,
+            Shader.TileMode.CLAMP)
+
+        val paint = vChart.renderer.paintRender
+        paint.setShader(gradient)*/
 
         mLineChartBinderHelper.prepareDataSets(vBinding.weatherFragmentForecastChart, configs)
         vChart.invalidate()
@@ -116,11 +128,11 @@ class WeatherFragment : FragmentBase(true) {
         colorOnSurface = MaterialColors.getColor(
             requireContext(),
             com.google.android.material.R.attr.colorOnSurface,
-            ContextCompat.getColor(requireContext(), R.color.color_back_54)
+            ContextCompat.getColor(requireContext(), R.color.color_on_surface_54)
         )
         colorSurface = MaterialColors.getColor(
             requireContext(),
-            com.google.android.material.R.attr.colorOnSurface,
+            com.google.android.material.R.attr.colorSurface,
             ContextCompat.getColor(requireContext(), R.color.color_back_54)
         )
     }
@@ -145,9 +157,9 @@ class WeatherFragment : FragmentBase(true) {
 
             xAxis.valueFormatter = MpChartTimestampAxisFormatter()
             xAxis.granularity = 1f
-            xAxis.setDrawAxisLine(true)
+            xAxis.setDrawAxisLine(false)
             xAxis.setDrawGridLines(false)
-            xAxis.setDrawLabels(false)
+            xAxis.setDrawLabels(true)
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.textColor = colorOnSurface
 
@@ -157,7 +169,7 @@ class WeatherFragment : FragmentBase(true) {
 
             axisLeft.setDrawZeroLine(false)
             axisLeft.isEnabled = true
-            axisLeft.setDrawAxisLine(true)
+            axisLeft.setDrawAxisLine(false)
 //           axisRight.setDrawAxisLine(false)
             axisLeft.setDrawLabels(false)
 //           axisRight.setDrawLabels(false)
