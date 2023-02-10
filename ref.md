@@ -120,10 +120,13 @@
 
 # links
 
+## pests
+- https://irac-online.org/
+
 ## tips
+- https://gardeningtips.in/
 - https://getbusygardening.com/
 - https://www.gardeningknowhow.com/
-- https://gardeningtips.in/
 
 ## farming guide
 - https://www.agrifarming.in/

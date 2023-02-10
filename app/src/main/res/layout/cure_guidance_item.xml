@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bOnClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="bModel"
+            type="com.taru.ui.pages.nav.cure.ModelCureGuidance" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cure_guidance_item"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dr_rect_round_24_back_alpha"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/dr_ripple_round_24"
+        android:onClick="@{bOnClick}"
+        android:tag="@{bModel.url}">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cure_guidance_item_image"
+            android:layout_width="@dimen/dp_72"
+            android:layout_height="@dimen/dp_64"
+            android:layout_margin="@dimen/dp_4"
+            android:scaleType="centerCrop"
+            app:bindCoilSrc="@{bModel.imageRes}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.18"
+            tools:src="@drawable/pic_garden" />
+
+
+        <TextView
+            android:id="@+id/cure_guidance_item_title"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_0"
+            android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:text="@{bModel.title}"
+            android:textAppearance="@style/Typo.Jl.Title"
+            app:layout_constraintBottom_toTopOf="@+id/cure_guidance_item_subtitle"
+            app:layout_constraintEnd_toStartOf="@+id/cure_guidance_item_link"
+            app:layout_constraintStart_toEndOf="@+id/cure_guidance_item_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="We are working on this section." />
+
+        <TextView
+
+            android:id="@+id/cure_guidance_item_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:text="@{bModel.subtitle}"
+            android:textAppearance="@style/Typo.Jl.BodyMedium"
+            android:textColor="@color/color_on_surface_54"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cure_guidance_item_link"
+            app:layout_constraintStart_toEndOf="@+id/cure_guidance_item_image"
+            app:layout_constraintTop_toBottomOf="@+id/cure_guidance_item_title"
+            tools:text="Farming, Horticulture, Crop Cultivation, Aquaculture, Livestock, Gardening, Subsidies, Loans" />
+
+        <ImageView
+            android:id="@+id/cure_guidance_item_link"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_24"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_on_surface_54"
+            app:srcCompat="@drawable/ic_link1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
