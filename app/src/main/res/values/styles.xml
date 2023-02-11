@@ -22,7 +22,7 @@
 
     <style name="Widget.Jl.App.Chip.Plain" parent="Widget.Jl.App.Chip">
         <item name="android:textColor">@color/black</item>
-        <item name="chipCornerRadius">@dimen/dp_8</item>
+        <item name="chipCornerRadius">@dimen/dp_12</item>
         <item name="chipStrokeColor">@android:color/transparent</item>
         <item name="chipBackgroundColor">#9FF1E7</item>
 

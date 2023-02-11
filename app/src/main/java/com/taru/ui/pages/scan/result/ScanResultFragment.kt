@@ -8,8 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.ChipGroup
-import com.taru.databinding.ChipGroupBinding
-import com.taru.databinding.ScanFragmentBinding
+import com.taru.databinding.ScanResultChipGroupBinding
 import com.taru.databinding.ScanResultFragmentBinding
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.scan.ScanViewModel
@@ -66,7 +65,7 @@ class ScanResultFragment: FragmentBase(true) {
         chipGroup.removeAllViews()
         keywords.forEach {
 
-            val chip = ChipGroupBinding.inflate(
+            val chip = ScanResultChipGroupBinding.inflate(
                 LayoutInflater.from(requireContext()),
                 chipGroup,
                 false).root

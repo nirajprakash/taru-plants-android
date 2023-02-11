@@ -17,5 +17,7 @@ data class PlantSpeciesDto(var id: String,
                            val images : Map<String, List<PlantImageDto>>,
                            val growth: PlantGrowthDto,
 
+                           val distribution: PlantDistributionDto
+
                            ) {
 }

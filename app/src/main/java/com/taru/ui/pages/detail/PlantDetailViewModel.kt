@@ -19,6 +19,7 @@ import javax.inject.Inject
 internal class PlantDetailViewModel @Inject constructor(var getPlantDetailByIdUseCase: GetPlantDetailByIdUseCase): ViewModelBase() {
     private var mPlantId: Int = -1
 
+    var bKeywords = MutableLiveData<List<String>>()
 
     val bIsProgress = MutableLiveData(false)
     val bData = MutableLiveData<PlantDetailRoomData>()
@@ -40,6 +41,7 @@ internal class PlantDetailViewModel @Inject constructor(var getPlantDetailByIdUs
         if (result is DomainResult.Success) {
             result.value.let {
                 bData.postValue(it)
+                bKeywords.postValue(it.detail.natives)
             }
             Log.d("PlantDetailViewModel", "details: ${result.value}")
         }else {

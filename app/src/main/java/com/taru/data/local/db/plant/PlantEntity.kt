@@ -26,6 +26,7 @@ data class PlantEntity(
     val speciesName: String?,
     val edible: Boolean?,
     val ediblePart: List<String>,
+    val natives: List<String>,
 
 
     @Embedded(prefix = "growth_")  val growth: PlantGrowthEntity?,

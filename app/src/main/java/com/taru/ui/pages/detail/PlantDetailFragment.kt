@@ -8,7 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.google.android.material.chip.ChipGroup
 import com.taru.R
+import com.taru.databinding.PlantDetailChipGroupBinding
 import com.taru.databinding.PlantDetailFragmentBinding
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
@@ -45,6 +47,29 @@ class PlantDetailFragment: FragmentBase(true) {
         lifecycleScope.launchWhenCreated {
             mViewModel.initArgs(args)
             vBinding.plantDetailImage.load(R.drawable.pic_scan_1)
+        }
+    }
+
+    override fun setupViewModelObservers() {
+        super.setupViewModelObservers()
+        mViewModel.bKeywords.observe(viewLifecycleOwner) {
+            addChips(vBinding.plantDetailSectionRegionChipGroup, it)
+        }
+    }
+
+    private fun addChips(chipGroup: ChipGroup, keywords: List<String>){
+
+
+        chipGroup.removeAllViews()
+        keywords.forEach {
+
+            val chip = PlantDetailChipGroupBinding.inflate(
+                LayoutInflater.from(requireContext()),
+                chipGroup,
+                false).root
+
+            chip.text = it
+            chipGroup.addView(chip)
         }
     }
 

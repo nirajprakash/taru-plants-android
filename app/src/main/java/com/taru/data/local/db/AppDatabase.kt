@@ -27,7 +27,7 @@ import com.taru.data.local.db.weather.*
         IdentifyLogRoomEntity::class,
         PlantEntity::class,
         PlantImageEntity::class,],
-    version = 8,
+    version = 9,
     exportSchema = true
 )
 @TypeConverters(StringListConverter::class)

@@ -42,7 +42,9 @@ fun PlantDetailDto.toRoomEntity(): PlantEntity {
         familyName = family.name,
         genusName = genus.name,
         speciesName = mainSpecies.name,
-        growth = mainSpecies.growth.toRoomEntity()
+        growth = mainSpecies.growth.toRoomEntity(),
+        natives = mainSpecies.distribution.native
+
     )
 }
 

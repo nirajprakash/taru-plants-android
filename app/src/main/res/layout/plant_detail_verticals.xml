@@ -26,8 +26,8 @@
 >
 
     <LinearLayout
-        android:id="@+id/plant_detail_pressure_ll"
-        android:layout_width="wrap_content"
+        android:id="@+id/plant_detail_soil_humidity_ll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_24"
         android:layout_marginBottom="@dimen/dp_24"
@@ -37,18 +37,16 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/plant_detail_pressure_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pressure"
+            android:text="Light"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/color_on_surface_54" />
 
         <TextView
-            android:id="@+id/plant_detail_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="800mb"
+            android:text='@{(bModel.growth.light!=null) ? bModel.growth.light.toString() : "--"}'
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
 
             android:textColor="@color/colorOnSurface"
@@ -62,8 +60,8 @@
         android:background="@drawable/dr_rect_on_surface_alpha" />
 
     <LinearLayout
-        android:id="@+id/plant_detail_visibility_ll"
-        android:layout_width="wrap_content"
+        android:id="@+id/plant_detail_soil_nutriments_ll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_24"
         android:layout_marginBottom="@dimen/dp_24"
@@ -72,18 +70,16 @@
         android:padding="@dimen/dp_12">
 
         <TextView
-            android:id="@+id/plant_detail_visibility_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visibility"
+            android:text="Soil Nutriments"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/color_on_surface_54" />
 
         <TextView
-            android:id="@+id/plant_detail_visibility"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.3 Km"
+            android:text='@{(bModel.growth.soilNutriments!=null) ? bModel.growth.soilNutriments.toString() : "--"}'
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
 
             android:textColor="@color/colorOnSurface"
@@ -98,8 +94,8 @@
         android:background="@drawable/dr_rect_on_surface_alpha" />
 
     <LinearLayout
-        android:id="@+id/plant_detail_humidity_ll"
-        android:layout_width="wrap_content"
+        android:id="@+id/plant_detail_soil_salinity_ll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_24"
         android:layout_marginBottom="@dimen/dp_24"
@@ -108,33 +104,144 @@
         android:padding="@dimen/dp_12">
 
         <TextView
-            android:id="@+id/plant_detail_humidity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Humidity"
+            android:text="Soil Salinity"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="@color/color_on_surface_54" />
 
         <TextView
-            android:id="@+id/plant_detail_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="87%"
+            android:text='@{(bModel.growth.soilSalinity!=null) ? bModel.growth.soilSalinity.toString() : "--"}'
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/colorOnSurface"
             tools:text="87%" />
     </LinearLayout>
 
+<!--2-->
 
+    <LinearLayout
+        android:id="@+id/plant_detail_ph_min_ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pH Min"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{(bModel.growth.phMinimum!=null) ? bModel.growth.phMinimum.toString() : "--"}'
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+            android:textColor="@color/colorOnSurface"
+            tools:text="800mb" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/plant_detail_divider_21"
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_32"
+        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+    <LinearLayout
+        android:id="@+id/plant_detail_ph_max_ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pH max"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{(bModel.growth.phMaximum!=null) ? bModel.growth.phMaximum.toString() : "--"}'
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+
+            android:textColor="@color/colorOnSurface"
+
+            tools:text="4.3 Km" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/plant_detail_divider_22"
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_32"
+        android:background="@drawable/dr_rect_on_surface_alpha" />
+
+    <LinearLayout
+        android:id="@+id/plant_detail_light_ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/color_on_surface_54" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{(bModel.growth.light!=null) ? bModel.growth.light.toString() : "--"}'
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/colorOnSurface"
+            tools:text="87%" />
+    </LinearLayout>
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow"
+        android:id="@+id/flow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginBottom="@dimen/dp_16"
-        app:constraint_referenced_ids="plant_detail_pressure_ll,plant_detail_divider_1,plant_detail_visibility_ll,plant_detail_divider_2,plant_detail_humidity_ll"
+        app:constraint_referenced_ids="plant_detail_soil_humidity_ll,plant_detail_divider_1,plant_detail_soil_nutriments_ll,plant_detail_divider_2,plant_detail_soil_salinity_ll"
+        app:flow_horizontalAlign="center"
+
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="8dp"
+        app:flow_horizontalStyle="spread"
+
+        app:flow_verticalBias="0"
+        app:flow_wrapMode="chain"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/flow2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:constraint_referenced_ids="plant_detail_ph_min_ll,plant_detail_divider_21,plant_detail_ph_max_ll,plant_detail_divider_22,plant_detail_light_ll"
         app:flow_horizontalAlign="center"
 
         app:flow_horizontalBias="0"
@@ -146,8 +253,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@id/flow1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
