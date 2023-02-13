@@ -1,6 +1,7 @@
 package com.taru.ui.pages.slider
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -48,6 +49,7 @@ class SliderAdapter: ListAdapter<ModelSliderImage, SliderAdapter.ItemViewHolder>
 //            binding.executePendingBindings()
 
 
+            Log.d("SliderAdapter bind", "bind: ${model.image}")
 //            imageUrl = imageUrl
             binding.sliderImageItemImage.showImage(Uri.parse(model.image))
         }
@@ -57,15 +59,13 @@ class SliderAdapter: ListAdapter<ModelSliderImage, SliderAdapter.ItemViewHolder>
         }
 
         fun clear() {
-            val ssiv: SubsamplingScaleImageView = binding.sliderImageItemImage.ssiv
-            if (ssiv != null) {
-                ssiv.recycle()
-            }
+            val ssiv: SubsamplingScaleImageView? = binding.sliderImageItemImage.ssiv
+            ssiv?.recycle()
         }
 
         fun hasNoImage(): Boolean {
-            val ssv: SubsamplingScaleImageView = binding.sliderImageItemImage.getSSIV()
-            return !ssv.hasImage()
+            val ssiv: SubsamplingScaleImageView? = binding.sliderImageItemImage.ssiv
+            return ssiv == null || !ssiv.hasImage();
         }
 
 

@@ -118,7 +118,7 @@ dependencies {
     // image
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    kapt 'com.github.bumptech.glide:compiler:4.14.2'
 
 // load with glide
     implementation 'com.github.piasy:GlideImageLoader:1.8.1'

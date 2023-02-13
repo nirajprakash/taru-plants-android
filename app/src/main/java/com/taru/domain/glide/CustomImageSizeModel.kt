@@ -1,4 +1,4 @@
-package com.taru.ui.pages.slider
+package com.taru.domain.glide
 
 import android.net.Uri
 import com.github.piasy.biv.loader.glide.GlideModel

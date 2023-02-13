@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.github.piasy.biv.BigImageViewer
 import com.github.piasy.biv.loader.glide.GlideCustomImageLoader
 import com.taru.databinding.SliderFragmentBinding
+import com.taru.domain.glide.CustomImageSizeModel
 import com.taru.ui.base.FragmentBase
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -50,14 +51,14 @@ class SliderFragment : FragmentBase(true) {
         super.onViewCreated(view, savedInstanceState)
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
-
-        lifecycleScope.launchWhenCreated {
-            BigImageViewer.initialize(
-                GlideCustomImageLoader.with(
-                    appContext,
-                    CustomImageSizeModel::class.java
-                )
+        BigImageViewer.initialize(
+            GlideCustomImageLoader.with(
+                appContext,
+                CustomImageSizeModel::class.java
             )
+        )
+        lifecycleScope.launchWhenCreated {
+
 
             mAdapter = SliderAdapter()
             vBinding.recycler.adapter = mAdapter

@@ -48,7 +48,7 @@ class PlantDetailFragment: FragmentBase(true) {
 
         lifecycleScope.launchWhenCreated {
             mViewModel.initArgs(args)
-            vBinding.plantDetailImage.load(R.drawable.pic_scan_1)
+//            vBinding.plantDetailImage.load(R.drawable.pic_scan_1)
         }
 
     }
