@@ -118,10 +118,16 @@
 - https://developer.android.com/codelabs/camerax-getting-started#4
 
 
-#chart
+# chart
 
 - https://github.com/PhilJay/MPAndroidChart/wiki/FillFormatter
 - https://stackoverflow.com/questions/43342597/android-fill-the-color-between-two-lines-using-mpandroidchart
+
+# image gallery
+
+- https://github.com/Piasy/BigImageViewer
+- https://medium.com/@issei_greenwood/introducing-loupe-10-minutes-to-implement-twitter-like-image-viewer-19c522db3c68
+
 
 # links
 

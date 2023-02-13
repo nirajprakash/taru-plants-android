@@ -50,6 +50,10 @@
         <argument android:name="plantId"
             app:argType="integer"/>
 
+        <action android:id="@+id/navigate_to_slider"
+            app:destination="@id/sliderFragment"/>
+
+
     </fragment>
     <fragment
         android:id="@+id/scan"
@@ -108,4 +112,15 @@
         <action android:id="@+id/navigate_to_plant_detail"
             app:destination="@id/plant_detail"/>
     </fragment>
+    <fragment
+        android:id="@+id/sliderFragment"
+        android:name="com.taru.ui.pages.slider.SliderFragment"
+        android:label="Plants Slider"
+        tools:layout="@layout/slider_fragment">
+        <argument android:name="images"
+            app:argType="string[]"
+
+            />
+    </fragment>
+
 </navigation>

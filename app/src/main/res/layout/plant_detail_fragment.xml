@@ -59,6 +59,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/plant_detail_image"
+                    app:bindCoilSrc="@{bViewModel.BData.detail.imageUrl}"
 
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -70,7 +71,7 @@
                     app:layout_constraintStart_toStartOf="@id/plant_detail_image_area"
                     app:layout_constraintTop_toTopOf="@id/plant_detail_image_area"
                     app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.32"
-                    tools:src="@drawable/pic_weather" />
+                     />
 
                 <LinearLayout
                     android:id="@+id/plant_detail_card_visibility_ll"
@@ -83,6 +84,7 @@
                     android:foreground="?selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
+                    android:onClick="@{bViewModel.bActionGallery}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/plant_detail_image_area"

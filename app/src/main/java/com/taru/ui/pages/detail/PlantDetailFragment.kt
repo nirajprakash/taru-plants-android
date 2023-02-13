@@ -12,7 +12,9 @@ import com.google.android.material.chip.ChipGroup
 import com.taru.R
 import com.taru.databinding.PlantDetailChipGroupBinding
 import com.taru.databinding.PlantDetailFragmentBinding
+import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
+import com.taru.ui.pages.nav.home.NavHomeFragmentDirections
 import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +50,7 @@ class PlantDetailFragment: FragmentBase(true) {
             mViewModel.initArgs(args)
             vBinding.plantDetailImage.load(R.drawable.pic_scan_1)
         }
+
     }
 
     override fun setupViewModelObservers() {
@@ -55,7 +58,11 @@ class PlantDetailFragment: FragmentBase(true) {
         mViewModel.bKeywords.observe(viewLifecycleOwner) {
             addChips(vBinding.plantDetailSectionRegionChipGroup, it)
         }
+
+
     }
+
+
 
     private fun addChips(chipGroup: ChipGroup, keywords: List<String>){
 
