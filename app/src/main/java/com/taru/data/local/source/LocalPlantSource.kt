@@ -15,6 +15,7 @@ import com.taru.data.local.db.plant.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -83,9 +84,19 @@ class LocalPlantSource @Inject constructor(
     suspend fun  getPlantDetail(plantId: Int) = withContext(Dispatchers.IO) {
         val plantDetail = plantDetailDao.byId(plantId)
         if(plantDetail!=null){
+            var plant = plantDetail.detail
+            plant.lastQueriedDt = (Calendar.getInstance().time.time/1000L).toInt()
+            plantDetailDao.update(plantDetail.detail)
             return@withContext LocalResult.Success(plantDetail)
         }
         return@withContext LocalResult.Message(404, "Not found")
+    }
+
+    suspend fun getRecentPlantDetails() = withContext(Dispatchers.IO){
+        val plantDetails = plantDetailDao.list(20)
+
+        return@withContext LocalResult.Success(plantDetails)
+
     }
 
     suspend fun  getCategories() = withContext(Dispatchers.IO) {

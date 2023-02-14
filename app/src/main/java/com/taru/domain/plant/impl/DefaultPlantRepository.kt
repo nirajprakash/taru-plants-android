@@ -10,6 +10,7 @@ import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.assets.entities.ModelCategory
 import com.taru.data.local.db.AppDatabase
 import com.taru.data.local.db.plant.PlantDetailRoomData
+import com.taru.data.local.db.plant.PlantEntity
 import com.taru.data.local.db.plant.PlantRecentSearchEntity
 import com.taru.data.local.source.CachedRemoteKeySource
 import com.taru.data.local.source.LocalPlantSource
@@ -135,6 +136,18 @@ class DefaultPlantRepository @Inject constructor(
             return DomainResult.Success(localresult.data)
         }
         return  DomainResult.Failure(Throwable("Finally failed"))
+
+    }
+
+    override suspend fun getRecentPlantList(): DomainResult<List<PlantEntity>> {
+        var localresult = localPlantSource.getRecentPlantDetails()
+             return DomainResult.Success(localresult.data)
+        /*if(localresult is LocalResult.Exception){
+            localresult.throwable.printStackTrace()
+        }*/
+
+//        return  DomainResult.Failure(Throwable("Finally failed"))
+
 
     }
 

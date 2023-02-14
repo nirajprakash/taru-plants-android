@@ -5,18 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.core.impl.LiveDataObservable
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.taru.databinding.NavPlantsFragmentBinding
-import com.taru.tools.livedata.LiveDataEvent
 import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
-import com.taru.ui.pages.nav.plants.recent.ModelRecent
+import com.taru.ui.pages.nav.plants.recent.RecentPlantsAdapter
 import com.taru.ui.pages.nav.plants.recent.RecentSearchAdapter
-import com.taru.ui.pages.nav.plants.recommended.ModelPlant
-import com.taru.ui.pages.nav.plants.recommended.PlantsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -27,7 +23,7 @@ class NavPlantsFragment: FragmentBase(false) {
     private val mViewModel: NavPlantsViewModel by viewModels()
     private lateinit var vBinding: NavPlantsFragmentBinding
     private lateinit var mListAdapterRecent: RecentSearchAdapter
-    private lateinit var mListAdapter: PlantsAdapter
+    private lateinit var mListAdapter: RecentPlantsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +44,7 @@ class NavPlantsFragment: FragmentBase(false) {
         mListAdapterRecent = RecentSearchAdapter(){
             navigateToSearch(it.q)
         }
-        mListAdapter = PlantsAdapter() {
+        mListAdapter = RecentPlantsAdapter() {
             modelPlant ->  navigateToDetail(modelPlant.id)
         }
         /*{
@@ -80,14 +76,14 @@ class NavPlantsFragment: FragmentBase(false) {
 //            mListAdapterRecent.submitList(list)
 
             vBinding.recyclerview.adapter = mListAdapter
-            var list2 = mutableListOf(
+          /*  var list2 = mutableListOf(
                 ModelPlant(0), ModelPlant(1), ModelPlant(2),
                 ModelPlant(3), ModelPlant(4), ModelPlant(5),
                 ModelPlant(6), ModelPlant(7), ModelPlant(8), ModelPlant(9)
             )
 
 
-            mListAdapter.submitList(list2)
+            mListAdapter.submitList(list2)*/
 
             //            throw RuntimeException("Test Crash")
 
@@ -112,9 +108,14 @@ class NavPlantsFragment: FragmentBase(false) {
             mListAdapterRecent.submitList(it)
 
         })
+        mViewModel.mEventRecentPlantList.observe(viewLifecycleOwner, LiveDataObserver{
+            mListAdapter.submitList(it)
+
+        })
     }
 
     private fun navigateToDetail(id: Int) {
+        findNavController().navigate(NavPlantsFragmentDirections.actionToDetail(id))
         // TODO uncomment findNavController().navigate(NavPlantsFragmentDirections.actionToDetail(12))
     }
 }

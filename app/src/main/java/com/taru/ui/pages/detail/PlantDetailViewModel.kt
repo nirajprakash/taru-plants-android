@@ -54,7 +54,7 @@ internal class PlantDetailViewModel @Inject constructor(
         if (result is DomainResult.Success) {
             result.value.let {
                 bData.postValue(it)
-                bKeywords.postValue(it.detail.natives)
+                bKeywords.postValue(it.detail.natives.take(7))
                 mPlantDetail = it
             }
             Log.d("PlantDetailViewModel", "details: ${result.value}")

@@ -1,21 +1,18 @@
-package com.taru.ui.pages.nav.plants.recommended
+package com.taru.ui.pages.nav.plants.recent
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.taru.R
-import com.taru.databinding.HomeCategoryItemBinding
+import com.taru.data.local.db.plant.PlantEntity
 import com.taru.databinding.NavPlantsItemBinding
-import com.taru.databinding.NavPlantsRecentItemBinding
 
 /**
- * Created by Niraj on 10-01-2023.
+ * Created by Niraj on 14-02-2023.
  */
-class PlantsAdapter(
-    val mOnClick: (ModelPlant) -> Unit) : ListAdapter<ModelPlant, PlantsAdapter.ItemViewHolder>(ModelPlant.diffCallback) {
+class RecentPlantsAdapter(val mOnClick: (PlantEntity) -> Unit): ListAdapter<PlantEntity, RecentPlantsAdapter.ItemViewHolder>(
+    PlantEntity.diffCallback) {
 
 
 
@@ -30,14 +27,15 @@ class PlantsAdapter(
 
     inner class ItemViewHolder(var binding: NavPlantsItemBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
-        fun bind(plant: ModelPlant) {
-            binding.navPlantsRecentItemImage.load(R.drawable.pic_tool_category)
+        fun bind(category: PlantEntity) {
+//         binding.homeCategoryItemImage.load(R.drawable.pic_tool_category)
+            binding.bModel = category
             binding.bOnClick =  this
             binding.executePendingBindings()
         }
 
         override fun onClick(v: View?) {
-            var posi = adapterPosition
+            var posi = absoluteAdapterPosition
             mOnClick(getItem(posi))
         }
 
@@ -45,7 +43,7 @@ class PlantsAdapter(
     }
 
     companion object {
-        fun viewHolder(parent: ViewGroup, adapter: PlantsAdapter): ItemViewHolder {
+        fun viewHolder(parent: ViewGroup, adapter: RecentPlantsAdapter): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = NavPlantsItemBinding.inflate(layoutInflater, parent, false)
             return adapter.ItemViewHolder(binding)

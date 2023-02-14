@@ -9,6 +9,7 @@ import com.taru.data.remote.plants.dto.PlantDetailDto
 import com.taru.data.remote.plants.dto.inner.PlantGrowthDto
 import com.taru.data.remote.plants.dto.inner.PlantImageDto
 import com.taru.data.remote.plants.dto.inner.PlantsSearchEntryDto
+import java.util.Calendar
 
 /**
  * Created by Niraj on 22-01-2023.
@@ -43,6 +44,7 @@ fun PlantDetailDto.toRoomEntity(): PlantEntity {
         genusName = genus.name,
         speciesName = mainSpecies.name,
         growth = mainSpecies.growth.toRoomEntity(),
+        lastQueriedDt = (Calendar.getInstance().time.time/1000).toInt(),
         natives = mainSpecies.distribution.native
 
     )

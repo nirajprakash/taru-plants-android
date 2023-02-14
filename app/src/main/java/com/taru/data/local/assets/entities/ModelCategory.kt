@@ -1,7 +1,6 @@
 package com.taru.data.local.assets.entities
 
 import androidx.recyclerview.widget.DiffUtil
-import com.taru.ui.pages.nav.home.category.DepreModelCategory
 
 /**
  * Created by Niraj on 06-02-2023.

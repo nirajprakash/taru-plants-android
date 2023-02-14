@@ -14,5 +14,7 @@ interface PlantDetailDao : RoomDaoBase<PlantEntity>  {
     @Transaction
     @Query("SELECT * FROM Plants WHERE id=:plantId")
     suspend fun byId(plantId:Int): PlantDetailRoomData?
+    @Query("SELECT * FROM Plants ORDER BY `lastQueriedDt` DESC LIMIT :limit")
+    fun list(limit: Int): List<PlantEntity>
 
 }

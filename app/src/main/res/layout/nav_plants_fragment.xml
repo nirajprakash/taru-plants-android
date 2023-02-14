@@ -37,9 +37,32 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/dp_200"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/home_search_btn"
+                android:onClick="@{() -> bViewModel.navigateToSearch()}"
+                android:visibility="@{bViewModel.bEmptySearch ? View.VISIBLE : View.GONE }"
+
+
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_56"
+                android:layout_marginHorizontal="@dimen/dp_24"
+                app:icon="@drawable/ic_if_search"
+                android:text="Search Plant .."
+                app:iconPadding="@dimen/dp_24"
+                android:textAlignment="textStart"
+                android:textColor="@color/color_on_surface_38"
+                />
 
            <TextView
                android:id="@+id/nav_plants_recent_title"
@@ -49,25 +72,21 @@
                android:paddingStart="@dimen/dp_24"
                android:paddingEnd="@dimen/dp_24"
 
+               android:visibility="@{bViewModel.bEmptySearch ? View.GONE : View.VISIBLE }"
+
                android:layout_marginTop="@dimen/dp_24"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
 
                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_horizontal"
                 android:layout_width="match_parent"
+                android:visibility="@{bViewModel.bEmptySearch ? View.GONE : View.VISIBLE }"
 
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nav_plants_recent_title"
-
                 android:paddingStart="@dimen/dp_24"
                 android:paddingEnd="@dimen/dp_24"
-                android:clipToPadding="false"
                 tools:listitem="@layout/home_category_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"/>
@@ -80,9 +99,8 @@
                 android:paddingStart="@dimen/dp_24"
                 android:paddingEnd="@dimen/dp_24"
 
+                android:visibility="@{bViewModel.bEmptyPlants ? View.GONE : View.VISIBLE }"
                 android:layout_marginTop="@dimen/dp_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerview_horizontal"
 
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
             <androidx.recyclerview.widget.RecyclerView
@@ -92,9 +110,7 @@
                 android:paddingBottom="@dimen/dp_200"
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nav_plants_checkout_title"
+                android:visibility="@{bViewModel.bEmptyPlants ? View.GONE : View.VISIBLE }"
 
                 android:paddingStart="@dimen/dp_24"
                 android:paddingEnd="@dimen/dp_24"
@@ -103,9 +119,32 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 android:orientation="vertical"/>
+            <ImageView
+                android:layout_marginTop="@dimen/dp_72"
+                android:layout_width="@dimen/dp_128"
+                android:visibility="@{bViewModel.bEmptyPlants ? View.VISIBLE : View.GONE }"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/illustration_not_found"/>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Recent Plants found"
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="@color/color_on_surface_38"
+
+                android:visibility="@{bViewModel.bEmptyPlants ? View.VISIBLE : View.GONE }"
+
+                android:layout_marginTop="@dimen/dp_36"
+
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
+        </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

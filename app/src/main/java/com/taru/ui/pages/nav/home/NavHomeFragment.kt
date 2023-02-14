@@ -14,7 +14,6 @@ import com.taru.databinding.NavHomeFragmentBinding
 import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.home.category.HomeCategoryAdapter
-import com.taru.ui.pages.nav.home.category.DepreModelCategory
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
