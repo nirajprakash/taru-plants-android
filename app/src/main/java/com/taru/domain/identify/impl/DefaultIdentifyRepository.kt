@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import com.taru.data.base.local.LocalResult
 import com.taru.data.base.remote.ApiResult
+import com.taru.data.local.db.log.IdentifyLogRoomEntity
 import com.taru.data.local.db.plant.PlantSearchEntryEntity
 import com.taru.data.local.source.LocalLogSource
 import com.taru.data.local.source.LocalPlantSource
@@ -23,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import me.shouheng.compress.Compress
 import me.shouheng.compress.concrete
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -47,6 +49,10 @@ class DefaultIdentifyRepository  @Inject constructor(
         }*/
         val localresult = remoteIdentifySource.identify(organ, file)
         if(localresult is ApiResult.Success){
+            var calender = Calendar.getInstance()
+//            calender.add(Calendar.DAY_OF_YEAR, -1);
+
+            localLogSource.insert(IdentifyLogRoomEntity(dt=(calender.time.time/1000L).toInt()))
             // TODO add into log
 //            Log.d("DefaultIdentityRepository", "identify: ${localresult.data}")
            return DomainResult.Success(localresult.data.toDomainModel(uri))

@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
@@ -66,11 +67,15 @@ class ScanFragment : FragmentBase(true) {
         super.onViewCreated(view, savedInstanceState)
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
+        vBinding.topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+            findNavController().popBackStack()
+        }
         lifecycleScope.launchWhenCreated {
             getPermission()
         }
 
-        vBinding.bottomAppBar.setOnMenuItemClickListener {
+       /* vBinding.bottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_scan_action_image -> {
                     Log.d("ScanFragment", "onClickPickImage: ")
@@ -78,7 +83,7 @@ class ScanFragment : FragmentBase(true) {
                 }
                 else -> false
             }
-        }
+        }*/
 
     }
 
@@ -108,7 +113,7 @@ class ScanFragment : FragmentBase(true) {
         })
 
         mViewModel.bIsButtonEnabled.observe(viewLifecycleOwner) {
-            vBinding.bottomAppBar.menu.findItem(R.id.menu_scan_action_image).isEnabled = it
+//            vBinding.bottomAppBar.menu.findItem(R.id.menu_scan_action_image).isEnabled = it
         }
 
         mViewModel.mEventOnActionScan.observe(viewLifecycleOwner) {
@@ -199,7 +204,7 @@ class ScanFragment : FragmentBase(true) {
                 override fun
                         onImageSaved(output: ImageCapture.OutputFileResults) {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
-                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     Log.d("ScanFragment", msg)
                     output.savedUri?.let {
                         mViewModel.setUri(it)
@@ -237,7 +242,7 @@ class ScanFragment : FragmentBase(true) {
 
     private fun getPermission() {
         PermissionX.init(requireActivity())
-            .permissions(Manifest.permission.CAMERA)
+            .permissions(CAMERA)
             .onExplainRequestReason { scope, deniedList ->
                 scope.showRequestReasonDialog(
                     deniedList,
@@ -248,11 +253,11 @@ class ScanFragment : FragmentBase(true) {
             }
             .request { allGranted, grantedList, deniedList ->
                 if (allGranted) {
-                    Toast.makeText(
+                   /* Toast.makeText(
                         requireContext(),
                         "All permissions are granted",
                         Toast.LENGTH_LONG
-                    ).show()
+                    ).show()*/
                     setupCamera()
                     mViewModel.enableButton()
                 } else {

@@ -16,6 +16,7 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:background="?colorSurface">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -28,17 +29,19 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:logo="@drawable/ic_logo_taru"
-                app:menu="@menu/menu_app"
-                app:title="Taru"
+                app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
+                app:navigationIconTint="@color/color_on_surface_54"
+
+                app:title="Leaf or Flower"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/dp_200"
+            android:paddingBottom="@dimen/dp_64"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 <!--               app:cardPreventCornerOverlap="false"
@@ -71,7 +74,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--         app:navigationIcon="@drawable/ic_drawer_menu_24px"-->
-        <com.google.android.material.bottomappbar.BottomAppBar
+        <!--<com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             style="@style/Widget.Material3.BottomAppBar"
             android:layout_width="match_parent"
@@ -85,13 +88,14 @@
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
-            app:menu="@menu/scan_menu" />
+            app:menu="@menu/scan_menu" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
             android:enabled="@{bViewModel.bIsButtonEnabled}"
-            app:layout_anchor="@id/bottomAppBar"
+          android:layout_gravity="center_horizontal|bottom"
             android:onClick="@{() -> bViewModel.onClickScan()}"
             app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.circle"
             app:srcCompat="@drawable/ic_if_scan" />

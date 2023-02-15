@@ -29,9 +29,10 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:logo="@drawable/ic_logo_taru"
-                app:menu="@menu/menu_app"
-                app:title="Taru"
+                app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
+                app:navigationIconTint="@color/color_on_surface_54"
+
+                app:title="Scan Result"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,16 +40,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingBottom="@dimen/dp_56"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <View
                 android:id="@+id/scan_result_fragment_icon_area"
                 android:layout_width="@dimen/dp_64"
+                android:layout_marginTop="@dimen/dp_24"
                 android:layout_height="@dimen/dp_64"
                 android:background="@drawable/dr_circle_surface_alpha"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/scan_result_fragment_image"/>
 
             <ImageView
                 android:id="@+id/scan_result_fragment_icon"
@@ -67,6 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:bindCoilSrc="@{bViewModel.bImageUri}"
+                android:layout_marginTop="@dimen/dp_24"
                 android:layout_marginHorizontal="@dimen/dp_24"
                 app:layout_constraintDimensionRatio="3:4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -129,11 +134,13 @@
                 android:id="@+id/scan_result_fragment_keywords"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_32"
+                android:layout_marginBottom="@dimen/dp_32"
                 android:layout_marginHorizontal="@dimen/dp_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scan_result_fragment_image">
+                app:layout_constraintTop_toBottomOf="@+id/scan_result_fragment_subtitle">
 
 
 
