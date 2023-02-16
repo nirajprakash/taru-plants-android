@@ -61,7 +61,9 @@
         android:label="Scan"
         tools:layout="@layout/scan_fragment">
         <action android:id="@+id/navigate_to_result"
-            app:destination="@id/scan_result"/>
+            app:destination="@id/scan_result"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/scan"/>
 
     </fragment>
 
@@ -75,6 +77,11 @@
 
         <argument android:name="keywords"
             app:argType="string[]"/>
+
+        <action android:id="@+id/navigate_to_search"
+            app:destination="@id/search"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/scan_result"/>
     </fragment>
 
     <fragment
