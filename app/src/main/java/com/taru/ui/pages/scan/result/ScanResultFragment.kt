@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.ChipGroup
-import com.taru.databinding.ScanResultChipGroupBinding
+import com.taru.databinding.ScanResultChipBinding
 import com.taru.databinding.ScanResultFragmentBinding
 import com.taru.ui.base.FragmentBase
+import com.taru.ui.pages.nav.home.NavHomeFragmentDirections
 import com.taru.ui.pages.scan.ScanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,7 +56,7 @@ class ScanResultFragment: FragmentBase(true) {
         //  vBinding.weatherImage.load(R.drawable.pic_weather)
     }
 
-    private fun addChips(chipGroup: ChipGroup, keywords: Array<String>){
+    private fun addChips(chipGroup: ChipGroup, keywords: List<String>){
 
         // TODO find if tag exist in chipgroup
         // TODO add remaining tags in chipgroup
@@ -65,14 +67,20 @@ class ScanResultFragment: FragmentBase(true) {
         chipGroup.removeAllViews()
         keywords.forEach {
 
-            val chip = ScanResultChipGroupBinding.inflate(
+            val chip = ScanResultChipBinding.inflate(
                 LayoutInflater.from(requireContext()),
                 chipGroup,
                 false).root
 
             chip.text = it
+            chip.tag = it
+            chip.setOnClickListener { v -> navigateToSearch(v.tag as String) }
             chipGroup.addView(chip)
         }
+    }
+
+    private fun navigateToSearch(q: String){
+        findNavController().navigate(ScanResultFragmentDirections.navigateToSearch(q))
     }
 
 

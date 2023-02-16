@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.google.android.material.chip.ChipGroup
 import com.taru.R
-import com.taru.databinding.PlantDetailChipGroupBinding
+import com.taru.databinding.PlantDetailChipBinding
 import com.taru.databinding.PlantDetailFragmentBinding
-import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
-import com.taru.ui.pages.nav.home.NavHomeFragmentDirections
-import com.taru.ui.pages.scan.result.ScanResultFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -70,10 +66,9 @@ class PlantDetailFragment: FragmentBase(true) {
         chipGroup.removeAllViews()
         keywords.forEach {
 
-            val chip = PlantDetailChipGroupBinding.inflate(
+            val chip = PlantDetailChipBinding.inflate(
                 LayoutInflater.from(requireContext()),
-                chipGroup,
-                false).root
+                chipGroup, false).root
 
             chip.text = it
             chipGroup.addView(chip)

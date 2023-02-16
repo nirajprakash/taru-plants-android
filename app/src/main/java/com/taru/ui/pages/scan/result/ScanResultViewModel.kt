@@ -13,14 +13,16 @@ import javax.inject.Inject
 internal class ScanResultViewModel @Inject constructor() : ViewModelBase() {
 
      var bImageUri = MutableLiveData<Uri>()
-     var bKeywords = MutableLiveData<Array<String>>()
+     var bKeywords = MutableLiveData<List<String>>()
 
     val bIsProgress = MutableLiveData(false)
     fun initArgs(args: ScanResultFragmentArgs) {
         bImageUri.postValue(Uri.parse(args.imageUri))
-        bKeywords.postValue(args.keywords)
+        bKeywords.postValue(args.keywords.toList().take(5))
 
     }
+
+
 
 
 }
