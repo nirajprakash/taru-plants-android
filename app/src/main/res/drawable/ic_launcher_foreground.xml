@@ -4,10 +4,10 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-  <group android:scaleX="0.63"
-      android:scaleY="0.63"
-      android:translateX="94.72"
-      android:translateY="94.72">
+  <group android:scaleX="0.6"
+      android:scaleY="0.6"
+      android:translateX="102.4"
+      android:translateY="102.4">
     <path
         android:pathData="M256,21.48C202.35,21.48 150.9,40.64 112.96,74.74C75.02,108.84 53.71,155.09 53.71,203.32C53.71,299.67 137.07,443.58 242.38,455.61C246.97,456.2 251.64,456.5 256.37,456.5C269.05,456.5 281.3,454.33 292.9,450.27C386.96,421.85 458.29,292.4 458.29,202.81C458.15,154.67 436.77,108.55 398.85,74.56C360.92,40.57 309.55,21.48 256,21.48Z"
         android:fillType="evenOdd">
@@ -18,8 +18,8 @@
             android:endX="256"
             android:endY="456.5"
             android:type="linear">
-          <item android:offset="0" android:color="#FFA5FFAE"/>
-          <item android:offset="1" android:color="#FF7EE088"/>
+          <item android:offset="0" android:color="#FFFFFFFF"/>
+          <item android:offset="1" android:color="#FFF2FFF3"/>
         </gradient>
       </aapt:attr>
     </path>
