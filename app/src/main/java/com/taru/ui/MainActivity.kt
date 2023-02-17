@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.splashscreen.SplashScreen;
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -34,7 +36,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
-
+        installSplashScreen()
+//        setTheme(R.style.Theme_Taru)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

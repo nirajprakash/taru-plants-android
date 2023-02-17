@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+
+
+        <item name="windowSplashScreenBackground">#29CD61</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.Taru</item>
+<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_logo_taru</item>-->
+
+<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBack</item>-->
+<!--        <item name="android:navigationBarColor">@color/colorBack</item>-->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+</resources>

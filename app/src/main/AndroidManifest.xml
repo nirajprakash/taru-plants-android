@@ -26,8 +26,10 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Taru">
+            android:theme="@style/Theme.AppSplash"
+            android:label="@string/app_name">
+<!--
+            android:theme="@style/Theme.Taru"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
