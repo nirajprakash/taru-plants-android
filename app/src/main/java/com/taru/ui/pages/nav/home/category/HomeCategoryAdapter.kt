@@ -1,6 +1,7 @@
 package com.taru.ui.pages.nav.home.category
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -26,11 +27,18 @@ class HomeCategoryAdapter(val mOnClick: (ModelCategory) -> Unit): ListAdapter<Mo
         holder.bind(getItem(position))
     }
 
-    inner class ItemViewHolder(var binding: HomeCategoryItemBinding) : ViewHolder(binding.root){
+    inner class ItemViewHolder(var binding: HomeCategoryItemBinding) : ViewHolder(binding.root),
+        View.OnClickListener {
         fun bind(category: ModelCategory) {
 //         binding.homeCategoryItemImage.load(R.drawable.pic_tool_category)
             binding.bModel = category
+            binding.bOnClick = this
             binding.executePendingBindings()
+        }
+
+        override fun onClick(v: View?) {
+            var posi = absoluteAdapterPosition
+            mOnClick(getItem(posi))
         }
 
 

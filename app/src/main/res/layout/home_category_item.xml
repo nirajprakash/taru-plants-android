@@ -23,6 +23,7 @@
         android:layout_marginEnd="@dimen/dp_12"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{bOnClick}"
 
         android:foreground="@drawable/dr_ripple_round_18">
 

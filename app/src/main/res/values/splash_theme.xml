@@ -5,14 +5,15 @@
 
 
         <item name="windowSplashScreenBackground">#29CD61</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/taru_logo_white_padding</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.Taru</item>
+
 <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_logo_taru</item>-->
 
 <!--        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBack</item>-->
 <!--        <item name="android:navigationBarColor">@color/colorBack</item>-->
-        <item name="android:windowLightStatusBar">true</item>
+<!--        <item name="android:windowLightStatusBar">true</item>-->
     </style>
 
 </resources>

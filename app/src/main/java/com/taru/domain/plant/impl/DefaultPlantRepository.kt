@@ -39,18 +39,26 @@ class DefaultPlantRepository @Inject constructor(
 
     private var cachedRemoteKeySource: CachedRemoteKeySource,
     val db: AppDatabase
-): PlantRepository {
-
+) : PlantRepository {
 
 
     @OptIn(ExperimentalPagingApi::class)
-    override  fun searchPaginated(q: String): Flow<PagingData<PlantSearchEntryEntity>> {
+    override fun searchPaginated(q: String): Flow<PagingData<PlantSearchEntryEntity>> {
         val pagingSourceFactory =
             { localPlantSource.getPlantsSearchPageSource(q) }
         return Pager(
-            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
+            config = PagingConfig(
+                RemotePlantsConstants.PAGE_SIZE,
+                maxSize = 300
+            ),//  enablePlaceholders = true
 
-            remoteMediator = PlantsSearchMediator(q, remotePlantsSource, localPlantSource, cachedRemoteKeySource, db),
+            remoteMediator = PlantsSearchMediator(
+                q,
+                remotePlantsSource,
+                localPlantSource,
+                cachedRemoteKeySource,
+                db
+            ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
@@ -63,10 +71,15 @@ class DefaultPlantRepository @Inject constructor(
         val pagingSourceFactory =
             { localPlantSource.getPlantsSearchPageSource("$filterForEdible:$q") }
         return Pager(
-            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
+            config = PagingConfig(
+                RemotePlantsConstants.PAGE_SIZE,
+                maxSize = 300
+            ),//  enablePlaceholders = true
 
-            remoteMediator = PlantsSearchFilterEdiblePartMediator(filterForEdible, q, remotePlantsSource,
-                localPlantSource, cachedRemoteKeySource, db),
+            remoteMediator = PlantsSearchFilterEdiblePartMediator(
+                filterForEdible, q, remotePlantsSource,
+                localPlantSource, cachedRemoteKeySource, db
+            ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
@@ -75,7 +88,10 @@ class DefaultPlantRepository @Inject constructor(
         val pagingSourceFactory =
             { localPlantSource.getPlantRecentSearchPageSource(q) }
         return Pager(
-            config = PagingConfig(RemotePlantsConstants.PAGE_SIZE, maxSize = 300),//  enablePlaceholders = true
+            config = PagingConfig(
+                RemotePlantsConstants.PAGE_SIZE,
+                maxSize = 300
+            ),//  enablePlaceholders = true
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
@@ -103,19 +119,19 @@ class DefaultPlantRepository @Inject constructor(
 
     override suspend fun getPlantDetail(plantId: Int): DomainResult<PlantDetailRoomData> {
         var localresult = localPlantSource.getPlantDetail(plantId)
-        if(localresult is LocalResult.Success){
+        if (localresult is LocalResult.Success) {
             return DomainResult.Success(localresult.data)
         }
 
         var remoteResult = remotePlantsSource.plantDetailById(plantId)
-        val remotePlant = if (remoteResult is ApiResult.Success && remoteResult.data!=null) {
+        val remotePlant = if (remoteResult is ApiResult.Success && remoteResult.data != null) {
             remoteResult.data.data
         } else {
             null
         }
         if (remotePlant == null) {
 
-            if(remoteResult is ApiResult.Exception){
+            if (remoteResult is ApiResult.Exception) {
                 remoteResult.throwable.printStackTrace()
             }
             return DomainResult.Failure(Throwable("Unable to get Plant"))
@@ -123,7 +139,7 @@ class DefaultPlantRepository @Inject constructor(
         }
 
         db.withTransaction {
-           var id = localPlantSource.addPlant(remotePlant.toRoomEntity())
+            var id = localPlantSource.addPlant(remotePlant.toRoomEntity())
 
             var ids = localPlantSource.addPlantImages(remotePlant.getImageEntities())
 
@@ -132,16 +148,16 @@ class DefaultPlantRepository @Inject constructor(
 
         localresult = localPlantSource.getPlantDetail(plantId)
 
-        if(localresult is LocalResult.Success){
+        if (localresult is LocalResult.Success) {
             return DomainResult.Success(localresult.data)
         }
-        return  DomainResult.Failure(Throwable("Finally failed"))
+        return DomainResult.Failure(Throwable("Finally failed"))
 
     }
 
     override suspend fun getRecentPlantList(): DomainResult<List<PlantEntity>> {
         var localresult = localPlantSource.getRecentPlantDetails()
-             return DomainResult.Success(localresult.data)
+        return DomainResult.Success(localresult.data)
         /*if(localresult is LocalResult.Exception){
             localresult.throwable.printStackTrace()
         }*/
@@ -153,21 +169,21 @@ class DefaultPlantRepository @Inject constructor(
 
     override suspend fun getCategoryList(): DomainResult<List<ModelCategory>> {
         var localresult = localPlantSource.getCategories()
-        if(localresult is LocalResult.Success){
+        if (localresult is LocalResult.Success) {
             return DomainResult.Success(localresult.data.items)
         }
-        if(localresult is LocalResult.Exception){
+        if (localresult is LocalResult.Exception) {
             localresult.throwable.printStackTrace()
         }
 
-        return  DomainResult.Failure(Throwable("Finally failed"))
+        return DomainResult.Failure(Throwable("Finally failed"))
 
 
     }
 
     override suspend fun clearData(): DomainResult.Success<Unit> {
         localPlantSource.removeAll()
-       withContext(Dispatchers.IO) { cachedRemoteKeySource.deleteAll() }
+        withContext(Dispatchers.IO) { cachedRemoteKeySource.deleteAll() }
         return DomainResult.Success(Unit)
     }
 }

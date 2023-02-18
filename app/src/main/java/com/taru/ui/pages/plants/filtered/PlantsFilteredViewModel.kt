@@ -1,5 +1,6 @@
 package com.taru.ui.pages.plants.filtered
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -18,12 +19,14 @@ internal class PlantsFilteredViewModel  @Inject constructor(
     private val plantsByFilterUseCase: GetPlantsByFilterUseCase
 ): ViewModelBase() {
 
+    var bTitle=  MutableLiveData<String>()
     var mFilterForEdible: Boolean = false
     var mQuery : String = ""
 
     fun initArgs(args: PlantsFilteredFragmentArgs) {
         mQuery = args.q?:""
         mFilterForEdible = args.filterForEdible
+        bTitle.postValue(args.name?:"")
     }
 /*    fun setQ(filterForEdible : Boolean, q: String){
         mQuery = q

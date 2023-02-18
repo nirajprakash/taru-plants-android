@@ -6,7 +6,7 @@
 
 
         <item name="windowSplashScreenBackground">#29CD61</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/taru_logo_white_padding</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.Taru</item>
 
@@ -15,6 +15,6 @@
         <!-- Status bar and Nav bar configs -->
 <!--        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBack</item>-->
 <!--        <item name="android:navigationBarColor">@color/colorBack</item>-->
-        <item name="android:windowLightStatusBar">false</item>
+<!--        <item name="android:windowLightStatusBar">false</item>-->
     </style>
 </resources>

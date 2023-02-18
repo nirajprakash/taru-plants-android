@@ -5,5 +5,9 @@
         &lt;!&ndash; <item name="colorPrimary">@color/my_light_primary</item> &ndash;&gt;
     </style>-->
 
-    <style name="Theme.Taru" parent="Base.Theme.Taru" />
+    <style name="Theme.Taru" parent="Base.Theme.Taru" >
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+
+    </style>
 </resources>

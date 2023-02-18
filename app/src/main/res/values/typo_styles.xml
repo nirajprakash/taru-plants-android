@@ -32,6 +32,12 @@
     <style name="Typo.Jl.Button.Junkie" parent="Typo.Jl.Button">
         <item name="fontFamily">@font/plusjakartasans_regular</item>
     </style>
+
+    <style name="Typo.Jl.Headline.Bold" parent="Typo.Jl.Headline">
+
+        <item name="fontFamily">@font/lilitaone_regular</item>
+    </style>
+
     <style name="Typo.Jl.Title" parent="TextAppearance.Material3.TitleMedium">
         <item name="fontFamily">@font/plusjakartasans_regular</item>
     </style>

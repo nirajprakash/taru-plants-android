@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_app"
-                app:title="Filter name"
+                app:title="@{bViewModel.bTitle}"
                 app:titleCentered="true" />
 
 

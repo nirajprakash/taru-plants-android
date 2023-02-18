@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  * Created by Niraj on 05-02-2023.
  */
 @AndroidEntryPoint
-class PlantsFilteredFragment : FragmentBase(true){
+class PlantsFilteredFragment : FragmentBase(true) {
 
     private val args: PlantsFilteredFragmentArgs by navArgs()
 
@@ -30,10 +30,11 @@ class PlantsFilteredFragment : FragmentBase(true){
     private lateinit var vBinding: PlantsFilteredFragmentBinding
 
     private lateinit var mListAdapterAutoComplete: SearchAutoCompleteAdapter
+
     //    private lateinit var mListAdapter: SearchPlantsAdapter
     private lateinit var mPagingAdapter: PlantsPagingAdapter
     private var plantsJob: Job? = null
-    private var recentJob: Job? = null
+//    private var recentJob: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,7 +52,7 @@ class PlantsFilteredFragment : FragmentBase(true){
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        mListAdapterAutoComplete = SearchAutoCompleteAdapter(){
+        mListAdapterAutoComplete = SearchAutoCompleteAdapter() {
 
         }
         /*  mListAdapter = SearchPlantsAdapter() {
@@ -60,38 +61,11 @@ class PlantsFilteredFragment : FragmentBase(true){
           }*/
 
         lifecycleScope.launchWhenCreated {
-//            vBinding.weatherImage.load(R.drawable.pic_weather)
 
-            /*   vBinding.searchViewRecyclerview.adapter = mListAdapterAutoComplete
-
-
-
-               var list = mutableListOf(
-                   ModelRecent(0), ModelRecent(1), ModelRecent(2),
-                   ModelRecent(3), ModelRecent(4), ModelRecent(5),
-                   ModelRecent(6), ModelRecent(7), ModelRecent(8), ModelRecent(9)
-               )
-
-
-               mListAdapterAutoComplete.submitList(list)*/
-         mViewModel.initArgs(args)
+            mViewModel.initArgs(args)
 
             initPagingAdapter()
             getPlantsSearchEntries()
-//            getRecentSearchEntries(q)
-
-            /*   vBinding.recyclerview.adapter = mListAdapter
-               var list2 = mutableListOf(
-                   ModelPlant(0), ModelPlant(1), ModelPlant(2),
-                   ModelPlant(3), ModelPlant(4), ModelPlant(5),
-                   ModelPlant(6), ModelPlant(7), ModelPlant(8), ModelPlant(9)
-               )
-
-
-               mListAdapter.submitList(list2)*/
-
-
-
 
             Log.d("SearchFragment: ", "callback: ")
             /*else{
@@ -117,7 +91,7 @@ class PlantsFilteredFragment : FragmentBase(true){
         }
     }
 
-    private  fun getPlantsSearchEntries(){
+    private fun getPlantsSearchEntries() {
         plantsJob?.cancel()
         plantsJob = lifecycleScope.launch {
             mViewModel.loadSearch().collectLatest { mPagingAdapter.submitData(it) }

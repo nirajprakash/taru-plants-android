@@ -3,12 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_app"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/splashFragment">
 
     <action android:id="@+id/action_global_to_Scan"
         app:destination="@id/scan"/>
     <action android:id="@+id/action_global_to_weather"
         app:destination="@id/weather"/>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.taru.ui.pages.splash.SplashFragment"
+        android:label="launcher"
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/navigate_to_home"
+            app:destination="@id/nav_home"
+
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_home"
@@ -18,6 +33,9 @@
 
         <action android:id="@+id/action_to_search"
             app:destination="@id/search"/>
+        <action android:id="@+id/action_to_filtered"
+            app:destination="@id/plantsFiltered"/>
+
     </fragment>
 
     <fragment
@@ -29,7 +47,7 @@
             app:destination="@id/plant_detail"/>
         <action android:id="@+id/action_to_search"
             app:destination="@id/search"/>
-    </fragment>
+        </fragment>
     <fragment
         android:id="@+id/nav_cure"
         android:name="com.taru.ui.pages.nav.cure.NavCureFragment"
@@ -116,6 +134,10 @@
         <argument android:name="q"
             app:argType="string"
             app:nullable="true" />
+        <argument android:name="name"
+            app:argType="string"
+            app:nullable="true" />
+
         <action android:id="@+id/navigate_to_plant_detail"
             app:destination="@id/plant_detail"/>
     </fragment>

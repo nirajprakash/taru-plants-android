@@ -122,7 +122,7 @@ class PlantsSearchFilterEdiblePartMediator @Inject constructor(
                 localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
                     plantsSearchEntryDto.toRoomEntity(
                         page*RemotePlantsConstants.PAGE_SIZE + index,
-                        q
+                        "${filterForEdible}:${q}"
                     )
                 })
                 cachedRemoteKeySource.insert(

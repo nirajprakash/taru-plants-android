@@ -27,15 +27,17 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                                                     private val getWeatherUseCase: GetWeatherUseCase,
                                                     private val getWeatherForecastUseCase: GetWeatherForecastUseCase
                                                     ): ViewModelBase(){
-    private val _mEventCategoryList = MutableLiveData<LiveDataEvent<List<ModelCategory>>>()
-    val mEventCategoryList: LiveData<LiveDataEvent<List<ModelCategory>>> = _mEventCategoryList
+//    private val _mEventCategoryList = MutableLiveData<LiveDataEvent<List<ModelCategory>>>()
+    val mCategoryList=  MutableLiveData<List<ModelCategory>>()
+    //= _mEventCategoryList
 
     val bCurrentWeather = MutableLiveData<WeatherCurrentRoomEntity>()
     init {
 
+        initData()
     }
 
-    fun initData(){
+    private fun initData(){
         getWeather()
         viewModelScope.launch {
             getPlantCategoriesUseCase().also {
@@ -43,7 +45,7 @@ internal class NavHomeViewModel @Inject constructor(private val navManager: NavM
                     is DomainResult.Success -> {
                         Log.d("TAG", "initList: ${it.value}")
                         it.value.let { list ->
-                            _mEventCategoryList.postValue(LiveDataEvent(list))
+                            mCategoryList.postValue(list)
                         }
                         /*mCurrentList = it.value.items
                         _mEventAds.postValue(LiveDataEvent(it.value.items))*/

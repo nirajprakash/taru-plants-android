@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.taru.R
 import com.taru.data.local.assets.entities.ModelCategory
@@ -45,6 +46,7 @@ class NavHomeFragment : FragmentBase(false) {
         mListAdapter = HomeCategoryAdapter {
                 navigateToFiltered(it)
         }
+
         /*{
             Log.d("AdListFragment", "AdListAdapter: $it")
             navigateToDetail(it.key)
@@ -59,48 +61,31 @@ class NavHomeFragment : FragmentBase(false) {
             vBinding.recyclerview.adapter = mListAdapter
 
 
-            /* layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                 override fun getSpanSize(position: Int): Int {
-                     return mListAdapter.getItemViewType(position)
-                 }
-             }*/
-            /*var list = mutableListOf(
-                DepreModelCategory(0), DepreModelCategory(1), DepreModelCategory(2),
-                DepreModelCategory(3), DepreModelCategory(4), DepreModelCategory(5),
-                DepreModelCategory(6), DepreModelCategory(7), DepreModelCategory(8), DepreModelCategory(9)
-            )
-
-
-            mListAdapter.submitList(list)*/
 
             vBinding.homeWeatherCard.homeWeatherCardImage.load(R.drawable.pic_weather)
             vBinding.homeScannerCard.homeScannerCardImage1.load(R.drawable.pic_scan_1)
             vBinding.homeScannerCard.homeScannerCardImage2.load(R.drawable.pic_scan_2)
             vBinding.homeScannerCard.homeScannerCardImage3.load(R.drawable.pic_scan_3)
 
-            mViewModel.initData()
+//            mViewModel.initData()
 //            throw RuntimeException("Test Crash")
 
-            /*mViewModel.mListStateParcel?.let {
 
-                Log.d("AdListAdapter", "listStae: ${it.toString()}")
-//                layoutManager.onRestoreInstanceState(it)
-//                mViewModel.saveListState(null)
-            }*/
 
         }
 
     }
 
     private fun navigateToFiltered(category: ModelCategory) {
-//        TODO("Not yet implemented")
+        Log.d("NavHomeFragment", "navigateToFiltered: $category")
+        findNavController().navigate(NavHomeFragmentDirections.actionToFiltered(category.q, category.title, category.filterForEdible))
     }
 
     override fun setupViewModelObservers() {
         super.setupViewModelObservers()
-        mViewModel.mEventCategoryList.observe(viewLifecycleOwner, LiveDataObserver{
+        mViewModel.mCategoryList.observe(viewLifecycleOwner) {
             mListAdapter.submitList(it)
 
-        })
+        }
     }
 }
