@@ -137,7 +137,10 @@ class PlantsSearchFilterEdiblePartMediator @Inject constructor(
                     )
                 )
                 // TODO add image reference
-                localPlantSource.addRecentSearch(PlantRecentSearchEntity(q= "${filterForEdible}:${q}", dt = (Date().time/1000).toInt(), imageUrl = null))
+                localPlantSource.addRecentSearch(PlantRecentSearchEntity(q= "${filterForEdible}:${q}",
+                    dt = (Date().time/1000).toInt(),
+                    refType = DatabaseConstants.Cached.REF_TYPE_PLANT_FILTER_EDIBLE_PART,
+                    imageUrl = null))
 
             }
 

@@ -67,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_plants_item_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/dp_12"
         app:layout_constraintDimensionRatio="16:6"
         android:id="@+id/search_plants_item_image"
         app:bindCoilSrc="@{bModel.imageUrl}"

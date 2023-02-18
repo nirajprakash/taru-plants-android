@@ -134,7 +134,10 @@ class PlantsSearchMediator @Inject constructor(
                     )
                 )
                 // TODO add image reference
-                localPlantSource.addRecentSearch(PlantRecentSearchEntity(q=q, dt = (Date().time/1000).toInt(), imageUrl = null))
+                localPlantSource.addRecentSearch(PlantRecentSearchEntity(q=q,
+                    dt = (Date().time/1000).toInt(),
+                    refType = DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH,
+                    imageUrl = null))
 
             }
 

@@ -72,15 +72,14 @@
                     android:layout_width="match_parent"
 
                     android:paddingBottom="@dimen/dp_200"
-                    android:layout_marginTop="@dimen/dp_12"
                     android:layout_height="match_parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
 
-                    android:paddingStart="@dimen/dp_24"
-                    android:paddingEnd="@dimen/dp_24"
+                    android:paddingStart="@dimen/dp_20"
+                    android:paddingEnd="@dimen/dp_20"
                     android:clipToPadding="false"
                     tools:listitem="@layout/search_plants_item"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

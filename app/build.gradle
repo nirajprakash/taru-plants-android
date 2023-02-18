@@ -4,6 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+    // Make sure that you have the Google services Gradle plugin
+    id 'com.google.gms.google-services'
+
+    // Add the Crashlytics Gradle plugin
+    id 'com.google.firebase.crashlytics'
 }
 
 def localPropertiesFile = rootProject.file("local.properties")
@@ -127,6 +132,15 @@ dependencies {
 
 // support thumbnail and gif with Glide
     implementation 'com.github.piasy:GlideImageViewFactory:1.8.1'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     // leaks
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 

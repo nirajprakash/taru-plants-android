@@ -17,6 +17,7 @@ data class PlantRecentSearchEntity(
     val id: Int = 0,
     val q: String,
     val dt: Int,
+    val refType: Int=0,
     val imageUrl: String?
 ) {
 

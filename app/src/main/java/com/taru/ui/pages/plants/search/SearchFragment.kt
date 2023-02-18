@@ -98,6 +98,10 @@ class SearchFragment : FragmentBase(true){
 
             mListAdapter.submitList(list2)*/
         }
+
+        vBinding.searchBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         vBinding.searchBar.text = args.q
 
         vBinding.searchView

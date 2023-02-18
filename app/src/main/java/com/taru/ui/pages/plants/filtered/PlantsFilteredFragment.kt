@@ -51,7 +51,10 @@ class PlantsFilteredFragment : FragmentBase(true) {
         super.onViewCreated(view, savedInstanceState)
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
-
+        vBinding.topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+            findNavController().popBackStack()
+        }
         mListAdapterAutoComplete = SearchAutoCompleteAdapter() {
 
         }

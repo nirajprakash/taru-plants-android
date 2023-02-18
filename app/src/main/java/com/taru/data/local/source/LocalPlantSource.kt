@@ -58,16 +58,16 @@ class LocalPlantSource @Inject constructor(
     }
 
     fun getPlantRecentSearchPageSource(q: String?): PagingSource<Int, PlantRecentSearchEntity> {
-        if (q != null) {
+        if (q != null && q.isNotEmpty()) {
             Log.d("LocalPlantSource", "getPlantRecentSearchPageSource not null: $q")
-            return plantRecentSearchDao.paginated("%$q%")
+            return plantRecentSearchDao.paginated("%$q%", DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH)
         }
         Log.d("LocalPlantSource", "getPlantRecentSearchPageSource null: $q")
-        return plantRecentSearchDao.paginated() // return pageSource
+        return plantRecentSearchDao.paginated(DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH) // return pageSource
     }
 
     suspend fun getPlantRecentSearchList() = withContext(Dispatchers.IO){
-       return@withContext LocalResult.Success(plantRecentSearchDao.list(DatabaseConstants.DEFAULT_LIST_SIZE))
+       return@withContext LocalResult.Success(plantRecentSearchDao.list(DatabaseConstants.DEFAULT_LIST_SIZE, DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH))
     }
 
 

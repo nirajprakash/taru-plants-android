@@ -39,9 +39,8 @@ class MainActivity : AppCompatActivity() {
 //        installSplashScreen()
 //        setTheme(R.style.Theme_Taru)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-//        setSupportActionBar(binding.toolbar)
+        setContentView(binding.root)  //        throw RuntimeException("Test Crash")
+        //        setSupportActionBar(binding.toolbar)
 
        /* val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
