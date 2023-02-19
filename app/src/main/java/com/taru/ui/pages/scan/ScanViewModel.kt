@@ -28,7 +28,10 @@ internal class ScanViewModel @Inject constructor(
 ) : ViewModelBase() {
 
     var mUri: Uri? = null
+
+    var bIsProgress = MutableLiveData(false)
     var bIsButtonEnabled = MutableLiveData(false)
+    var mIsButtonActive = false
     private val _mEventButtonAllowed = MutableLiveData<LiveDataEvent<Boolean>>()
     var mEventButtonAllowed: LiveData<LiveDataEvent<Boolean>> = _mEventButtonAllowed
     private val _mEventOnActionScan = MutableLiveData<LiveDataEvent<Boolean>>()
@@ -50,17 +53,26 @@ internal class ScanViewModel @Inject constructor(
 
     private fun isAllowed() {
         viewModelScope.launch {
+            bIsProgress.postValue(true)
+            if(mIsButtonActive){
+                bIsButtonEnabled.postValue(false)
+            }
             var isAllowedResult = isAllowedUseCase.invoke()
 
 
             if (isAllowedResult is DomainResult.Success) {
                 _mEventButtonAllowed.postValue(LiveDataEvent(isAllowedResult.value))
                 bIsButtonEnabled.postValue(isAllowedResult.value)
+                mIsButtonActive =  isAllowedResult.value
             } else {
                 _mEventButtonAllowed.postValue(LiveDataEvent(false))
                 bIsButtonEnabled.postValue(false)
             }
 
+            if(mIsButtonActive){
+                bIsButtonEnabled.postValue(true)
+            }
+            bIsProgress.postValue(false)
         }
     }
 
@@ -73,31 +85,43 @@ internal class ScanViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (mUri == null) return@launch
-            navigateToResult()
-            // TODO uncomment identify(organ, mUri!!)
+//            navigateToResult()
+            identify(organ, mUri!!)
         }
 
     }
 
     private suspend fun identify(organ: String, uri: Uri) {
 //        identifyUseCase.invoke("organ");
+
+        bIsProgress.postValue(true)
+
+        if(mIsButtonActive){
+            bIsButtonEnabled.postValue(false)
+        }
         var result = identifyUseCase.invoke(organ, uri)
         if (result is DomainResult.Success) {
             var message = result.value.keywords.joinToString(separator = ", ")
             bScanMessage.postValue(message)
+            navigateToResult(result.value.keywords.toTypedArray())
 
             Log.d("ScanViewModel", "identify: ${result.value}")
         }else {
             if(result is DomainResult.Failure){
+
                 result.throwable?.printStackTrace()
             }
         }
 
+        if(mIsButtonActive){
+            bIsButtonEnabled.postValue(true)
+        }
+        bIsProgress.postValue(false)
     }
 
-    private fun navigateToResult(){
+    private fun navigateToResult(keywords: Array<String>){
         if(mUri == null)return
-        navManager.navigate(ScanFragmentDirections.navigateToResult(mUri!!.toString(), arrayOf("Aswder", "water", "drink")))
+        navManager.navigate(ScanFragmentDirections.navigateToResult(mUri!!.toString(), keywords))
     }
 
 

@@ -101,6 +101,17 @@
             android:onClick="@{() -> bViewModel.onClickScan()}"
             app:shapeAppearanceOverlay="@style/Jl.App.ShapeAppearanceOverlay.circle"
             app:srcCompat="@drawable/ic_if_scan" />
-
+        <FrameLayout
+            android:background="@color/color_surface_54"
+            android:visibility="@{ bViewModel.bIsProgress ? View.VISIBLE : View.GONE}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/albums_progress_bar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

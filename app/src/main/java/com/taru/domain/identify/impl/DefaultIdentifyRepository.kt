@@ -47,17 +47,20 @@ class DefaultIdentifyRepository  @Inject constructor(
 /*        val compressedImageFile = Compressor.compress(context, uri) {
             default(width = 640, format = Bitmap.CompressFormat.JPEG)
         }*/
-        val localresult = remoteIdentifySource.identify(organ, file)
-        if(localresult is ApiResult.Success){
+        val apiResult = remoteIdentifySource.identify(organ, file)
+        if(apiResult is ApiResult.Success){
             var calender = Calendar.getInstance()
 //            calender.add(Calendar.DAY_OF_YEAR, -1);
 
             localLogSource.insert(IdentifyLogRoomEntity(dt=(calender.time.time/1000L).toInt()))
             // TODO add into log
 //            Log.d("DefaultIdentityRepository", "identify: ${localresult.data}")
-           return DomainResult.Success(localresult.data.toDomainModel(uri))
-        }else if(localresult is ApiResult.Exception){
-            localresult.throwable.printStackTrace()
+           return DomainResult.Success(apiResult.data.toDomainModel(uri))
+        }else if(apiResult is ApiResult.Exception){
+            apiResult.throwable.printStackTrace()
+        }else if(apiResult is ApiResult.Message){
+
+            return  DomainResult.Failure(Throwable("${apiResult.message}"))
         }
 
         return DomainResult.Failure(Throwable("some"))
@@ -66,6 +69,7 @@ class DefaultIdentifyRepository  @Inject constructor(
     override suspend fun isAllowed(): DomainResult<Boolean> {
         var countResult = localLogSource.getCountForDay()
 
+        Log.d("DefaultIdentityRepository", "isAllowed: $countResult")
         if(countResult< IdentifyConstants.ALLOWED_COUNT){
             return DomainResult.Success(true)
         }
