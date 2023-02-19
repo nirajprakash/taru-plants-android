@@ -34,7 +34,9 @@ internal class PlantDetailViewModel @Inject constructor(
     fun initArgs(args: PlantDetailFragmentArgs) {
         mPlantId = args.plantId
         viewModelScope.launch {
+            bIsProgress.postValue(true)
             getDetail()
+            bIsProgress.postValue(false)
         }
     }
 

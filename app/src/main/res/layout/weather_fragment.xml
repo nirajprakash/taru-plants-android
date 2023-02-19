@@ -28,8 +28,9 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/menu_app"
-                app:title="Taru"
+                app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
+                app:navigationIconTint="@color/color_on_surface_54"
+                app:title="Weather"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -82,7 +83,7 @@
                     android:paddingHorizontal="@dimen/dp_16"
                     android:paddingVertical="@dimen/dp_8"
 
-                    android:text="Partially Cloud"
+                    android:text='@{bViewModel.bCurrentWeather != null ? bViewModel.bCurrentWeather.weather.main :""}'
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/colorOnSurface"
                     app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +99,7 @@
                     android:layout_marginTop="@dimen/dp_12"
 
 
-                    android:text='@{String.format("%.1f",bViewModel.bCurrentWeather.attrs.temp)+" \u2103" }'
+                    android:text='@{bViewModel.bCurrentWeather != null ? String.format("%.1f",bViewModel.bCurrentWeather.attrs.temp)+" \u2103" : "" }'
 
 
                     android:textAppearance="@style/Typo.Jl.Headline.Large"
@@ -271,7 +272,7 @@
 
                     android:layout_marginTop="@dimen/dp_4"
 
-                    android:text="Next 15 days"
+                    android:text="Next 5 days"
 
                     android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/color_on_surface_54"
@@ -283,7 +284,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="@dimen/dp_24"
-                    android:layout_marginVertical="@dimen/dp_8"
+                    android:layout_marginVertical="@dimen/dp_12"
                     app:layout_constraintDimensionRatio="7:6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:cardBackgroundColor="@color/color_back_54"
@@ -306,6 +307,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+        <ProgressBar
+            android:visibility="@{ bViewModel.bIsProgress ? View.VISIBLE : View.GONE}"
+            android:id="@+id/albums_progress_bar"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

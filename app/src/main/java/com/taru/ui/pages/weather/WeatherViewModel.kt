@@ -29,6 +29,7 @@ internal class WeatherViewModel  @Inject constructor(
     private val _mEventForecastEntries = MutableLiveData<LiveDataEvent<List<ForecastEntryEntity>>>()
     val mEventForecastEntries: LiveData<LiveDataEvent<List<ForecastEntryEntity>>> = _mEventForecastEntries
 
+    var bIsProgress = MutableLiveData(false)
     fun initData() {
         getWeather()
     }
@@ -36,7 +37,7 @@ internal class WeatherViewModel  @Inject constructor(
     private fun getWeather() {
 
         viewModelScope.launch {
-
+            bIsProgress.postValue(true)
             getWeatherUseCase().also {
 
 
@@ -85,6 +86,8 @@ internal class WeatherViewModel  @Inject constructor(
                 }
 
             }
+
+            bIsProgress.postValue(false)
 
         }
     }

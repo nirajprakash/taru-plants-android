@@ -29,6 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_app"
+                app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
+                app:navigationIconTint="@color/color_on_surface_54"
                 app:title="Taru"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -149,7 +151,7 @@
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/plant_detail_section_region_chip_group"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_12"
                     android:layout_marginHorizontal="@dimen/dp_24"
@@ -216,6 +218,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <FrameLayout
+            android:background="?colorSurface"
+            android:visibility="@{ bViewModel.bIsProgress ? View.VISIBLE : View.GONE}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/albums_progress_bar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

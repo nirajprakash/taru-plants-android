@@ -32,7 +32,7 @@
                 app:navigationIcon="@drawable/round_keyboard_arrow_left_24"
                 app:navigationIconTint="@color/color_on_surface_54"
 
-                app:title="Leaf or Flower"
+                app:title="Scan Leaf or Flower"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -91,9 +91,11 @@
             app:menu="@menu/scan_menu" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+           style="@style/Widget.Material3.FloatingActionButton.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+
             android:enabled="@{bViewModel.bIsButtonEnabled}"
           android:layout_gravity="center_horizontal|bottom"
             android:onClick="@{() -> bViewModel.onClickScan()}"

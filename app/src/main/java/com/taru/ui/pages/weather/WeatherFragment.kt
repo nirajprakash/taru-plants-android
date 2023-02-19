@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -35,6 +37,7 @@ class WeatherFragment : FragmentBase(true) {
     private var colorSurface: Int = Color.WHITE
     private var colorOnSurface: Int = Color.BLACK
 
+
     private var mLineChartBinderHelper: LineChartBinderHelper = LineChartBinderHelper()
     private val mViewModel: WeatherViewModel by viewModels()
     private lateinit var vBinding: WeatherFragmentBinding
@@ -56,7 +59,10 @@ class WeatherFragment : FragmentBase(true) {
         super.onViewCreated(view, savedInstanceState)
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
-
+        vBinding.topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+            findNavController().popBackStack()
+        }
         lifecycleScope.launchWhenCreated {
             vBinding.weatherImage.load(R.drawable.pic_weather)
             colors()

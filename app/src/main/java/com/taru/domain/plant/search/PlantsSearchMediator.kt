@@ -116,12 +116,13 @@ class PlantsSearchMediator @Inject constructor(
                 val nextKey = page + 1
 
 
-                localPlantSource.addAll(remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
+                var plants = remoteData.data.mapIndexed { index, plantsSearchEntryDto ->
                     plantsSearchEntryDto.toRoomEntity(
                         page*RemotePlantsConstants.PAGE_SIZE + index,
                         q
                     )
-                })
+                }
+                localPlantSource.addAll(plants)
                 cachedRemoteKeySource.insert(
                     CachedRemoteKeyEntity(
                         nextKey = nextKey,
@@ -137,7 +138,7 @@ class PlantsSearchMediator @Inject constructor(
                 localPlantSource.addRecentSearch(PlantRecentSearchEntity(q=q,
                     dt = (Date().time/1000).toInt(),
                     refType = DatabaseConstants.Cached.REF_TYPE_PLANT_SEARCH,
-                    imageUrl = null))
+                    imageUrl = plants.firstOrNull { plantSearchEntryEntity -> plantSearchEntryEntity.imageUrl!=null }?.imageUrl))
 
             }
 

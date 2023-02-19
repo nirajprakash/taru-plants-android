@@ -1,6 +1,7 @@
 package com.taru.ui.pages.plants.search
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -25,6 +26,8 @@ internal class SearchViewModel @Inject constructor(
     private val recentPlantByQueryUseCase: GetPlantRecentSearchByQueryUseCase
 ): ViewModelBase() {
 
+    var bIsButtonEnabled = MutableLiveData(false)
+    var bIsProgress= MutableLiveData(false)
     var mQuery : String = ""
 
     fun initArgs(args: SearchFragmentArgs) {
@@ -33,6 +36,12 @@ internal class SearchViewModel @Inject constructor(
     fun setQ(q: String){
         mQuery = q
     }
+
+    fun setProgress(progress: Boolean) {
+//        TODO("Not yet implemented")
+        bIsProgress.postValue(progress)
+    }
+
 
     fun loadSearch(): Flow<PagingData<PlantSearchEntryEntity>> {
         var result = plantsByQueryUseCase.invoke(mQuery)
@@ -54,5 +63,6 @@ internal class SearchViewModel @Inject constructor(
         var result = recentPlantByQueryUseCase.invoke(q)
         return result.cachedIn(viewModelScope)
     }
+
 
 }

@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import com.taru.databinding.SearchFragmentBinding
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.plants.search.autocomplete.SearchAutoCompleteAdapter
@@ -39,6 +40,7 @@ class SearchFragment : FragmentBase(true){
     private lateinit var mPagingAdapter: PlantsPagingAdapter
     private lateinit var mPagingAdapterRecent: RecentPagingAdapter
     private var plantsJob: Job? = null
+    private var plantsLoadJob: Job? = null
     private var recentJob: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -173,6 +175,7 @@ class SearchFragment : FragmentBase(true){
         }
         vBinding.searchViewRecyclerview.adapter = mPagingAdapterRecent
 
+
         mPagingAdapterRecent.addLoadStateListener { loadState ->
             Log.d("SearchFragment", "loadState:  ${loadState}")
             /* binding.articleList.isVisible = loadState.refresh is LoadState.NotLoading
@@ -183,8 +186,23 @@ class SearchFragment : FragmentBase(true){
 
     private  fun getPlantsSearchEntries(){
         plantsJob?.cancel()
+
+        plantsLoadJob?.cancel()
         plantsJob = lifecycleScope.launch {
-            mViewModel.loadSearch().collectLatest { mPagingAdapter.submitData(it) }
+            mViewModel.loadSearch().collectLatest {
+                mPagingAdapter.submitData(it) }
+            Log.d("SearchFragment", "getPlantsSearchEntries: job")
+
+        }
+        plantsLoadJob = lifecycleScope.launch {
+            mPagingAdapter.loadStateFlow.collectLatest {
+                if(it.refresh is LoadState.Loading){
+                    mViewModel.setProgress(true)
+                }else{
+                    mViewModel.setProgress(false)
+
+                }
+}
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }
@@ -193,10 +211,15 @@ class SearchFragment : FragmentBase(true){
     private  fun getRecentSearchEntries(q: String?){
         recentJob?.cancel()
         recentJob = lifecycleScope.launch {
-            mViewModel.loadRecentSearch(q).collectLatest { mPagingAdapterRecent.submitData(it) }
+
+            mViewModel.loadRecentSearch(q).collectLatest {
+
+
+                mPagingAdapterRecent.submitData(it) }
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }
+
     }
 
 }

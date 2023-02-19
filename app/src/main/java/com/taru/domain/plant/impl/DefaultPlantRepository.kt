@@ -44,8 +44,9 @@ class DefaultPlantRepository @Inject constructor(
 
     @OptIn(ExperimentalPagingApi::class)
     override fun searchPaginated(q: String): Flow<PagingData<PlantSearchEntryEntity>> {
+       var qFormatted = q.lowercase()
         val pagingSourceFactory =
-            { localPlantSource.getPlantsSearchPageSource(q) }
+            { localPlantSource.getPlantsSearchPageSource(qFormatted) }
         return Pager(
             config = PagingConfig(
                 RemotePlantsConstants.PAGE_SIZE,
@@ -53,7 +54,7 @@ class DefaultPlantRepository @Inject constructor(
             ),//  enablePlaceholders = true
 
             remoteMediator = PlantsSearchMediator(
-                q,
+                qFormatted,
                 remotePlantsSource,
                 localPlantSource,
                 cachedRemoteKeySource,
@@ -68,8 +69,10 @@ class DefaultPlantRepository @Inject constructor(
         filterForEdible: Boolean,
         q: String
     ): Flow<PagingData<PlantSearchEntryEntity>> {
+        val qFormatted = q.lowercase()
+
         val pagingSourceFactory =
-            { localPlantSource.getPlantsSearchPageSource("$filterForEdible:$q") }
+            { localPlantSource.getPlantsSearchPageSource("$filterForEdible:$qFormatted") }
         return Pager(
             config = PagingConfig(
                 RemotePlantsConstants.PAGE_SIZE,
@@ -77,7 +80,7 @@ class DefaultPlantRepository @Inject constructor(
             ),//  enablePlaceholders = true
 
             remoteMediator = PlantsSearchFilterEdiblePartMediator(
-                filterForEdible, q, remotePlantsSource,
+                filterForEdible, qFormatted, remotePlantsSource,
                 localPlantSource, cachedRemoteKeySource, db
             ),
             pagingSourceFactory = pagingSourceFactory
@@ -85,8 +88,11 @@ class DefaultPlantRepository @Inject constructor(
     }
 
     override fun recentSearchPaginated(q: String?): Flow<PagingData<PlantRecentSearchEntity>> {
+        val qFormatted = q?.lowercase()
         val pagingSourceFactory =
-            { localPlantSource.getPlantRecentSearchPageSource(q) }
+            { localPlantSource.getPlantRecentSearchPageSource(qFormatted) }
+
+
         return Pager(
             config = PagingConfig(
                 RemotePlantsConstants.PAGE_SIZE,

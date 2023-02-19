@@ -28,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:logo="@drawable/ic_logo_taru"
-                app:menu="@menu/menu_app"
                 app:title="Taru"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -95,7 +94,7 @@
                 android:id="@+id/nav_plants_checkout_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Checkout Plants"
+                android:text="Recent Plants"
                 android:paddingStart="@dimen/dp_24"
                 android:paddingEnd="@dimen/dp_24"
 
@@ -111,6 +110,8 @@
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_height="wrap_content"
                 android:visibility="@{bViewModel.bEmptyPlants ? View.GONE : View.VISIBLE }"
+
+                android:nestedScrollingEnabled="false"
 
                 android:paddingStart="@dimen/dp_24"
                 android:paddingEnd="@dimen/dp_24"

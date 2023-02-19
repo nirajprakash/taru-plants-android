@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/dp_64"
+        android:layout_marginBottom="@dimen/dp_80"
         android:textAppearance="@style/Typo.Jl.Headline.Bold"/>
 
 
