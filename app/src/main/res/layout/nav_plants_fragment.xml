@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:logo="@drawable/ic_logo_taru"
-                app:title="Taru"
+                app:title="Recent"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
