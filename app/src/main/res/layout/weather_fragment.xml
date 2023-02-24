@@ -272,7 +272,7 @@
 
                     android:layout_marginTop="@dimen/dp_4"
 
-                    android:text="Next 5 days"
+                    android:text="Upcoming days"
 
                     android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
                     android:textColor="@color/color_on_surface_54"

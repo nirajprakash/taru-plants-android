@@ -1,19 +1,21 @@
 package com.taru.domain.chart.mpchart.axis
 
 import android.hardware.SensorManager
+import android.util.Log
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Niraj on 18-09-2022.
  */
-class MpChartTimestampAxisFormatter(var sensorDelay: Int = SensorManager.SENSOR_DELAY_NORMAL) : ValueFormatter() {
+class MpChartTimestampAxisFormatter() : ValueFormatter() {
 
 
 
-    fun setDelay(delay: Int){
-        sensorDelay = delay;
-    }
+
+
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
 
        /* val LENGTH_SAMPLE: Int = mModelLineChart.getSampleLength()
@@ -25,7 +27,16 @@ class MpChartTimestampAxisFormatter(var sensorDelay: Int = SensorManager.SENSOR_
         }*/
 //        var delay  = MAP_DELAY_TYPE_TO_DELAY.get(sensorDelay)
 //        var totalDelay = value*delay;
-        return  "mon"
+        var calender = Calendar.getInstance()
+        calender.add(Calendar.SECOND, value.toInt())
+//        calender.time = Date(value.toLong()*1000)
+        val sdf = SimpleDateFormat("EEE", Locale.getDefault())
+        val d = calender.time
+        Log.d("MpChartTimestampAxisFormatter", "$value: $d")
+        val dayOfTheWeek: String = sdf.format(d)
+
+        Log.d("MpChartTimestampAxisFormatter", "week: $dayOfTheWeek")
+        return  dayOfTheWeek
 //        return super.getAxisLabel(value, axis)
     }
 

@@ -24,8 +24,8 @@ android {
         applicationId "com.taru"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
         buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
         buildConfigField "String", "PLANTNET_KEY", localProperties['plantnetKey']

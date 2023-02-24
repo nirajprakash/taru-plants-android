@@ -8,7 +8,7 @@
     </style>
     <style name="Typo.Jl.Headline.Large" parent="Typo.Jl.Headline">
 
-        <item name="android:textSize">@dimen/sp_108</item>
+        <item name="android:textSize">@dimen/sp_96</item>
     </style>
 
 

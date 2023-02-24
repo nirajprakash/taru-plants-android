@@ -162,7 +162,8 @@ class WeatherFragment : FragmentBase(true) {
             //Formatting
 
             xAxis.valueFormatter = MpChartTimestampAxisFormatter()
-            xAxis.granularity = 1f
+//            xAxis.granularity = 1f
+            xAxis.labelCount = 4
             xAxis.setDrawAxisLine(false)
             xAxis.setDrawGridLines(false)
             xAxis.setDrawLabels(true)
