@@ -47,5 +47,10 @@ class NavAboutFragment: FragmentBase(false) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://junkielabs.in"))
             startActivity(intent)
         }
+
+        vBinding.buttonPrivacy.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://nirajprakash.github.io/documents/taru/privacy.html"))
+            startActivity(intent)
+        }
     }
 }

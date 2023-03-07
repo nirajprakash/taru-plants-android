@@ -122,6 +122,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_detail1"/>
 
+                <Button
+                    android:id="@+id/button_privacy"
+
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginHorizontal="@dimen/dp_40"
+                    android:textColor="@color/colorOnSurface"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_detail2"
+
+                    app:layout_constraintBottom_toTopOf="@+id/nav_about_fragment_line"
+                    android:textAppearance="@style/Typo.Jl.Button"
+                    android:backgroundTint="@color/colorCard"
+                    android:text="Open Privacy Policy" />
 
                 <View
                     android:id="@+id/nav_about_fragment_line"
@@ -132,7 +149,7 @@
                     android:background="@color/color_on_surface_38"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nav_about_fragment_detail2"
+                    app:layout_constraintTop_toBottomOf="@id/button_privacy"
                     app:layout_constraintWidth_percent="0.7"
                     app:layout_constraintBottom_toTopOf="@id/nav_about_fragment_detail3"/>
 
