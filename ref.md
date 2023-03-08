@@ -26,6 +26,11 @@
 
 # testing
 
+## project
+
+- https://medium.com/huawei-developers/testing-the-modules-of-your-mvvm-clean-architecture-android-project-part-1-creating-your-618faf3da6d9
+
+
 ## test doubles
 
 - https://developer.android.com/training/testing/fundamentals/test-doubles
@@ -35,6 +40,9 @@
 - https://github.com/robolectric/deckard-gradle233
 
 - test doubles : shadows 
+
+
+
 
 ## nav graph 
 
