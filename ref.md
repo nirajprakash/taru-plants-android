@@ -11,6 +11,8 @@
 - https://github.com/gastsail/CocktailApp/blob/master/app/src/main/java/com/g/tragosapp/domain/DefaultCocktailRepository.kt
 - https://github.com/igorwojda/android-showcase
 
+## ci-cd
+- https://github.com/igorwojda/android-showcase#ci-pipeline
 
 ## weather api
 
