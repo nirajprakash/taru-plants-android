@@ -7,15 +7,25 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
  * Created by Niraj on 13-03-2023.
  */
-object MockRetrofit {
+class MockRetrofit(var baseUrl: String) {
 //    val mChannelSize: Int by lazy { 23 }
 
-    val retrofitWeather: Retrofit by lazy {
+
+
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BuildConfig.WEATHER_KEY)
+            .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
+
+//    fun testRetrofit(baseUrl: String): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(baseUrl)
+//            .addConverterFactory(MoshiConverterFactory.create())
+//            .build()
+////            .create(TestApis::class.java)
+//    }
 
 
 }
