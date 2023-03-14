@@ -2,7 +2,6 @@ package com.taru.data.remote.weather
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
-import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
@@ -30,7 +29,7 @@ import java.net.HttpURLConnection
 @RunWith(AndroidJUnit4::class)
 class RemoteWeatherSourceTest {
 
-    @MockK
+//    @MockK
     lateinit var apiWeather: ApiWeather
 
     private lateinit var mockWebServer: MockWebServer
@@ -74,8 +73,8 @@ class RemoteWeatherSourceTest {
             .setBody(json)
         mockWebServer.enqueue(expectedResponse)
         val actualResponse = apiWeather.getCurrent(22f, 72f)
-        assertThat(actualResponse.code()).isEqualTo(HttpURLConnection.HTTP_OK)
-        assertThat(actualResponse.body()).isEqualTo(currentWeather)
+        Truth.assertThat(actualResponse.code()).isEqualTo(HttpURLConnection.HTTP_OK)
+        Truth.assertThat(actualResponse.body()).isEqualTo(currentWeather)
 //        val result  = actualResponse.body()
 //        println("result: $result")
     }
