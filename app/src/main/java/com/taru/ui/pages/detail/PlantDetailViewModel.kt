@@ -51,7 +51,6 @@ internal class PlantDetailViewModel @Inject constructor(
         if(mPlantId == -1){
             return
         }
-        bIsProgress.postValue(true)
         var result = getPlantDetailByIdUseCase.invoke(mPlantId)
         if (result is DomainResult.Success) {
             result.value.let {

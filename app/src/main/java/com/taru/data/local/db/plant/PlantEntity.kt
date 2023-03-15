@@ -19,7 +19,7 @@ data class PlantEntity(
     @PrimaryKey(autoGenerate = false)
     val id: Int ,
     var speciesId: Int?,
-    val imageUrl: String,
+    val imageUrl: String, // TODO make this nullable
     val vegetable: Boolean?,
     val commonName: String?,
     val familyName: String?,

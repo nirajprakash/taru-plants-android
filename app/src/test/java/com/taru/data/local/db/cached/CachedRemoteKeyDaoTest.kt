@@ -56,15 +56,15 @@ class CachedRemoteKeyDaoTest {
     @Test
     fun getKey() = runTest {
         cachedRemoteKeyDao.insert(
-            CachedRemoteKeyEntity(1, refType =  2, refId = 4, q =  "sa", nextKey = 2, prevKey = null, isEndReached = false),
-            CachedRemoteKeyEntity(2, refType =  2, refId = 4, q =  "sa", nextKey = 3, prevKey = null, isEndReached = false),
-            CachedRemoteKeyEntity(3, refType =  2, refId = 4, q =  "sa", nextKey = null, prevKey = null, isEndReached = true),
-            CachedRemoteKeyEntity(3, refType =  2, refId = 4, q =  "sa", nextKey = null, prevKey = null, isEndReached = true))
+            CachedRemoteKeyEntity(1, refType =  2, refId = 1, q =  "sa", nextKey = 2, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity(2, refType =  2, refId = 2, q =  "sa", nextKey = 3, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity(3, refType =  2, refId = 3, q =  "sa", nextKey = null, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity(4, refType =  2, refId = 4, q =  "sa", nextKey = null, prevKey = null, isEndReached = true))
 
         // Then
-        val value = cachedRemoteKeyDao.getKey(refType = 2, q = "sa", refId = 4)
+        val value = cachedRemoteKeyDao.getKey(refType = 2, q = "sa", refId = 2)
         Truth.assertThat(value.size).isEqualTo(1)
-        Truth.assertThat(value[0].id).isEqualTo(3)
+        Truth.assertThat(value[0].id).isEqualTo(2)
 
     }
 
