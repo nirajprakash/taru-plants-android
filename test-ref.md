@@ -65,6 +65,11 @@
   <!-- ** -->
 - https://proandroiddev.com/how-to-better-unit-testing-42a956e005d6
 
+# mockk
+
+ ## spy on static call
+
+ - https://notwoods.github.io/mockk-guidebook/docs/mocking/static/
 
 # unit testing
 

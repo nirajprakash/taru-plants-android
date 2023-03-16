@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import me.shouheng.compress.Compress
 import me.shouheng.compress.concrete
+import java.io.File
 import java.util.*
 import javax.inject.Inject
 
@@ -39,10 +40,7 @@ class DefaultIdentifyRepository  @Inject constructor(
     //    fun identify()
     override suspend fun identify(organ: String, uri: Uri): DomainResult<ModelIdentified> {
 
-        val file  = Compress.with(context, uri).concrete {
-            withMaxHeight(500f)
-            withMaxWidth(500f)
-        }.get(Dispatchers.IO)
+        val file  = compressFile(uri)
 
 /*        val compressedImageFile = Compressor.compress(context, uri) {
             default(width = 640, format = Bitmap.CompressFormat.JPEG)
@@ -76,6 +74,15 @@ class DefaultIdentifyRepository  @Inject constructor(
         return DomainResult.Success(false)
 
 
+    }
+
+     suspend fun compressFile(uri: Uri): File {
+        val file  = Compress.with(context, uri).concrete {
+            withMaxHeight(500f)
+            withMaxWidth(500f)
+        }.get(Dispatchers.IO)
+
+        return file
     }
 
 }
