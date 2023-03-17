@@ -68,7 +68,7 @@ class DefaultIdentifyRepository  @Inject constructor(
         var countResult = localLogSource.getCountForDay()
 
         Log.d("DefaultIdentityRepository", "isAllowed: $countResult")
-        if(countResult< IdentifyConstants.ALLOWED_COUNT){
+        if(countResult<= IdentifyConstants.ALLOWED_COUNT){
             return DomainResult.Success(true)
         }
         return DomainResult.Success(false)
