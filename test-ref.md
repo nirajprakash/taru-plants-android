@@ -83,3 +83,6 @@
 
 ## flow
 - https://github.com/cashapp/turbine
+
+## livedata
+- https://github.com/nickbutcher/plaid/tree/main/test_shared/src/main/java/io/plaidapp/test/shared

@@ -19,4 +19,7 @@ interface CachedRemoteKeyDao: RoomDaoBase<CachedRemoteKeyEntity> {
     @Query("DELETE FROM CachedRemoteKey")
     fun deleteAll()
 
+    @Query("Select count(*) from CachedRemoteKey")
+    fun getCount(): Int
+
 }

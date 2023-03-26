@@ -56,15 +56,36 @@ class CachedRemoteKeyDaoTest {
     @Test
     fun getKey() = runTest {
         cachedRemoteKeyDao.insert(
-            CachedRemoteKeyEntity(1, refType =  2, refId = 1, q =  "sa", nextKey = 2, prevKey = null, isEndReached = false),
-            CachedRemoteKeyEntity(2, refType =  2, refId = 2, q =  "sa", nextKey = 3, prevKey = null, isEndReached = false),
-            CachedRemoteKeyEntity(3, refType =  2, refId = 3, q =  "sa", nextKey = null, prevKey = null, isEndReached = false),
-            CachedRemoteKeyEntity(4, refType =  2, refId = 4, q =  "sa", nextKey = null, prevKey = null, isEndReached = true))
+            CachedRemoteKeyEntity( refType =  2, refId = 1, q =  "sa", nextKey = 2, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity( refType =  2, refId = 2, q =  "sa", nextKey = 3, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity( refType =  2, refId = 3, q =  "sa", nextKey = null, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity( refType =  2, refId = 4, q =  "sa", nextKey = null, prevKey = null, isEndReached = true))
 
         // Then
         val value = cachedRemoteKeyDao.getKey(refType = 2, q = "sa", refId = 2)
         Truth.assertThat(value.size).isEqualTo(1)
         Truth.assertThat(value[0].id).isEqualTo(2)
+
+    }
+
+
+    @Test
+    fun `test unique index replace old`() = runTest {
+        cachedRemoteKeyDao.insert(
+            CachedRemoteKeyEntity( refType =  2, refId = 2, q =  "sa", nextKey = 2, prevKey = null, isEndReached = false),
+            CachedRemoteKeyEntity( refType =  2, refId = 2, q =  "sa", nextKey = 2, prevKey = null, isEndReached = true)
+        )
+
+        // Then
+        val value = cachedRemoteKeyDao.getKey(refType = 2, q = "sa", refId = 2)
+        val count = cachedRemoteKeyDao.getCount()
+
+//        println("keys: $value")
+//        println("keys: $count")
+        Truth.assertThat(count).isEqualTo(1)
+        /* id should of second*/
+        Truth.assertThat(value[0].isEndReached).isEqualTo(true)
+//        Truth.assertThat(value[0].id).isEqualTo(2)
 
     }
 
