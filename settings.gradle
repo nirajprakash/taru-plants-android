@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Taru"
 include ':app'
+include ':shared-test'

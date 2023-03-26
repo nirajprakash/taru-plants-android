@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+apply from: '../shared_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
+android {
+    compileSdk 33
+    compileOptions{
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+}

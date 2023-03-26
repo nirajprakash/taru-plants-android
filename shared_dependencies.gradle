@@ -1,0 +1,19 @@
+//plugins {
+//    id 'kotlin-kapt'
+//    id 'com.google.dagger.hilt.android'
+//
+//}
+
+android {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+kapt {
+    correctErrorTypes true
+}
+dependencies {
+    implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'androidx.core:core-ktx:1.9.0'
+    kapt "com.google.dagger:hilt-compiler:2.44"
+}
