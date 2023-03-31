@@ -26,10 +26,9 @@ import java.net.HttpURLConnection
  * Created by Niraj on 12-03-2023.
  */
 // https://github.com/sachin1kumar/Retrofit-Testing/blob/master/app/src/test/java/com/manager/retrofitesting/RequestViewModelTest.kt
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class RemoteWeatherSourceTest {
 
-//    @MockK
     lateinit var apiWeather: ApiWeather
 
     private lateinit var mockWebServer: MockWebServer
@@ -41,7 +40,7 @@ class RemoteWeatherSourceTest {
         mockWebServer = MockWebServer()
         mockWebServer.start()
         var baseUrl = mockWebServer.url("/").toString()
-        println("MockWebServer url: ${baseUrl}")
+//        println("MockWebServer url: ${baseUrl}")
         apiWeather = MockRetrofit(baseUrl).retrofit.create(ApiWeather::class.java)
 
 

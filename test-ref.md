@@ -15,6 +15,23 @@
 ## difference
 - https://stackoverflow.com/questions/34397524/whats-the-difference-between-src-androidtest-and-src-test-folders
 
+## unit test
+<!-- ** -->
+- https://betterprogramming.pub/android-unit-testing-basics-3e7075a432a1
+
+- https://medium.com/android-news/better-testing-with-mvvm-ae74d4d872bd
+<!-- mockwebserver,  -->
+- https://www.howtodoandroid.com/mvvm_unit_testing_android/
+
+- https://ayusch.com/unit-testing-and-why-should-you-start-writing-unit-tests/
+
+<!-- annotations, junit methods -->
+- https://ayusch.com/unit-testing-in-android/
+
+<!-- mockk vs mockito -->
+- https://blog.logrocket.com/unit-testing-kotlin-projects-with-mockk-vs-mockito/#mockk-vs-mockito
+
+
 ## android test
 
 - https://medium.com/stepstone-tech/better-tests-with-androidxs-activityscenario-in-kotlin-part-1-6a6376b713ea

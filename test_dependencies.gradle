@@ -12,11 +12,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.6'
     testImplementation "androidx.test.ext:junit-ktx:1.1.5"
-    testImplementation "com.google.truth:truth:1.1.3"
-    testImplementation "androidx.test.ext:truth:1.5.0"
-    testImplementation "io.mockk:mockk:1.13.4"
     testImplementation "androidx.arch.core:core-testing:2.2.0"
+
+    testImplementation "io.mockk:mockk:1.13.4"
     testImplementation "org.robolectric:robolectric:4.9.2"
+
+
+    testImplementation "androidx.test.ext:truth:1.5.0"
+    // truth assertion
+    testImplementation "com.google.truth:truth:1.1.3"
 
     // for retrofit
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
@@ -28,7 +32,7 @@ dependencies {
     kaptTest 'com.google.dagger:hilt-android-compiler:2.44'
 
 
-// optional - Test helpers
+// optional - Room Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
     // alternatively - without Android dependencies for tests

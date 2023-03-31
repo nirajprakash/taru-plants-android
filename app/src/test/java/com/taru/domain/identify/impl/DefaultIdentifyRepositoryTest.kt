@@ -9,9 +9,11 @@ import com.taru.data.base.remote.ApiResult
 import com.taru.data.local.source.LocalLogSource
 import com.taru.data.remote.identify.RemoteIdentifySource
 import com.taru.data.remote.identify.dto.PlantIdentifyDto
+import com.taru.data.remote.identify.toDomainModel
 import com.taru.domain.base.result.DomainResult
 import com.taru.domain.base.result.assertThat
 import com.taru.domain.identify.IdentifyConstants
+import com.taru.domain.identify.model.ModelIdentified
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -80,8 +82,12 @@ class DefaultIdentifyRepositoryTest {
             PlantIdentifyDto("English", listOf())
         )
 
-        var result = defaultIdentifyRepository.identify("ds", Uri.EMPTY)
-//        println("result:  $result")
+        val result = defaultIdentifyRepository.identify("leaf", Uri.parse("file://plant-image.jpg"))
+
+        println("result : ${result}")
+        val expectedResult = ModelIdentified(listOf(),"file://plant-image.jpg")
+        assertThat(result).isEqualTo(DomainResult.Success(expectedResult))
+
 
 
 //        mockkStatic(Compress::class)

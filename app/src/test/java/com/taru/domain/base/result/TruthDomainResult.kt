@@ -31,6 +31,6 @@ fun <T> success(): Subject.Factory<TruthDomainResultSubject<T>, DomainResult<T>>
     return Subject.Factory { failureMetadata, target -> TruthDomainResultSubject(failureMetadata, target) }
 }
 
-fun <T> assertThat(food: DomainResult<T>): TruthDomainResultSubject<T> {
-    return assertAbout(success<T>()).that(food)
+fun <T> assertThat(domainResult: DomainResult<T>): TruthDomainResultSubject<T> {
+    return assertAbout(success<T>()).that(domainResult)
 }

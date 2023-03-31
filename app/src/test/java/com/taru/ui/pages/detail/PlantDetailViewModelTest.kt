@@ -97,7 +97,8 @@ class PlantDetailViewModelTest {
         Truth.assertThat(progressList[1]).isEqualTo(true)
         Truth.assertThat(dataList.size).isEqualTo(1)
         Truth.assertThat(dataList[0]).isEqualTo(plantDetail)
-
+        plantDetailViewModel.bData.removeObserver(dataObserver)
+        plantDetailViewModel.bIsProgress.removeObserver(isProgressObserver)
 //
 //        val loadingState = forecastViewStateSlots[0]
 //        Truth.assertThat(loadingState.status).isEqualTo(Status.LOADING)
