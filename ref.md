@@ -151,3 +151,8 @@
 
 ## farming guide
 - https://www.agrifarming.in/
+
+
+## leaks: BottomNavigationView
+
+- https://stackoverflow.com/a/65456408

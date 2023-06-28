@@ -10,6 +10,7 @@ import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withCreated
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
  * Created by Niraj on 14-01-2023.
  */
 @AndroidEntryPoint
-class SearchFragment : FragmentBase(true){
+class SearchFragment : FragmentBase(true) {
 
     private val args: SearchFragmentArgs by navArgs()
 
@@ -36,7 +37,8 @@ class SearchFragment : FragmentBase(true){
     private lateinit var vBinding: SearchFragmentBinding
 
     private lateinit var mListAdapterAutoComplete: SearchAutoCompleteAdapter
-//    private lateinit var mListAdapter: SearchPlantsAdapter
+
+    //    private lateinit var mListAdapter: SearchPlantsAdapter
     private lateinit var mPagingAdapter: PlantsPagingAdapter
     private lateinit var mPagingAdapterRecent: RecentPagingAdapter
     private var plantsJob: Job? = null
@@ -59,52 +61,54 @@ class SearchFragment : FragmentBase(true){
 
         vBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        mListAdapterAutoComplete = SearchAutoCompleteAdapter(){
+        mListAdapterAutoComplete = SearchAutoCompleteAdapter() {
 
         }
-      /*  mListAdapter = SearchPlantsAdapter() {
-                modelPlant ->
-        //navigateToDetail(modelPlant.id)
-        }*/
+        /*  mListAdapter = SearchPlantsAdapter() {
+                  modelPlant ->
+          //navigateToDetail(modelPlant.id)
+          }*/
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
+            withCreated {
 //            vBinding.weatherImage.load(R.drawable.pic_weather)
 
-         /*   vBinding.searchViewRecyclerview.adapter = mListAdapterAutoComplete
+                /*   vBinding.searchViewRecyclerview.adapter = mListAdapterAutoComplete
 
 
 
-            var list = mutableListOf(
-                ModelRecent(0), ModelRecent(1), ModelRecent(2),
-                ModelRecent(3), ModelRecent(4), ModelRecent(5),
-                ModelRecent(6), ModelRecent(7), ModelRecent(8), ModelRecent(9)
-            )
+                   var list = mutableListOf(
+                       ModelRecent(0), ModelRecent(1), ModelRecent(2),
+                       ModelRecent(3), ModelRecent(4), ModelRecent(5),
+                       ModelRecent(6), ModelRecent(7), ModelRecent(8), ModelRecent(9)
+                   )
 
 
-            mListAdapterAutoComplete.submitList(list)*/
-            mViewModel.initArgs(args)
-            initPagingAdapterRecent()
-            getRecentSearchEntries(null)
+                   mListAdapterAutoComplete.submitList(list)*/
+                mViewModel.initArgs(args)
+                initPagingAdapterRecent()
+                getRecentSearchEntries(null)
 
-            initPagingAdapter()
-            getPlantsSearchEntries()
+                initPagingAdapter()
+                getPlantsSearchEntries()
 //            getRecentSearchEntries(q)
 
-         /*   vBinding.recyclerview.adapter = mListAdapter
-            var list2 = mutableListOf(
-                ModelPlant(0), ModelPlant(1), ModelPlant(2),
-                ModelPlant(3), ModelPlant(4), ModelPlant(5),
-                ModelPlant(6), ModelPlant(7), ModelPlant(8), ModelPlant(9)
-            )
+                /*   vBinding.recyclerview.adapter = mListAdapter
+                   var list2 = mutableListOf(
+                       ModelPlant(0), ModelPlant(1), ModelPlant(2),
+                       ModelPlant(3), ModelPlant(4), ModelPlant(5),
+                       ModelPlant(6), ModelPlant(7), ModelPlant(8), ModelPlant(9)
+                   )
 
 
-            mListAdapter.submitList(list2)*/
+                   mListAdapter.submitList(list2)*/
+            }
         }
 
         vBinding.searchBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        vBinding.searchBar.text = args.q
+        vBinding.searchBar.setText(args.q)// =
 
         vBinding.searchView
             .getEditText()
@@ -119,16 +123,20 @@ class SearchFragment : FragmentBase(true){
             }
         vBinding.searchView
             .getEditText()
-            .addTextChangedListener {
-                text ->  getRecentSearchEntries(text?.toString())
+            .addTextChangedListener { text ->
+                getRecentSearchEntries(text?.toString())
             }
 
         mBackCallback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (vBinding.searchView.isShowing && vBinding.searchBar.collapse(vBinding.searchView, vBinding.appBarLayout)) {
+            if (vBinding.searchView.isShowing && vBinding.searchBar.collapse(
+                    vBinding.searchView,
+                    vBinding.appBarLayout
+                )
+            ) {
                 // Clear selection.
                 this.remove()
                 return@addCallback;
-            }else{
+            } else {
                 this.remove()
                 requireActivity().onBackPressedDispatcher.onBackPressed()
 //                this.
@@ -152,9 +160,9 @@ class SearchFragment : FragmentBase(true){
 
         mPagingAdapter.addLoadStateListener { loadState ->
             Log.d("SearchFragment", "loadState:  ${loadState}")
-           /* binding.articleList.isVisible = loadState.refresh is LoadState.NotLoading
-            binding.progress.isVisible = loadState.refresh is LoadState.Loading
-            manageErrors(loadState)*/
+            /* binding.articleList.isVisible = loadState.refresh is LoadState.NotLoading
+             binding.progress.isVisible = loadState.refresh is LoadState.Loading
+             manageErrors(loadState)*/
         }
     }
 
@@ -168,7 +176,7 @@ class SearchFragment : FragmentBase(true){
         mPagingAdapterRecent = RecentPagingAdapter {
             mViewModel.setQ(q = it.q)
 //            vBinding.searchView.setText(it.q)
-            vBinding.searchBar.text = it.q
+            vBinding.searchBar.setText(it.q)// = it.q
             vBinding.searchView.hide()
             getPlantsSearchEntries()
 
@@ -184,38 +192,40 @@ class SearchFragment : FragmentBase(true){
         }
     }
 
-    private  fun getPlantsSearchEntries(){
+    private fun getPlantsSearchEntries() {
         plantsJob?.cancel()
 
         plantsLoadJob?.cancel()
         plantsJob = lifecycleScope.launch {
             mViewModel.loadSearch().collectLatest {
-                mPagingAdapter.submitData(it) }
+                mPagingAdapter.submitData(it)
+            }
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }
         plantsLoadJob = lifecycleScope.launch {
             mPagingAdapter.loadStateFlow.collectLatest {
-                if(it.refresh is LoadState.Loading){
+                if (it.refresh is LoadState.Loading) {
                     mViewModel.setProgress(true)
-                }else{
+                } else {
                     mViewModel.setProgress(false)
 
                 }
-}
+            }
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }
     }
 
-    private  fun getRecentSearchEntries(q: String?){
+    private fun getRecentSearchEntries(q: String?) {
         recentJob?.cancel()
         recentJob = lifecycleScope.launch {
 
             mViewModel.loadRecentSearch(q).collectLatest {
 
 
-                mPagingAdapterRecent.submitData(it) }
+                mPagingAdapterRecent.submitData(it)
+            }
             Log.d("SearchFragment", "getPlantsSearchEntries: job")
 
         }

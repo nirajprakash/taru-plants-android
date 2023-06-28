@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withCreated
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.taru.R
@@ -16,6 +17,7 @@ import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
 import com.taru.ui.pages.nav.home.category.HomeCategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * Created by Niraj on 08-01-2023.
@@ -30,7 +32,7 @@ class NavHomeFragment : FragmentBase(false) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         vBinding =
             NavHomeFragmentBinding.inflate(inflater, container, false).apply {
                 bViewModel = mViewModel
@@ -54,7 +56,7 @@ class NavHomeFragment : FragmentBase(false) {
         Log.d("AdListFragment", "onCraeted:")
 
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch { withCreated {
 //            val layoutManager = GridLayoutManager(requireContext(), 2)
 
 //            vBinding.recyclerViewAdList.layoutManager = layoutManager
@@ -70,9 +72,12 @@ class NavHomeFragment : FragmentBase(false) {
 //            mViewModel.initData()
 //            throw RuntimeException("Test Crash")
 
-
-
-        }
+        } }
+//        {
+//
+//
+//
+//        }
 
     }
 

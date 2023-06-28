@@ -22,14 +22,14 @@ localProperties.load(new FileInputStream(localPropertiesFile))
 
 android {
     namespace 'com.taru'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.taru"
         minSdk 24
-        targetSdk 33
-        versionCode 5
-        versionName "1.0.4"
+        targetSdk 34
+        versionCode 6
+        versionName "1.0.5"
         buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
         buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
         buildConfigField "String", "PLANTNET_KEY", localProperties['plantnetKey']
@@ -74,16 +74,16 @@ dependencies {
 
 //    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0-alpha02'
+    implementation 'com.google.android.material:material:1.10.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
 
 //    implementation "com.google.dagger:hilt-android:2.44"
 //    implementation 'androidx.core:core-ktx:1.9.0'
 //
 //    kapt "com.google.dagger:hilt-compiler:2.44"
-    implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     //Coil
     implementation "io.coil-kt:coil:$coil_version"

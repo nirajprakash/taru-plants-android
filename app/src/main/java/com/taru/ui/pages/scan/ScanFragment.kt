@@ -26,16 +26,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
 import com.permissionx.guolindev.PermissionX
-import com.taru.R
 import com.taru.data.remote.identify.IdentifyConstants
-import com.taru.databinding.NavHomeFragmentBinding
 import com.taru.databinding.ScanFragmentBinding
 import com.taru.tools.livedata.LiveDataObserver
 import com.taru.ui.base.FragmentBase
-import com.taru.ui.pages.nav.home.NavHomeViewModel
-import com.taru.ui.pages.nav.home.category.HomeCategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
