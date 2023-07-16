@@ -1,7 +1,7 @@
 name: Github Action with a cronjob trigger
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "*/1 * * * *"
 
 jobs:
   cronjob-based-github-action:
@@ -13,7 +13,7 @@ jobs:
       # - step 2
       # - step n, use it as the last step
       - uses: gautamkrishnar/keepalive-workflow@v1 # using the workflow with default settings
-        with: 
-          time_elapsed: 1
+        # with: 
+          # time_elapsed: 1
           
       
