@@ -52,9 +52,15 @@
   ### hilt
 - https://nyamebismark12-nb.medium.com/testing-with-hilt-android-b299c4ff9f9d
 
+
 ### android ui testing
 
+- https://www.kodeco.com/22152158-testing-with-hilt-tutorial-ui-and-instrumentation-tests
+
 - https://developer.android.com/training/testing/espresso
+
+### fragment Test
+- https://gist.github.com/gigiperih/60f87a8b939e2e9ac198aa67920ae289
 
 ### roboelectric and espresso + shared Test
 - https://www.kodeco.com/books/android-test-driven-development-by-tutorials/v1.0/chapters/15-refactoring-your-tests

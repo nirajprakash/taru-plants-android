@@ -14,6 +14,7 @@ plugins {
 
 apply from: '../shared_dependencies.gradle'
 apply from: '../test_dependencies.gradle'
+apply from: '../android_test_dependencies.gradle'
 
 def localPropertiesFile = rootProject.file("local.properties")
 def localProperties = new Properties()
@@ -34,7 +35,7 @@ android {
         buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
         buildConfigField "String", "PLANTNET_KEY", localProperties['plantnetKey']
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]

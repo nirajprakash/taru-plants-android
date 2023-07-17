@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.taru.App
 import com.taru.BuildConfig
+import com.taru.base.BaseApp
 import com.taru.data.remote.identify.ApiIdentify
 import com.taru.data.remote.ip.ApiIp
 import com.taru.data.remote.plants.ApiPlants
@@ -39,7 +40,7 @@ object RetrofitModule {
     fun provideCacheInterceptor() = Interceptor { chain ->
         var request = chain.request()
         //LOGW(TAG, "cache interceptor offline")
-        if (!App.hasNetwork()) {
+        if (!BaseApp.hasNetwork()) {
             // LOGW(TAG, "cache interceptor offline2")
             val cacheControl = CacheControl.Builder()
                 .maxStale(7, TimeUnit.DAYS)
