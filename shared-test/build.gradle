@@ -8,7 +8,8 @@ apply from: '../shared_dependencies.gradle'
 apply from: '../test_dependencies.gradle'
 
 android {
-    compileSdk 33
+    compileSdk 34
+    namespace = "com.taru.test.shared"
     compileOptions{
 
     sourceCompatibility = JavaVersion.VERSION_1_8
