@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
     // Make sure that you have the Google services Gradle plugin
@@ -108,7 +109,7 @@ dependencies {
     //Moshi
     implementation 'com.squareup.moshi:moshi:1.15.0'
     implementation "com.squareup.moshi:moshi-kotlin:1.15.0"
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.15.0'
+    ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.15.0'
 
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     // paging Data
@@ -119,7 +120,7 @@ dependencies {
     // room
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
@@ -133,7 +134,7 @@ dependencies {
     // image
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-    kapt 'com.github.bumptech.glide:compiler:4.14.2'
+    ksp 'com.github.bumptech.glide:ksp:4.14.2'
 
 // load with glide
     implementation 'com.github.piasy:GlideImageLoader:1.8.1'
