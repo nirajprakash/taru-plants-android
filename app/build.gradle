@@ -28,9 +28,9 @@ android {
     defaultConfig {
         applicationId "com.taru"
         minSdk 24
-        targetSdk 34
-        versionCode 6
-        versionName "1.0.5"
+        targetSdk 35
+        versionCode 7
+        versionName "1.0.6"
         buildConfigField "String", "WEATHER_KEY", localProperties['weatherKey']
         buildConfigField "String", "TREFLE_KEY", localProperties['trefleKey']
         buildConfigField "String", "PLANTNET_KEY", localProperties['plantnetKey']
