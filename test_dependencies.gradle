@@ -27,10 +27,12 @@ dependencies {
     // for coroutine
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
     // For Robolectric tests.
-    testImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     // ...with Kotlin.
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.44'
+    kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    // ...with Kotlin.
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
 // optional - Room Test helpers
     testImplementation "androidx.room:room-testing:$room_version"

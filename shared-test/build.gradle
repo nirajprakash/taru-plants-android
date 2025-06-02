@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
     id 'kotlin-kapt'
 }
 
@@ -8,7 +9,7 @@ apply from: '../shared_dependencies.gradle'
 apply from: '../test_dependencies.gradle'
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace = "com.taru.test.shared"
     compileOptions{
 
