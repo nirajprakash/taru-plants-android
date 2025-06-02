@@ -23,7 +23,7 @@ localProperties.load(new FileInputStream(localPropertiesFile))
 
 android {
     namespace 'com.taru'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.taru"
